@@ -9,6 +9,17 @@ putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
 $_SERVER['VERCEL'] = '1';
 
+// Sanitasi variabel DB dari typo atau karakter tak diinginkan
+foreach (['DB_URL', 'DATABASE_URL', 'DB_SSLMODE'] as $envKey) {
+    $val = getenv($envKey) ?: ($_ENV[$envKey] ?? ($_SERVER[$envKey] ?? null));
+    if ($val) {
+        $cleanVal = trim(str_replace(['require_', 'require%20', 'require '], 'require', $val));
+        putenv("$envKey=$cleanVal");
+        $_ENV[$envKey] = $cleanVal;
+        $_SERVER[$envKey] = $cleanVal;
+    }
+}
+
 // Override lokasi cache bootstrap Laravel ke /tmp (folder writable di Vercel)
 putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
 putenv('APP_SERVICES_CACHE=/tmp/services.php');
