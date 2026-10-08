@@ -29,10 +29,10 @@ $_SERVER['APP_ROUTES_CACHE'] = '/tmp/routes.php';
 $_SERVER['APP_EVENTS_CACHE'] = '/tmp/events.php';
 
 // Salin manifest cache jika sudah ada dari build
-if (!file_exists('/tmp/packages.php') && file_exists(__DIR__ . '/../bootstrap/cache/packages.php')) {
+if (file_exists(__DIR__ . '/../bootstrap/cache/packages.php')) {
     @copy(__DIR__ . '/../bootstrap/cache/packages.php', '/tmp/packages.php');
 }
-if (!file_exists('/tmp/services.php') && file_exists(__DIR__ . '/../bootstrap/cache/services.php')) {
+if (file_exists(__DIR__ . '/../bootstrap/cache/services.php')) {
     @copy(__DIR__ . '/../bootstrap/cache/services.php', '/tmp/services.php');
 }
 
