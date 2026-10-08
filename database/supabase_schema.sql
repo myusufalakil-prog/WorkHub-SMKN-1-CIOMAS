@@ -256,6 +256,27 @@ INSERT INTO migrations (migration, batch) VALUES
 ON CONFLICT DO NOTHING;
 
 -- =============================================================================
+-- KEAMANAN: ROW LEVEL SECURITY (RLS)
+-- Mengamankan tabel dari akses anonim Supabase REST API
+-- User database Laravel (postgres) otomatis memiliki akses penuh (bypass RLS)
+-- =============================================================================
+ALTER TABLE jurusans ENABLE ROW LEVEL SECURITY;
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE skills ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_skills ENABLE ROW LEVEL SECURITY;
+ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+ALTER TABLE project_jurusans ENABLE ROW LEVEL SECURITY;
+ALTER TABLE project_members ENABLE ROW LEVEL SECURITY;
+ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
+ALTER TABLE project_files ENABLE ROW LEVEL SECURITY;
+ALTER TABLE project_activities ENABLE ROW LEVEL SECURITY;
+ALTER TABLE project_messages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;
+ALTER TABLE student_achievements ENABLE ROW LEVEL SECURITY;
+ALTER TABLE student_portfolios ENABLE ROW LEVEL SECURITY;
+ALTER TABLE school_events ENABLE ROW LEVEL SECURITY;
+
+-- =============================================================================
 -- DATA AWAL (SEEDER) - 5 JURUSAN RESMI, SKILLS, & AKUN DEMO
 -- Password default semua akun adalah: password
 -- Hash Bcrypt: $2y$12$NqKkUjS3qQj5P9gP8pI2u.3qK0zL1E2L7mB5r4o8YkH3x1v9u6vCe
