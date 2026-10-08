@@ -9,6 +9,33 @@ putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
 $_SERVER['VERCEL'] = '1';
 
+// Override lokasi cache bootstrap Laravel ke /tmp (folder writable di Vercel)
+putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
+putenv('APP_SERVICES_CACHE=/tmp/services.php');
+putenv('APP_CONFIG_CACHE=/tmp/config.php');
+putenv('APP_ROUTES_CACHE=/tmp/routes.php');
+putenv('APP_EVENTS_CACHE=/tmp/events.php');
+
+$_ENV['APP_PACKAGES_CACHE'] = '/tmp/packages.php';
+$_ENV['APP_SERVICES_CACHE'] = '/tmp/services.php';
+$_ENV['APP_CONFIG_CACHE'] = '/tmp/config.php';
+$_ENV['APP_ROUTES_CACHE'] = '/tmp/routes.php';
+$_ENV['APP_EVENTS_CACHE'] = '/tmp/events.php';
+
+$_SERVER['APP_PACKAGES_CACHE'] = '/tmp/packages.php';
+$_SERVER['APP_SERVICES_CACHE'] = '/tmp/services.php';
+$_SERVER['APP_CONFIG_CACHE'] = '/tmp/config.php';
+$_SERVER['APP_ROUTES_CACHE'] = '/tmp/routes.php';
+$_SERVER['APP_EVENTS_CACHE'] = '/tmp/events.php';
+
+// Salin manifest cache jika sudah ada dari build
+if (!file_exists('/tmp/packages.php') && file_exists(__DIR__ . '/../bootstrap/cache/packages.php')) {
+    @copy(__DIR__ . '/../bootstrap/cache/packages.php', '/tmp/packages.php');
+}
+if (!file_exists('/tmp/services.php') && file_exists(__DIR__ . '/../bootstrap/cache/services.php')) {
+    @copy(__DIR__ . '/../bootstrap/cache/services.php', '/tmp/services.php');
+}
+
 // Siapkan struktur folder writable di /tmp untuk Laravel
 $storagePath = '/tmp/storage';
 $folders = [
