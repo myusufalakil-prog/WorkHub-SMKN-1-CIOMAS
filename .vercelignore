@@ -1,0 +1,7 @@
+.git
+.github
+.vscode
+tests
+phpunit.xml
+scratch_top.png
+.phpunit.result.cache
