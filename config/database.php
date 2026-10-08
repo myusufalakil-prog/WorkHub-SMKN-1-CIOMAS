@@ -86,8 +86,8 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DB_URL') ? trim(str_replace(['require_', 'require%20', 'require '], 'require', (string) env('DB_URL'))) : null,
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'url' => env('DB_URL') ? trim(str_replace(['require_', 'require%20', 'require ', 'ap-southeast-1'], ['require', 'require', 'require', 'ap-south-1'], (string) env('DB_URL'))) : null,
+            'host' => str_replace('ap-southeast-1', 'ap-south-1', (string) env('DB_HOST', '127.0.0.1')),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'laravel'),
             'username' => env('DB_USERNAME', 'root'),

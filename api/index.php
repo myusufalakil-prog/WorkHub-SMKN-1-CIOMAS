@@ -14,10 +14,20 @@ foreach (['DB_URL', 'DATABASE_URL', 'DB_SSLMODE'] as $envKey) {
     $val = getenv($envKey) ?: ($_ENV[$envKey] ?? ($_SERVER[$envKey] ?? null));
     if ($val) {
         $cleanVal = trim(str_replace(['require_', 'require%20', 'require '], 'require', $val));
+        // Koreksi otomatis region Supabase pooler jika masih ap-southeast-1 (lama) ke ap-south-1 (baru)
+        $cleanVal = str_replace('ap-southeast-1', 'ap-south-1', $cleanVal);
         putenv("$envKey=$cleanVal");
         $_ENV[$envKey] = $cleanVal;
         $_SERVER[$envKey] = $cleanVal;
     }
+}
+
+$dbHost = getenv('DB_HOST') ?: ($_ENV['DB_HOST'] ?? ($_SERVER['DB_HOST'] ?? ''));
+if (str_contains($dbHost, 'ap-southeast-1')) {
+    $newHost = str_replace('ap-southeast-1', 'ap-south-1', $dbHost);
+    putenv("DB_HOST=$newHost");
+    $_ENV['DB_HOST'] = $newHost;
+    $_SERVER['DB_HOST'] = $newHost;
 }
 
 // Override lokasi cache bootstrap Laravel ke /tmp (folder writable di Vercel)
