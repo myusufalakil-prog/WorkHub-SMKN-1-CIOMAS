@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 // Tandai lingkungan Serverless Vercel
 putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
@@ -23,5 +27,13 @@ foreach ($folders as $folder) {
     }
 }
 
-// Teruskan request ke front controller resmi Laravel
-require __DIR__ . '/../public/index.php';
+try {
+    require __DIR__ . '/../public/index.php';
+} catch (\Throwable $e) {
+    http_response_code(500);
+    header('Content-Type: text/plain; charset=UTF-8');
+    echo "=== WORKHUB VERCEL ERROR DEBUG ===\n\n";
+    echo "Message: " . $e->getMessage() . "\n\n";
+    echo "File: " . $e->getFile() . " on line " . $e->getLine() . "\n\n";
+    echo "Stack Trace:\n" . $e->getTraceAsString() . "\n";
+}
