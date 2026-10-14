@@ -42,12 +42,21 @@
                         Pilih minimal 1 atau lebih jurusan untuk membangun sinergi tim.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        @foreach(['PPLG (Software & Gim)', 'Animasi (3D & 2D)', 'BCF (Broadcasting & Film)', 'TJKT (Jaringan & Server)', 'DKV (Desain Komunikasi)'] as $j)
-                            <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-[#181818] text-xs font-medium text-neutral-800 dark:text-neutral-200 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                                <input type="checkbox" name="jurusan[]" value="{{ $j }}" class="rounded border-neutral-300 dark:border-neutral-700 text-black focus:ring-black">
-                                <span>{{ $j }}</span>
-                            </label>
-                        @endforeach
+                        @if(isset($jurusans) && count($jurusans) > 0)
+                            @foreach($jurusans as $j)
+                                <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-[#181818] text-xs font-medium text-neutral-800 dark:text-neutral-200 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+                                    <input type="checkbox" name="jurusan[]" value="{{ $j->kode }}" class="rounded border-neutral-300 dark:border-neutral-700 text-black focus:ring-black">
+                                    <span>{{ $j->kode }} &bull; {{ $j->nama_lengkap }}</span>
+                                </label>
+                            @endforeach
+                        @else
+                            @foreach(['PPLG', 'BCF', 'Animasi', 'TO', 'TPFL'] as $j)
+                                <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-[#181818] text-xs font-medium text-neutral-800 dark:text-neutral-200 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+                                    <input type="checkbox" name="jurusan[]" value="{{ $j }}" class="rounded border-neutral-300 dark:border-neutral-700 text-black focus:ring-black">
+                                    <span>{{ $j }}</span>
+                                </label>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
 

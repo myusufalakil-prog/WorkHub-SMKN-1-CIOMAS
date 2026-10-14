@@ -143,9 +143,36 @@ class SiswaController extends Controller
         ]);
 
         if ($request->has('jurusan')) {
-            $jurusanIds = Jurusan::whereIn('kode', $request->input('jurusan'))
-                ->orWhereIn('id', $request->input('jurusan'))
-                ->pluck('id');
+            $rawJurusan = (array) $request->input('jurusan', []);
+            $numericIds = [];
+            $stringCodes = [];
+
+            foreach ($rawJurusan as $item) {
+                if (is_numeric($item)) {
+                    $numericIds[] = (int) $item;
+                } elseif (is_string($item)) {
+                    $clean = trim(explode(' ', trim($item))[0]);
+                    if ($clean !== '') {
+                        $stringCodes[] = $clean;
+                    }
+                }
+            }
+
+            $query = Jurusan::query();
+            if (!empty($stringCodes) && !empty($numericIds)) {
+                $query->where(function ($q) use ($stringCodes, $numericIds) {
+                    $q->whereIn('kode', $stringCodes)
+                      ->orWhereIn('id', $numericIds);
+                });
+            } elseif (!empty($stringCodes)) {
+                $query->whereIn('kode', $stringCodes);
+            } elseif (!empty($numericIds)) {
+                $query->whereIn('id', $numericIds);
+            } else {
+                $query->whereRaw('1 = 0');
+            }
+
+            $jurusanIds = $query->pluck('id');
             $project->jurusans()->sync($jurusanIds);
         }
 
