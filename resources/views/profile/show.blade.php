@@ -24,7 +24,7 @@
                         </p>
 
                         <p class="text-xs text-neutral-400 mt-0.5">
-                            {{ $student->email ?? 'user@synapsehub.id' }} &bull; {{ $student->jabatan ?? 'Talenta Kolaborator' }}
+                            {{ $student->email ?? 'user@workhub.id' }} &bull; {{ $student->jabatan ?? 'Talenta Kolaborator' }}
                         </p>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     Tentang / Bio
                 </span>
                 <p class="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-3xl">
-                    {{ $student->bio ?? 'Kolaborator aktif dalam proyek lintas domain di SynapseHub.' }}
+                    {{ $student->bio ?? 'Kolaborator aktif dalam proyek lintas domain di WORKHUB.' }}
                 </p>
             </div>
 

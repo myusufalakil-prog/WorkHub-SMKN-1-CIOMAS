@@ -28,7 +28,7 @@
                         type="text" 
                         name="title" 
                         required
-                        placeholder="Contoh: SynapseHub Innovation Platform 2026"
+                        placeholder="Contoh: WORKHUB Innovation Platform 2026"
                         class="w-full px-3.5 py-2.5 text-sm bg-neutral-50 dark:bg-[#141414] text-neutral-900 dark:text-white placeholder-neutral-400 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:border-neutral-900 dark:focus:border-neutral-300 focus:bg-white dark:focus:bg-[#111111] transition-all"
                     />
                 </div>

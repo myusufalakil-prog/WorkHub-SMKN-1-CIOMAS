@@ -55,7 +55,7 @@
                     Tentang Kolaborator
                 </span>
                 <p class="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-3xl">
-                    {{ $student->bio ?? 'Kolaborator aktif dalam proyek multidisiplin di SynapseHub.' }}
+                    {{ $student->bio ?? 'Kolaborator aktif dalam proyek multidisiplin di WORKHUB.' }}
                 </p>
             </div>
 
@@ -174,7 +174,7 @@
                         Portofolio Karya Talenta
                     </h3>
                     <p class="text-xs text-neutral-500">
-                        Hasil karya nyata yang dipamerkan di platform SynapseHub.
+                        Hasil karya nyata yang dipamerkan di platform WORKHUB.
                     </p>
                 </div>
 

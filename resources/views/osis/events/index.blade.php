@@ -95,7 +95,7 @@
                         type="text" 
                         name="title" 
                         required 
-                        placeholder="Contoh: SynapseHub Global Innovation Festival 2026" 
+                        placeholder="Contoh: WORKHUB Global Innovation Festival 2026" 
                         class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white focus:outline-none"
                     />
                 </div>

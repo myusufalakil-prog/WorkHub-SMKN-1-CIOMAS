@@ -1,4 +1,4 @@
-<x-guest-layout title="Masuk ke Akun - SynapseHub">
+<x-guest-layout title="Masuk ke Akun - WORKHUB">
     <div class="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <!-- Ambient Background Glows -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-blue-600/15 via-purple-600/15 to-amber-500/15 blur-[120px] rounded-full pointer-events-none -z-10"></div>
@@ -9,10 +9,10 @@
             <!-- Header Card -->
             <div class="text-center">
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold text-lg shadow-md mb-4 shadow-blue-500/20">
-                    SH
+                    WH
                 </div>
                 <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950 dark:text-white">
-                    Masuk ke SynapseHub
+                    Masuk ke WORKHUB
                 </h1>
                 <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1.5">
                     Platform Kolaborasi Talenta & Proyek Inovasi.

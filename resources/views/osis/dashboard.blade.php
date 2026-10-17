@@ -8,7 +8,7 @@
             <div>
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-bold text-white mb-3 border border-white/20 shadow-xs">
                     <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                    <span>Penyelenggara Komunitas &bull; SynapseHub</span>
+                    <span>Penyelenggara Komunitas &bull; WORKHUB</span>
                 </div>
                 <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight flex items-center gap-2">
                     <x-icon name="landmark" class="w-7 h-7 text-white shrink-0" />

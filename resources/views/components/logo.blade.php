@@ -36,14 +36,12 @@
         </svg>
     </div>
 
-    @if($variant === 'full')
         <div class="flex flex-col leading-none">
             <span class="font-extrabold {{ $sizeClasses['text'] }} tracking-tight {{ $textColor }} font-sans">
-                Synapse<span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-black">Hub</span>
+                WORK<span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-black">HUB</span>
             </span>
             <span class="text-[8.5px] tracking-widest uppercase font-bold text-neutral-400 dark:text-neutral-400 mt-0.5">
-                Jaringan Talenta & Proyek
+                Connect. Collaborate. Create.
             </span>
         </div>
-    @endif
 </{{ $href ? 'a' : 'div' }}>

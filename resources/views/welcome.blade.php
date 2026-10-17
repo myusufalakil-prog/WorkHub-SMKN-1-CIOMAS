@@ -1,4 +1,4 @@
-<x-guest-layout title="Platform Kolaborasi Talenta & Proyek Inovasi - SynapseHub">
+<x-guest-layout title="Platform Kolaborasi Talenta & Proyek Inovasi - WORKHUB">
     <!-- Ambient Gradient Background Lights -->
     <div class="relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none -z-10 overflow-hidden">
@@ -15,7 +15,7 @@
                 <!-- Glowing Announcement Pill -->
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 dark:bg-[#181818]/90 border border-neutral-200 dark:border-neutral-700/80 text-xs font-semibold text-neutral-800 dark:text-neutral-200 mb-6 shadow-xs backdrop-blur-md">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Jaringan Kolaborasi & Talenta Terbuka &bull; <strong class="text-neutral-950 dark:text-white">SynapseHub</strong></span>
+                    <span>Jaringan Kolaborasi & Talenta Terbuka &bull; <strong class="text-neutral-950 dark:text-white">WORKHUB</strong></span>
                 </div>
 
                 <!-- Main Heading -->
@@ -71,7 +71,7 @@
                 <div class="mt-14 max-w-6xl mx-auto">
                     <div class="flex items-center justify-between mb-4">
                         <p class="text-xs uppercase font-extrabold tracking-widest text-neutral-400 dark:text-neutral-500">
-                            {{ $jurusans->count() }} Pilar Domain & Disiplin Keahlian di SynapseHub
+                            {{ $jurusans->count() }} Pilar Domain & Disiplin Keahlian di WORKHUB
                         </p>
                         <a href="{{ route('projects.index') }}" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">
                             Eksplorasi Semua &rarr;
@@ -247,7 +247,7 @@
                         <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Inovasi Kolaboratif</span>
                     </div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950 dark:text-white">
-                        Proyek Kolaborasi di SynapseHub
+                        Proyek Kolaborasi di WORKHUB
                     </h2>
                     <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                         Eksplorasi proyek nyata multidisiplin yang sedang aktif dibangun oleh komunitas talenta.
@@ -286,7 +286,7 @@
                             <x-icon name="folder-kanban" class="w-6 h-6" />
                         </div>
                         <h3 class="text-sm font-bold text-neutral-900 dark:text-white">Belum Ada Proyek Publik</h3>
-                        <p class="text-xs text-neutral-500 mt-1 max-w-sm mx-auto">Daftar sekarang di SynapseHub dan inisiasi proyek kolaborasi pertamamu.</p>
+                        <p class="text-xs text-neutral-500 mt-1 max-w-sm mx-auto">Daftar sekarang di WORKHUB dan inisiasi proyek kolaborasi pertamamu.</p>
                         <div class="mt-4">
                             <x-button :href="route('register')" variant="primary" size="sm">
                                 Mulai Proyek Pertama

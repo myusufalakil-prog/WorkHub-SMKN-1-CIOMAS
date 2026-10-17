@@ -1,4 +1,4 @@
-<x-guest-layout title="Pilih Portal Peran - SynapseHub">
+<x-guest-layout title="Pilih Portal Peran - WORKHUB">
     <div class="relative overflow-hidden py-12 md:py-20">
         <!-- Ambient Background Glows -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-blue-600/15 via-purple-600/15 to-amber-500/15 blur-[120px] rounded-full pointer-events-none -z-10"></div>
@@ -10,7 +10,7 @@
             <div class="text-center max-w-3xl mx-auto mb-12">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/5 dark:bg-white/10 border border-neutral-200/80 dark:border-white/10 text-xs font-semibold text-neutral-800 dark:text-neutral-200 mb-5 shadow-xs backdrop-blur-md">
                     <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                    <span>Gerbang Akses Multi-Role &bull; SynapseHub</span>
+                    <span>Gerbang Akses Multi-Role &bull; WORKHUB</span>
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-950 dark:text-white leading-tight">
@@ -54,7 +54,7 @@
                         </div>
                         <div>
                             <h2 class="text-xs sm:text-sm font-bold text-neutral-900 dark:text-white">
-                                Belum masuk ke akun SynapseHub?
+                                Belum masuk ke akun WORKHUB?
                             </h2>
                             <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
                                 Silakan masuk dengan email Anda atau daftarkan akun talenta baru untuk mulai berkolaborasi.
@@ -297,7 +297,7 @@
             @endphp
             <div class="mt-16 pt-10 border-t border-neutral-200/80 dark:border-[#222222] text-center">
                 <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 block mb-4">
-                    Mendukung 12 Pilar Bidang Keahlian Multidisiplin SynapseHub
+                    Mendukung 12 Pilar Bidang Keahlian Multidisiplin WORKHUB
                 </span>
                 <div class="flex flex-wrap items-center justify-center gap-2 max-w-5xl mx-auto">
                     @foreach($defaultDomains as $d)
@@ -313,7 +313,7 @@
             <!-- Footer Link -->
             <div class="mt-10 text-center">
                 <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-xs font-semibold text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors">
-                    &larr; Kembali ke Beranda Utama SynapseHub
+                    &larr; Kembali ke Beranda Utama WORKHUB
                 </a>
             </div>
         </div>

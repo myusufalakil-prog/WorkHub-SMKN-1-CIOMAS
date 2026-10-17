@@ -49,18 +49,18 @@ class DatabaseSeeder extends Seeder
         Skill::create(['name' => 'Product Management & Scrum', 'category' => 'Business']);
         Skill::create(['name' => 'Growth & Digital Marketing', 'category' => 'Business']);
 
-        // 3. Akun Super Admin SynapseHub
+        // 3. Akun Super Admin WORKHUB
         User::create([
-            'name' => 'SynapseHub Administrator',
+            'name' => 'WORKHUB Administrator',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
-            'institution' => 'SynapseHub Core Team',
+            'institution' => 'WORKHUB Core Team',
             'headline' => 'Platform Administrator & Tech Lead',
             'kelas' => 'Tech Core',
             'jurusan_id' => $tech->id,
             'jabatan' => 'Administrator Sistem',
-            'bio' => 'Akun administrator dengan hak akses penuh ke seluruh portal dan ekosistem kolaborasi SynapseHub.',
+            'bio' => 'Akun administrator dengan hak akses penuh ke seluruh portal dan ekosistem kolaborasi WORKHUB.',
             'phone' => '081122334455',
         ]);
 

@@ -3,7 +3,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                Proyek Kolaborasi SynapseHub
+                Proyek Kolaborasi WORKHUB
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                 Eksplorasi proyek inovasi multidisiplin, ajukan diri bergabung dengan tim, atau inisiasi proyek baru.

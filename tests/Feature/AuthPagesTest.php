@@ -29,7 +29,7 @@ class AuthPagesTest extends TestCase
         // Login Page
         $login = $this->get('/login');
         $login->assertStatus(200);
-        $login->assertSee('Masuk ke SynapseHub');
+        $login->assertSee('Masuk ke WORKHUB');
         $login->assertDontSee('admin@gmail.com');
 
         // Register Page

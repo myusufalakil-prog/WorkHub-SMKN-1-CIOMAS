@@ -110,13 +110,13 @@ class AuthController extends Controller
             'jurusan_id' => $request->jurusan_id,
             'jabatan' => 'Kolaborator & Kreator',
             'headline' => 'Talenta & Kolaborator Proyek',
-            'bio' => 'Talenta aktif yang siap berkolaborasi dalam proyek inovasi multidisiplin di SynapseHub.',
+            'bio' => 'Talenta aktif yang siap berkolaborasi dalam proyek inovasi multidisiplin di WORKHUB.',
         ]);
 
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('siswa.dashboard')->with('success', 'Akun berhasil dibuat! Selamat datang di jaringan kolaborasi SynapseHub.');
+        return redirect()->route('siswa.dashboard')->with('success', 'Akun berhasil dibuat! Selamat datang di jaringan kolaborasi WORKHUB.');
     }
 
     /**

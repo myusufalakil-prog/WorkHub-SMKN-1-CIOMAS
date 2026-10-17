@@ -323,7 +323,7 @@ ON CONFLICT (id) DO NOTHING;
 
 -- Akun User Utama (Password: password)
 INSERT INTO users (id, name, email, password, role, institution, headline, kelas, jurusan_id, jabatan, bio, phone) VALUES
-(1, 'SynapseHub Administrator', 'admin@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'admin', 'SynapseHub Core Team', 'Platform Administrator & Tech Lead', 'Tech Core', 1, 'Administrator Sistem', 'Akun administrator dengan hak akses penuh ke seluruh portal dan ekosistem kolaborasi SynapseHub.', '081122334455'),
+(1, 'WORKHUB Administrator', 'admin@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'admin', 'WORKHUB Core Team', 'Platform Administrator & Tech Lead', 'Tech Core', 1, 'Administrator Sistem', 'Akun administrator dengan hak akses penuh ke seluruh portal dan ekosistem kolaborasi WORKHUB.', '081122334455'),
 (2, 'Community Organizer', 'osis@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'osis', 'Open Innovation Community', 'Challenge Curator & Event Coordinator', 'Community Lead', 5, 'Koordinator Event & Kurator Showcase', 'Mengoordinasikan hackathon, challenge kolaborasi terbuka, dan kurasi showcase proyek unggulan.', '081298765432'),
 (3, 'Raka Pratama', 'raka@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'siswa', 'Talenta Terbuka / Tech Enthusiast', 'Fullstack Developer & AI Prototyper', 'Developer', 1, 'Fullstack Developer', 'Antusias berkolaborasi membangun produk inovatif nyata bersama desainer, audio-video creator, dan engineer perangkat keras.', '081234567890')
 ON CONFLICT (id) DO NOTHING;
@@ -335,9 +335,9 @@ INSERT INTO user_skills (user_id, skill_id, level, is_verified) VALUES
 (3, 7, 'Menengah', true)
 ON CONFLICT DO NOTHING;
 
--- Event / Challenge Awal SynapseHub
+-- Event / Challenge Awal WORKHUB
 INSERT INTO school_events (title, date_text, status, "desc", lead, participants_info, category) VALUES
-('SynapseHub Open Innovation Hackathon 2026', '24 - 26 Oktober 2026', 'Open Registrasi', 'Kompetisi kolaborasi lintas disiplin: Software, Desain Visual, Media, dan Hardware Prototyping.', 'SynapseHub Community Team', 'Terbuka untuk Umum / Talenta Multi-Disiplin', 'Hackathon & Challenge Global')
+('WORKHUB Open Innovation Hackathon 2026', '24 - 26 Oktober 2026', 'Open Registrasi', 'Kompetisi kolaborasi lintas disiplin: Software, Desain Visual, Media, dan Hardware Prototyping.', 'WORKHUB Community Team', 'Terbuka untuk Umum / Talenta Multi-Disiplin', 'Hackathon & Challenge Global')
 ON CONFLICT DO NOTHING;
 
 -- Reset Sequence PostgreSQL agar ID baru tidak bentrok

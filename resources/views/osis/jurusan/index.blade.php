@@ -5,7 +5,7 @@
                 Statistik & Keaktifan {{ $jurusans->count() }} Bidang Keahlian
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Data partisipasi talenta dan kontribusi proyek per pilar bidang keahlian di SynapseHub.
+                Data partisipasi talenta dan kontribusi proyek per pilar bidang keahlian di WORKHUB.
             </p>
         </div>
     </div>

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title . ' - SynapseHub' : 'SynapseHub - Terhubung. Berkolaborasi. Berinovasi.' }}</title>
-    <meta name="description" content="SynapseHub: Platform Kolaborasi Proyek & Jaringan Talenta Multi-Disiplin. Hubungkan ide, talenta, dan keahlian untuk menciptakan inovasi nyata.">
+    <title>{{ isset($title) ? $title . ' - WORKHUB' : 'WORKHUB - Connect. Collaborate. Create.' }}</title>
+    <meta name="description" content="WORKHUB: Platform Kolaborasi Proyek & Jaringan Talenta Multi-Disiplin. Hubungkan ide, talenta, dan keahlian untuk menciptakan inovasi nyata.">
 
     <!-- Favicon & PWA Icons -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
@@ -76,9 +76,9 @@
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">
                 <x-logo variant="compact" size="sm" />
-                <span class="font-bold text-neutral-900 dark:text-white">SynapseHub</span>
+                <span class="font-bold text-neutral-900 dark:text-white">WORKHUB</span>
                 <span class="text-neutral-400 dark:text-neutral-600">&bull;</span>
-                <span class="font-semibold text-neutral-700 dark:text-neutral-300">Terhubung. Berkolaborasi. Berinovasi.</span>
+                <span class="font-semibold text-neutral-700 dark:text-neutral-300">Connect. Collaborate. Create.</span>
             </div>
             <div>
                 Platform Kolaborasi Talenta & Proyek Inovasi Lintas Disiplin

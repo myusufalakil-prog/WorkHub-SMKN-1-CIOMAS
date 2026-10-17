@@ -15,7 +15,7 @@
                     Halo, {{ auth()->user()->name ?? ($student->name ?? 'Kolaborator') }}
                 </h1>
                 <p class="text-xs md:text-sm text-blue-100 mt-2 max-w-xl leading-relaxed">
-                    Siap berkolaborasi hari ini? Kamu memiliki <strong class="text-white underline decoration-white/40">{{ $projects->count() }} proyek aktif</strong> dalam ekosistem kolaborasi SynapseHub.
+                    Siap berkolaborasi hari ini? Kamu memiliki <strong class="text-white underline decoration-white/40">{{ $projects->count() }} proyek aktif</strong> dalam ekosistem kolaborasi WORKHUB.
                 </p>
             </div>
 
@@ -249,7 +249,7 @@
                     />
                 @empty
                     <div class="col-span-full bg-white dark:bg-[#181818] border border-dashed border-neutral-300 dark:border-neutral-700 rounded-xl p-6 text-center text-xs text-neutral-400">
-                        Belum ada talenta lain yang terdaftar. Ajak rekan kolaborasimu bergabung di SynapseHub!
+                        Belum ada talenta lain yang terdaftar. Ajak rekan kolaborasimu bergabung di WORKHUB!
                     </div>
                 @endforelse
             </div>

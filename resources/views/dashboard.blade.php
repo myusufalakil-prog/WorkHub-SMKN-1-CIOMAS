@@ -4,7 +4,7 @@
         <div>
             <div class="flex items-center gap-2">
                 <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                    Halo, {{ auth()->user()->name ?? ($student->name ?? 'Talenta SynapseHub') }}
+                    Halo, {{ auth()->user()->name ?? ($student->name ?? 'Talenta WORKHUB') }}
                 </h1>
                 <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">
                     {{ auth()->user()->institution ?? (auth()->user()->headline ?? 'Talenta') }} &bull; {{ auth()->user()->jurusan->nama_lengkap ?? 'Domain Multidisiplin' }}
