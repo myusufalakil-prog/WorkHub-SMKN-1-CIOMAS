@@ -27,11 +27,19 @@ class CheckRole
             return $next($request);
         }
 
+        // Role organizer dan osis diperlakukan setara/sinonim
+        $isOrganizerRole = in_array('osis', $roles) || in_array('organizer', $roles);
+        $userIsOrganizer = ($user->role === 'osis' || $user->role === 'organizer');
+
+        if ($isOrganizerRole && $userIsOrganizer) {
+            return $next($request);
+        }
+
         if (!in_array($user->role, $roles)) {
             return match ($user->role) {
-                'osis' => redirect()->route('osis.dashboard')->with('error', 'Akses ditolak. Anda dialihkan ke Portal OSIS yang sesuai dengan peran Anda.'),
+                'osis', 'organizer' => redirect()->route('organizer.dashboard')->with('error', 'Akses ditolak. Anda dialihkan ke Portal Penyelenggara/Organizer yang sesuai dengan peran Anda.'),
                 'guru' => redirect()->route('guru.dashboard')->with('error', 'Akses ditolak. Anda dialihkan ke Portal Guru Pembimbing yang sesuai dengan peran Anda.'),
-                default => redirect()->route('siswa.dashboard')->with('error', 'Akses ditolak. Anda dialihkan ke Portal Siswa yang sesuai dengan peran Anda.'),
+                default => redirect()->route('siswa.dashboard')->with('error', 'Akses ditolak. Anda dialihkan ke Portal Talenta yang sesuai dengan peran Anda.'),
             };
         }
 

@@ -454,6 +454,37 @@ class SiswaController extends Controller
         }
     }
 
+    public function getMessages(Request $request, $id)
+    {
+        $project = Project::findOrFail($id);
+        $user = $this->getActiveStudent();
+
+        $afterId = (int) $request->query('after_id', 0);
+
+        $messages = ProjectMessage::where('project_id', $project->id)
+            ->where('id', '>', $afterId)
+            ->with(['user.jurusan'])
+            ->oldest()
+            ->get()
+            ->map(function ($msg) use ($user) {
+                return [
+                    'id' => $msg->id,
+                    'user_id' => $msg->user_id,
+                    'user_name' => $msg->user->name ?? 'Anggota',
+                    'user_avatar' => strtoupper(substr($msg->user->name ?? 'U', 0, 2)),
+                    'jurusan' => $msg->user->jurusan?->kode ?? 'TECH',
+                    'message' => $msg->message,
+                    'created_at' => $msg->created_at ? $msg->created_at->format('H:i') : 'Baru saja',
+                    'is_me' => ($msg->user_id === ($user->id ?? 0)),
+                ];
+            });
+
+        return response()->json([
+            'success' => true,
+            'messages' => $messages,
+        ]);
+    }
+
     public function sendMessage(Request $request, $id)
     {
         $request->validate([
@@ -466,15 +497,35 @@ class SiswaController extends Controller
         $isLead = ($project->lead_id === $user->id);
         $isActive = $project->activeMembers()->where('users.id', $user->id)->exists();
         if (!$isLead && !$isActive && !$user->isAdmin()) {
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json(['error' => 'Hanya anggota resmi atau ketua tim yang dapat mengirim pesan.'], 403);
+            }
             return back()->with('error', 'Hanya anggota resmi atau ketua tim yang dapat mengirim pesan dalam diskusi tim.');
         }
 
-        ProjectMessage::create([
+        $msg = ProjectMessage::create([
             'project_id' => $project->id,
             'user_id' => $user->id,
             'message' => $request->message,
             'attachment' => $request->attachment ?? null,
         ]);
+
+        if ($request->expectsJson() || $request->ajax()) {
+            $msg->load('user.jurusan');
+            return response()->json([
+                'success' => true,
+                'message' => [
+                    'id' => $msg->id,
+                    'user_id' => $msg->user_id,
+                    'user_name' => $msg->user->name ?? 'Anggota',
+                    'user_avatar' => strtoupper(substr($msg->user->name ?? 'U', 0, 2)),
+                    'jurusan' => $msg->user->jurusan?->kode ?? 'TECH',
+                    'message' => $msg->message,
+                    'created_at' => $msg->created_at->format('H:i'),
+                    'is_me' => true,
+                ],
+            ]);
+        }
 
         return redirect()->route('siswa.workspace', ['id' => $project->id, 'tab' => 'chat'])
             ->with('success', 'Pesan berhasil dikirim ke ruang kolaborasi tim!');
@@ -567,12 +618,16 @@ class SiswaController extends Controller
         $user = $this->getActiveStudent();
 
         $user->update([
+            'name' => $request->input('name', $user->name),
             'bio' => $request->input('bio', $user->bio),
+            'institution' => $request->input('institution', $user->institution),
+            'headline' => $request->input('headline', $user->headline),
+            'portfolio_website' => $request->input('portfolio_website', $user->portfolio_website),
             'kelas' => $request->input('kelas', $user->kelas),
             'jabatan' => $request->input('jabatan', $user->jabatan),
         ]);
 
-        return redirect()->back()->with('success', 'Biodata profil siswa berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Biodata profil talenta berhasil diperbarui!');
     }
 
     public function storePortfolio(Request $request)

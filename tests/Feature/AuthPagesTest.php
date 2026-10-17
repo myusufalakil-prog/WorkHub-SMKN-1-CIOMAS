@@ -17,19 +17,19 @@ class AuthPagesTest extends TestCase
         // Home Page
         $home = $this->get('/');
         $home->assertStatus(200);
-        $home->assertSee('Masuk (Login)');
-        $home->assertSee('Daftar (Register)');
+        $home->assertSee('Masuk');
+        $home->assertSee('Daftar Talenta Baru');
 
         // Portal Page
         $portal = $this->get('/portal');
         $portal->assertStatus(200);
-        $portal->assertSee('Masuk (Login)');
-        $portal->assertSee('Daftar (Register)');
+        $portal->assertSee('Masuk Akun');
+        $portal->assertSee('Daftar Akun');
 
         // Login Page
         $login = $this->get('/login');
         $login->assertStatus(200);
-        $login->assertSee('Masuk ke WORKHUB');
+        $login->assertSee('Masuk ke SynapseHub');
         $login->assertDontSee('admin@gmail.com');
 
         // Register Page

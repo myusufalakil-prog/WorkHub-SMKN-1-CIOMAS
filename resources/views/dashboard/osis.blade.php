@@ -1,23 +1,23 @@
-<x-app-layout current="osis-dashboard" role="osis" pageTitle="Dashboard Pengurus OSIS">
+<x-app-layout current="osis-dashboard" role="osis" pageTitle="Dasbor Penyelenggara & Komunitas">
     <!-- OSIS Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div>
             <div class="flex items-center gap-2">
                 <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                    Dashboard OSIS & Event Sekolah
+                    Dasbor Penyelenggara & Kegiatan Komunitas
                 </h1>
                 <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-neutral-900 text-white dark:bg-white dark:text-black">
                     Koordinator Kolaborasi
                 </span>
             </div>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Selamat bertugas, <strong class="text-neutral-800 dark:text-neutral-200">Muhammad Zidan</strong> (Ketua OSIS). Pantau event dan kurasi proyek siswa untuk pameran festival.
+                Selamat bertugas, <strong class="text-neutral-800 dark:text-neutral-200">{{ auth()->user()->name ?? 'Penyelenggara Komunitas' }}</strong>. Pantau agenda dan kurasi proyek talenta untuk galeri inovasi.
             </p>
         </div>
 
         <div class="flex items-center gap-2">
             <x-button :href="route('osis.events')" variant="primary" size="md" icon="calendar">
-                Agenda Event Festival
+                Agenda Festival & Tantangan
             </x-button>
         </div>
     </div>
@@ -25,7 +25,7 @@
     <!-- OSIS Metrik Grid -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 my-6">
         <div class="bg-white dark:bg-[#181818] border border-neutral-200 dark:border-[#2A2A2A] rounded-xl p-4 md:p-5 shadow-xs">
-            <span class="text-[11px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Total Proyek Sekolah</span>
+            <span class="text-[11px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Total Proyek Kolaborasi</span>
             <div class="flex items-baseline justify-between mt-2">
                 <span class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white">{{ $totalProjects }}</span>
                 <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5">
@@ -35,25 +35,25 @@
         </div>
 
         <div class="bg-white dark:bg-[#181818] border border-neutral-200 dark:border-[#2A2A2A] rounded-xl p-4 md:p-5 shadow-xs">
-            <span class="text-[11px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Siswa Berkolaborasi</span>
+            <span class="text-[11px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Talenta Berkolaborasi</span>
             <div class="flex items-baseline justify-between mt-2">
                 <span class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white">{{ $totalStudents }}</span>
-                <span class="text-xs font-medium text-neutral-500">Lintas 5 Jurusan</span>
+                <span class="text-xs font-medium text-neutral-500">Lintas 12 Bidang</span>
             </div>
         </div>
 
         <div class="bg-white dark:bg-[#181818] border border-neutral-200 dark:border-[#2A2A2A] rounded-xl p-4 md:p-5 shadow-xs">
-            <span class="text-[11px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Antrean Showcase</span>
+            <span class="text-[11px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Antrean Galeri</span>
             <div class="flex items-baseline justify-between mt-2">
                 <span class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white">{{ $pendingShowcaseProjects->count() }}</span>
                 <span class="text-xs font-medium text-amber-600 dark:text-amber-400 flex items-center gap-0.5">
-                    <x-icon name="clock" class="w-3.5 h-3.5" /> Butuh Review
+                    <x-icon name="clock" class="w-3.5 h-3.5" /> Perlu Ditinjau
                 </span>
             </div>
         </div>
 
         <div class="bg-white dark:bg-[#181818] border border-neutral-200 dark:border-[#2A2A2A] rounded-xl p-4 md:p-5 shadow-xs">
-            <span class="text-[11px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Festival Sekolah</span>
+            <span class="text-[11px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Festival Inovasi Hub</span>
             <div class="flex items-baseline justify-between mt-2">
                 <span class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white">H-42</span>
                 <span class="text-xs font-semibold px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
@@ -63,16 +63,16 @@
         </div>
     </div>
 
-    <!-- Section 1: Antrean Kurasi Showcase Publik -->
+    <!-- Section 1: Antrean Kurasi Galeri Publik -->
     <section class="my-8">
         <div class="flex items-center justify-between mb-4">
             <div>
                 <h2 class="text-lg font-bold text-neutral-900 dark:text-white tracking-tight flex items-center gap-2">
                     <x-icon name="award" class="w-5 h-5 text-neutral-700 dark:text-neutral-300" />
-                    Kurasi Proyek untuk Showcase Festival
+                    Kurasi Proyek untuk Galeri Festival
                 </h2>
                 <p class="text-xs text-neutral-500 dark:text-neutral-400">
-                    Proyek siswa yang diajukan masuk ke galeri resmi festival sekolah dan disetujui untuk dipamerkan.
+                    Proyek talenta yang diajukan masuk ke galeri resmi festival dan disetujui untuk dipamerkan.
                 </p>
             </div>
             <x-button :href="route('osis.kurasi')" variant="secondary" size="sm">
@@ -89,7 +89,7 @@
                                 <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700">
                                     {{ $p->jurusan_label }}
                                 </span>
-                                <span class="text-xs text-neutral-400">Lead: <strong>{{ $p->lead->name ?? 'Siswa' }}</strong> ({{ $p->lead->kelas ?? 'Lintas Jurusan' }})</span>
+                                <span class="text-xs text-neutral-400">Ketua Tim: <strong>{{ $p->lead->name ?? 'Talenta' }}</strong> ({{ $p->lead->institution ?? ($p->lead->headline ?? 'Talenta') }})</span>
                             </div>
                             <h3 class="text-base font-bold text-neutral-900 dark:text-white">
                                 {{ $p->title }}
@@ -101,12 +101,12 @@
 
                         <div class="flex items-center gap-2 shrink-0">
                             <x-button :href="route('siswa.workspace', $p->id)" variant="secondary" size="sm">
-                                Review Hasil Karya
+                                Tinjau Hasil Karya
                             </x-button>
                             <form action="{{ route('osis.kurasi.approve', $p->id) }}" method="POST" class="inline">
                                 @csrf
                                 <x-button type="submit" variant="primary" size="sm" icon="check">
-                                    Setujui Showcase
+                                    Setujui Galeri
                                 </x-button>
                             </form>
                         </div>
@@ -120,17 +120,17 @@
         </x-card>
     </section>
 
-    <!-- Section 2: Monitoring Aktivitas Kolaborasi per Jurusan -->
+    <!-- Section 2: Monitoring Aktivitas Kolaborasi per Bidang -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-8">
         <!-- 2 cols: Monitoring Semua Proyek Aktif -->
         <div class="lg:col-span-2 space-y-4">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-lg font-bold text-neutral-900 dark:text-white tracking-tight">
-                        Daftar Proyek Kolaborasi Siswa
+                        Daftar Proyek Kolaborasi Aktif
                     </h2>
                     <p class="text-xs text-neutral-500">
-                        Pantau progres pengerjaan setiap tim lintas jurusan.
+                        Pantau kemajuan pengerjaan setiap tim lintas bidang keahlian.
                     </p>
                 </div>
                 <x-button :href="route('osis.projects')" variant="outline" size="sm">
@@ -165,12 +165,12 @@
             </div>
         </div>
 
-        <!-- 1 col: Keaktifan Jurusan SMK -->
+        <!-- 1 col: Keaktifan Domain Keahlian -->
         <div>
             <x-card padding="p-5">
                 <h3 class="text-sm font-bold text-neutral-900 dark:text-white mb-3 flex items-center gap-2">
                     <x-icon name="layers" class="w-4 h-4 text-neutral-500" />
-                    Keaktifan Jurusan SMK
+                    Keaktifan Domain Global
                 </h3>
 
                 <div class="space-y-3 text-xs">

@@ -1,4 +1,4 @@
-<x-guest-layout title="Platform Kolaborasi Antarjurusan - SMKN 1 Ciomas">
+<x-guest-layout title="Platform Kolaborasi Talenta & Proyek Inovasi - SynapseHub">
     <!-- Ambient Gradient Background Lights -->
     <div class="relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none -z-10 overflow-hidden">
@@ -15,7 +15,7 @@
                 <!-- Glowing Announcement Pill -->
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 dark:bg-[#181818]/90 border border-neutral-200 dark:border-neutral-700/80 text-xs font-semibold text-neutral-800 dark:text-neutral-200 mb-6 shadow-xs backdrop-blur-md">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Platform Kolaborasi Kejuruan Resmi &bull; <strong class="text-neutral-950 dark:text-white">SMKN 1 Ciomas</strong></span>
+                    <span>Jaringan Kolaborasi & Talenta Terbuka &bull; <strong class="text-neutral-950 dark:text-white">SynapseHub</strong></span>
                 </div>
 
                 <!-- Main Heading -->
@@ -28,7 +28,7 @@
 
                 <!-- Subtitle -->
                 <p class="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto mt-6 leading-relaxed">
-                    Wadah terpadu sinergi karya inovasi 5 kejuruan <strong>SMKN 1 Ciomas</strong>. Hubungkan keahlian coding, broadcasting, animasi, otomotif, dan manufaktur logam dalam proyek nyata berstandar industri.
+                    Wadah terpadu kolaborasi karya dan proyek multidisiplin. Hubungkan talenta <strong>Software Engineering, Desain Kreatif, Multimedia, Rekayasa Teknik, dan Strategi Bisnis</strong> dalam proyek nyata berstandar industri.
                 </p>
 
                 <!-- Action Buttons -->
@@ -47,7 +47,7 @@
                             class="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-bold bg-white text-blue-700 border-2 border-blue-600/70 hover:bg-blue-50 transition-all shadow-xs hover:-translate-y-0.5"
                         >
                             <x-icon name="user" class="w-4 h-4" />
-                            <span>Daftar Siswa Baru</span>
+                            <span>Daftar Talenta Baru</span>
                         </a>
 
                         <a 
@@ -61,63 +61,36 @@
                             href="{{ route('portal') }}" 
                             class="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all shadow-md hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 cursor-pointer"
                         >
-                            <span>Buka Portal Dashboard</span>
+                            <span>Buka Portal Dasbor</span>
                             <x-icon name="arrow-right" class="w-4 h-4" />
                         </a>
                     @endguest
                 </div>
 
-                <!-- 5 Kejuruan Interactive Cards Grid -->
-                <div class="mt-14 max-w-5xl mx-auto">
-                    <p class="text-xs uppercase font-extrabold tracking-widest text-neutral-400 dark:text-neutral-500 mb-4">
-                        5 Kejuruan Terintegrasi SMKN 1 Ciomas
-                    </p>
+                <!-- Multidisciplinary Domain Interactive Cards Grid (Dynamic for all disciplines) -->
+                <div class="mt-14 max-w-6xl mx-auto">
+                    <div class="flex items-center justify-between mb-4">
+                        <p class="text-xs uppercase font-extrabold tracking-widest text-neutral-400 dark:text-neutral-500">
+                            {{ $jurusans->count() }} Pilar Domain & Disiplin Keahlian di SynapseHub
+                        </p>
+                        <a href="{{ route('projects.index') }}" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">
+                            Eksplorasi Semua &rarr;
+                        </a>
+                    </div>
                     
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-                        <!-- PPLG -->
-                        <div class="p-3.5 rounded-xl bg-white/90 dark:bg-[#161616]/90 border border-blue-200/80 dark:border-blue-900/40 shadow-xs hover:border-blue-400 dark:hover:border-blue-700 transition-all text-left group">
-                            <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">
-                                <x-icon name="code" class="w-4 h-4" />
-                            </div>
-                            <h4 class="text-sm font-bold text-neutral-900 dark:text-white">PPLG</h4>
-                            <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">Software & Game</p>
-                        </div>
-
-                        <!-- BCF -->
-                        <div class="p-3.5 rounded-xl bg-white/90 dark:bg-[#161616]/90 border border-purple-200/80 dark:border-purple-900/40 shadow-xs hover:border-purple-400 dark:hover:border-purple-700 transition-all text-left group">
-                            <div class="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">
-                                <x-icon name="video" class="w-4 h-4" />
-                            </div>
-                            <h4 class="text-sm font-bold text-neutral-900 dark:text-white">BCF</h4>
-                            <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">Broadcasting & Film</p>
-                        </div>
-
-                        <!-- Animasi -->
-                        <div class="p-3.5 rounded-xl bg-white/90 dark:bg-[#161616]/90 border border-amber-200/80 dark:border-amber-900/40 shadow-xs hover:border-amber-400 dark:hover:border-amber-700 transition-all text-left group">
-                            <div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">
-                                <x-icon name="sparkles" class="w-4 h-4" />
-                            </div>
-                            <h4 class="text-sm font-bold text-neutral-900 dark:text-white">Animasi</h4>
-                            <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">3D Model & Visual</p>
-                        </div>
-
-                        <!-- TO -->
-                        <div class="p-3.5 rounded-xl bg-white/90 dark:bg-[#161616]/90 border border-rose-200/80 dark:border-rose-900/40 shadow-xs hover:border-rose-400 dark:hover:border-rose-700 transition-all text-left group">
-                            <div class="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">
-                                <x-icon name="settings" class="w-4 h-4" />
-                            </div>
-                            <h4 class="text-sm font-bold text-neutral-900 dark:text-white">TO</h4>
-                            <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">Teknik Otomotif</p>
-                        </div>
-
-                        <!-- TPFL -->
-                        <div class="p-3.5 rounded-xl bg-white/90 dark:bg-[#161616]/90 border border-cyan-200/80 dark:border-cyan-900/40 shadow-xs hover:border-cyan-400 dark:hover:border-cyan-700 transition-all text-left group col-span-2 sm:col-span-1">
-                            <div class="w-8 h-8 rounded-lg bg-cyan-50 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">
-                                <x-icon name="layers" class="w-4 h-4" />
-                            </div>
-                            <h4 class="text-sm font-bold text-neutral-900 dark:text-white">TPFL</h4>
-                            <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">Pengelasan & Logam</p>
-                        </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                        @foreach($jurusans as $j)
+                            <a 
+                                href="{{ route('projects.index', ['jurusan' => $j->kode]) }}"
+                                class="p-3.5 rounded-xl bg-white/90 dark:bg-[#161616]/90 border border-neutral-200/80 dark:border-neutral-800/80 shadow-xs hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-md transition-all text-left group block"
+                            >
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">
+                                    <x-icon :name="$j->icon" class="w-4 h-4" />
+                                </div>
+                                <h4 class="text-xs font-extrabold text-neutral-900 dark:text-white tracking-wide">{{ $j->kode }}</h4>
+                                <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1 leading-snug">{{ $j->nama_lengkap }}</p>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -130,20 +103,20 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                     <div>
-                        <span class="text-2xl md:text-3xl font-extrabold text-neutral-950 dark:text-white">5 Kejuruan</span>
-                        <p class="text-xs text-neutral-500 mt-1">Sinergi Kompetensi SMK</p>
+                        <span class="text-2xl md:text-3xl font-extrabold text-neutral-950 dark:text-white">{{ $jurusans->count() }} Bidang</span>
+                        <p class="text-xs text-neutral-500 mt-1">Sinergi Multidisiplin</p>
                     </div>
                     <div>
-                        <span class="text-2xl md:text-3xl font-extrabold text-neutral-950 dark:text-white">100% PBL</span>
-                        <p class="text-xs text-neutral-500 mt-1">Project-Based Learning</p>
+                        <span class="text-2xl md:text-3xl font-extrabold text-neutral-950 dark:text-white">100% Nyata</span>
+                        <p class="text-xs text-neutral-500 mt-1">Inkubasi Proyek & Portofolio</p>
                     </div>
                     <div>
-                        <span class="text-2xl md:text-3xl font-extrabold text-neutral-950 dark:text-white">AI Collab Match</span>
-                        <p class="text-xs text-neutral-500 mt-1">Rekomendasi Partner Tim</p>
+                        <span class="text-2xl md:text-3xl font-extrabold text-neutral-950 dark:text-white">Pencocokan Cerdas</span>
+                        <p class="text-xs text-neutral-500 mt-1">Rekomendasi Partner Tim (AI)</p>
                     </div>
                     <div>
-                        <span class="text-2xl md:text-3xl font-extrabold text-neutral-950 dark:text-white">Terverifikasi</span>
-                        <p class="text-xs text-neutral-500 mt-1">Karya Standar Industri</p>
+                        <span class="text-2xl md:text-3xl font-extrabold text-neutral-950 dark:text-white">Galeri Karya</span>
+                        <p class="text-xs text-neutral-500 mt-1">Pameran Inovasi Terkurasi</p>
                     </div>
                 </div>
             </div>
@@ -162,12 +135,12 @@
                         Masuk ke Lingkungan Kerja Sesuai Peran
                     </h2>
                     <p class="text-xs md:text-sm text-neutral-600 dark:text-neutral-400 mt-2.5 leading-relaxed">
-                        Dirancang khusus untuk kebutuhan masing-masing civitas akademika SMKN 1 Ciomas dengan kontrol hak akses yang aman dan profesional.
+                        Dirancang khusus untuk kebutuhan kreator, pengembang, desainer, dan penyelenggara kegiatan komunitas dengan kontrol hak akses yang aman dan profesional.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
-                    <!-- 1. Portal Siswa Card (Blue/Indigo Glow) -->
+                    <!-- 1. Portal Talenta Card (Blue/Indigo Glow) -->
                     <div class="rounded-2xl border border-blue-200/80 dark:border-blue-900/40 bg-gradient-to-b from-blue-50/50 via-white to-white dark:from-blue-950/20 dark:via-[#161616] dark:to-[#161616] p-7 flex flex-col justify-between shadow-xs hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-600 transition-all group">
                         <div>
                             <div class="flex items-center justify-between mb-5">
@@ -175,30 +148,30 @@
                                     <x-icon name="user" class="w-6 h-6" />
                                 </div>
                                 <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">
-                                    Siswa Kolaborator
+                                    Talenta & Kreator
                                 </span>
                             </div>
 
                             <h3 class="text-xl font-extrabold text-neutral-900 dark:text-white">
-                                Portal Siswa
+                                Portal Kolaborator
                             </h3>
                             <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">
-                                Ruang inisiasi proyek bersama, pengerjaan tugas lintas jurusan, chat tim realtime, dan pencarian rekan lewat WORKHUB MATCH.
+                                Ruang inisiasi proyek bersama, pengelolaan tugas tim, diskusi kelompok, dan pencarian rekan kolaborasi lewat fitur pencocokan cerdas.
                             </p>
 
                             <!-- Features List -->
                             <ul class="mt-5 space-y-2.5 text-xs text-neutral-700 dark:text-neutral-300 border-t border-neutral-100 dark:border-neutral-800/80 pt-4">
                                 <li class="flex items-center gap-2">
                                     <x-icon name="check" class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 stroke-[2.5]" />
-                                    <span>Workspace tim & checklist tugas PBL</span>
+                                    <span>Ruang kerja tim & manajemen tugas kolaboratif</span>
                                 </li>
                                 <li class="flex items-center gap-2">
                                     <x-icon name="check" class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 stroke-[2.5]" />
-                                    <span>AI Collab Match antar 5 jurusan</span>
+                                    <span>Pencocokan talenta cerdas lintas 12 bidang keahlian</span>
                                 </li>
                                 <li class="flex items-center gap-2">
                                     <x-icon name="check" class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 stroke-[2.5]" />
-                                    <span>Portofolio karya & sertifikat industri</span>
+                                    <span>Portofolio karya & validasi keahlian terkurasi</span>
                                 </li>
                             </ul>
                         </div>
@@ -208,13 +181,13 @@
                                 href="{{ route('siswa.dashboard') }}"
                                 class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all shadow-xs cursor-pointer"
                             >
-                                <span>Buka Halaman Siswa</span>
+                                <span>Buka Portal Kolaborator</span>
                                 <x-icon name="arrow-right" class="w-3.5 h-3.5" />
                             </a>
                         </div>
                     </div>
 
-                    <!-- 2. Portal OSIS Card (Amber/Orange Glow) -->
+                    <!-- 2. Portal Penyelenggara Card (Amber/Orange Glow) -->
                     <div class="rounded-2xl border border-amber-200/80 dark:border-amber-900/40 bg-gradient-to-b from-amber-50/50 via-white to-white dark:from-amber-950/20 dark:via-[#161616] dark:to-[#161616] p-7 flex flex-col justify-between shadow-xs hover:shadow-xl hover:border-amber-400 dark:hover:border-amber-600 transition-all group">
                         <div>
                             <div class="flex items-center justify-between mb-5">
@@ -222,30 +195,30 @@
                                     <x-icon name="award" class="w-6 h-6" />
                                 </div>
                                 <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
-                                    Pengurus & Kurator
+                                    Komunitas & Kurator
                                 </span>
                             </div>
 
                             <h3 class="text-xl font-extrabold text-neutral-900 dark:text-white">
-                                Portal Pengurus OSIS
+                                Portal Penyelenggara & Komunitas
                             </h3>
                             <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">
-                                Pusat koordinasi agenda festival kejuruan, kurasi proyek unggulan untuk showcase pameran publik, dan broadcast sekolah.
+                                Pusat koordinasi hackathon, tantangan inovasi, kurasi karya unggulan untuk galeri publik, dan siaran pengumuman.
                             </p>
 
                             <!-- Features List -->
                             <ul class="mt-5 space-y-2.5 text-xs text-neutral-700 dark:text-neutral-300 border-t border-neutral-100 dark:border-neutral-800/80 pt-4">
                                 <li class="flex items-center gap-2">
                                     <x-icon name="check" class="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 stroke-[2.5]" />
-                                    <span>Kurasi karya terbaik untuk Showcase</span>
+                                    <span>Kurasi karya terbaik untuk Galeri Inovasi Publik</span>
                                 </li>
                                 <li class="flex items-center gap-2">
                                     <x-icon name="check" class="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 stroke-[2.5]" />
-                                    <span>Agenda Expo Festival & Pameran SMK</span>
+                                    <span>Manajemen Tantangan, Hackathon & Agenda Kegiatan</span>
                                 </li>
                                 <li class="flex items-center gap-2">
                                     <x-icon name="check" class="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 stroke-[2.5]" />
-                                    <span>Broadcast pengumuman ke seluruh siswa</span>
+                                    <span>Siaran pengumuman ke seluruh jaringan talenta</span>
                                 </li>
                             </ul>
                         </div>
@@ -255,11 +228,10 @@
                                 href="{{ route('osis.dashboard') }}"
                                 class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white transition-all shadow-xs cursor-pointer"
                             >
-                                <span>Buka Halaman OSIS</span>
+                                <span>Buka Portal Penyelenggara</span>
                                 <x-icon name="arrow-right" class="w-3.5 h-3.5" />
                             </a>
                         </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -272,13 +244,13 @@
                 <div>
                     <div class="flex items-center gap-2 mb-1.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Karya Nyata Siswa</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Inovasi Kolaboratif</span>
                     </div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950 dark:text-white">
-                        Proyek Kolaborasi SMKN 1 Ciomas
+                        Proyek Kolaborasi di SynapseHub
                     </h2>
                     <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                        Sinergi lintas jurusan yang sedang aktif berjalan di sekolah.
+                        Eksplorasi proyek nyata multidisiplin yang sedang aktif dibangun oleh komunitas talenta.
                     </p>
                 </div>
 
@@ -299,9 +271,9 @@
                     @endphp
                     <x-project-card 
                         :title="$p->title"
-                        :jurusan="$p->jurusan_label ?: 'Kolaborasi Siswa'"
+                        :jurusan="$p->jurusan_label ?: 'Kolaborasi Terbuka'"
                         :description="$p->description"
-                        :tags="['PBL', $p->category]"
+                        :tags="['Inovasi', $p->category]"
                         :members="$activeCount . ' / ' . $p->target_members"
                         :deadline="$p->deadline ? $p->deadline->format('d M Y') : '-'"
                         :progress="$p->progress"
@@ -314,7 +286,7 @@
                             <x-icon name="folder-kanban" class="w-6 h-6" />
                         </div>
                         <h3 class="text-sm font-bold text-neutral-900 dark:text-white">Belum Ada Proyek Publik</h3>
-                        <p class="text-xs text-neutral-500 mt-1 max-w-sm mx-auto">Daftar sekarang sebagai siswa SMKN 1 Ciomas dan inisiasi proyek kolaborasi pertamamu.</p>
+                        <p class="text-xs text-neutral-500 mt-1 max-w-sm mx-auto">Daftar sekarang di SynapseHub dan inisiasi proyek kolaborasi pertamamu.</p>
                         <div class="mt-4">
                             <x-button :href="route('register')" variant="primary" size="sm">
                                 Mulai Proyek Pertama
@@ -326,7 +298,7 @@
         </section>
 
         <!-- ========================================================================= -->
-        <!-- 5. WORKHUB MATCH SECTION -->
+        <!-- 5. SYNAPSE MATCH SECTION -->
         <!-- ========================================================================= -->
         <section class="py-16 md:py-24 bg-neutral-100/70 dark:bg-[#131313] border-t border-neutral-200 dark:border-[#222222]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -334,13 +306,13 @@
                     <div>
                         <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white bg-white dark:bg-[#1E1E1E] px-3 py-1 rounded-full border border-neutral-300 dark:border-neutral-700 mb-3 shadow-xs">
                             <x-icon name="cpu" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                            <span>WORKHUB MATCH (AI Talent Search)</span>
+                            <span>PENCOCOKAN REKAN (Pencarian Talenta Cerdas)</span>
                         </div>
                         <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950 dark:text-white">
                             Temukan partner yang paling cocok untuk proyekmu.
                         </h2>
                         <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1.5 max-w-2xl">
-                            Algoritma pencocokan kompetensi lintas 5 jurusan yang menganalisis keahlian siswa untuk kolaborasi optimal.
+                            Algoritma pencocokan kompetensi multidisiplin yang menganalisis keahlian talenta untuk kolaborasi optimal.
                         </p>
                     </div>
 
@@ -348,7 +320,7 @@
                         href="{{ route('siswa.match') }}" 
                         class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors shrink-0 shadow-xs"
                     >
-                        <span>Buka AI Match</span>
+                        <span>Buka Pencocokan Rekan</span>
                         <x-icon name="arrow-right" class="w-3.5 h-3.5" />
                     </a>
                 </div>
@@ -358,14 +330,14 @@
                     @forelse($candidates as $c)
                         <x-match-card 
                             :name="$c->name"
-                            :classMajor="($c->kelas ?? 'Siswa') . ' ' . ($c->jurusan->kode ?? 'SMKN 1 Ciomas')"
+                            :classMajor="($c->institution ?? ($c->headline ?? 'Talenta')) . ' • ' . ($c->jurusan->kode ?? 'TECH')"
                             :score="95"
                             :skills="$c->skills->pluck('name')->all()"
                             :href="route('siswa.profil', $c->id)"
                         />
                     @empty
                         <div class="col-span-full bg-white dark:bg-[#181818] border border-dashed border-neutral-300 dark:border-neutral-700 rounded-2xl p-8 text-center text-xs text-neutral-500">
-                            Belum ada siswa terdaftar. Ajak teman-teman SMKN 1 Ciomas bergabung dan bangun portofolio bersama!
+                            Belum ada talenta terdaftar. Ajak rekan-rekanmu bergabung dan bangun portofolio kolaborasi bersama!
                         </div>
                     @endforelse
                 </div>

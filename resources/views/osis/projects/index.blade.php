@@ -1,16 +1,16 @@
-<x-app-layout current="osis-proyek" role="osis" pageTitle="Monitoring Proyek Sekolah">
+<x-app-layout current="osis-proyek" role="osis" pageTitle="Pemantauan Proyek Kolaborasi">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                Monitoring Proyek Kolaborasi Sekolah
+                Pemantauan Proyek Kolaborasi
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Data real-time semua proyek yang sedang dikerjakan siswa lintas 5 jurusan.
+                Data terkini semua proyek yang sedang dikerjakan talenta lintas 12 bidang keahlian.
             </p>
         </div>
 
         <x-button :href="route('osis.kurasi')" variant="primary" size="md" icon="award">
-            Kurasi Showcase ({{ $projects->where('is_showcase', false)->count() }})
+            Kurasi Karya Unggulan ({{ $projects->where('is_showcase', false)->count() }})
         </x-button>
     </div>
 
@@ -22,11 +22,11 @@
                     <thead class="bg-neutral-50 dark:bg-[#151515] border-b border-neutral-200 dark:border-[#242424] text-neutral-500 uppercase tracking-wider font-semibold">
                         <tr>
                             <th class="p-4">Proyek & Deskripsi</th>
-                            <th class="p-4">Sinergi Jurusan</th>
-                            <th class="p-4">Project Lead</th>
+                            <th class="p-4">Bidang Keahlian</th>
+                            <th class="p-4">Ketua Tim</th>
                             <th class="p-4">Anggota Tim</th>
-                            <th class="p-4">Progress</th>
-                            <th class="p-4">Status Showcase</th>
+                            <th class="p-4">Kemajuan Proyek</th>
+                            <th class="p-4">Status Galeri</th>
                             <th class="p-4 text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -43,11 +43,11 @@
                                     </span>
                                 </td>
                                 <td class="p-4">
-                                    <span class="font-bold text-neutral-900 dark:text-white block">{{ $p->lead->name ?? 'Lead' }}</span>
-                                    <span class="text-neutral-400">{{ $p->lead->kelas ?? 'Siswa' }}</span>
+                                    <span class="font-bold text-neutral-900 dark:text-white block">{{ $p->lead->name ?? 'Ketua' }}</span>
+                                    <span class="text-neutral-400">{{ $p->lead->institution ?? ($p->lead->headline ?? 'Talenta') }}</span>
                                 </td>
                                 <td class="p-4">
-                                    <span class="font-semibold text-neutral-800 dark:text-neutral-200">{{ $p->members->count() }} / {{ $p->target_members }} Siswa</span>
+                                    <span class="font-semibold text-neutral-800 dark:text-neutral-200">{{ $p->members->count() }} / {{ $p->target_members }} Talenta</span>
                                 </td>
                                 <td class="p-4">
                                     <div class="flex items-center gap-2">
@@ -59,14 +59,14 @@
                                 </td>
                                 <td class="p-4">
                                     @if($p->is_showcase)
-                                        <x-badge variant="success" size="xs">Showcase Aktif</x-badge>
+                                        <x-badge variant="success" size="xs">Galeri Aktif</x-badge>
                                     @else
                                         <x-badge variant="neutral" size="xs">Belum Masuk</x-badge>
                                     @endif
                                 </td>
                                 <td class="p-4 text-right">
                                     <x-button :href="route('siswa.workspace', $p->id)" variant="outline" size="sm">
-                                        Buka Workspace
+                                        Buka Ruang Kerja
                                     </x-button>
                                 </td>
                             </tr>

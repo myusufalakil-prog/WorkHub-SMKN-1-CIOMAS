@@ -39,19 +39,19 @@ class OsisController extends Controller
             'title' => $request->title,
             'date_text' => $request->date_text,
             'status' => $request->status ?? 'Open Registrasi',
-            'desc' => $request->desc ?? 'Kegiatan festival dan kompetisi lintas jurusan SMK.',
-            'lead' => $request->lead ?? 'Pengurus OSIS',
-            'participants_info' => $request->participants_info ?? 'Terbuka untuk Semua Siswa SMK',
-            'category' => $request->category ?? 'Festival Sekolah',
+            'desc' => $request->desc ?? 'Kegiatan festival inovasi dan kompetisi kolaborasi lintas domain.',
+            'lead' => $request->lead ?? 'Tim Organizer Hub',
+            'participants_info' => $request->participants_info ?? 'Terbuka untuk Seluruh Talenta Komunitas',
+            'category' => $request->category ?? 'Festival Inovasi',
         ]);
 
-        // Kirim notifikasi broadcast ke siswa mengenai event baru
+        // Kirim notifikasi broadcast ke talenta mengenai event baru
         $students = User::where('role', 'siswa')->get();
         foreach ($students as $stu) {
             Notification::create([
                 'user_id' => $stu->id,
                 'type' => 'Event Baru',
-                'title' => "Agenda OSIS: {$event->title}",
+                'title' => "Agenda Komunitas: {$event->title}",
                 'desc' => "Event baru dijadwalkan pada {$event->date_text}. Segera daftarkan proyek kolaborasi timmu!",
                 'icon' => 'calendar',
                 'status' => 'unread',
@@ -60,7 +60,7 @@ class OsisController extends Controller
             ]);
         }
 
-        return redirect()->route('osis.events')->with('success', "Event '{$event->title}' berhasil dipublikasikan dan diberitahukan ke seluruh siswa!");
+        return redirect()->route('osis.events')->with('success', "Event '{$event->title}' berhasil dipublikasikan dan diberitahukan ke seluruh talenta!");
     }
 
     public function projects()
@@ -108,14 +108,18 @@ class OsisController extends Controller
     public function broadcast(Request $request)
     {
         if ($request->isMethod('post')) {
+            $request->validate([
+                'title' => 'required|string|max:255',
+            ]);
+
             $title = $request->input('title');
-            $desc = $request->input('desc');
+            $desc = $request->input('desc') ?? $request->input('message') ?? 'Pengumuman resmi dari tim Organizer.';
 
             $students = User::where('role', 'siswa')->get();
             foreach ($students as $stu) {
                 Notification::create([
                     'user_id' => $stu->id,
-                    'type' => 'Pengumuman OSIS',
+                    'type' => 'Pengumuman Komunitas',
                     'title' => $title,
                     'desc' => $desc,
                     'icon' => 'sparkles',
@@ -125,10 +129,25 @@ class OsisController extends Controller
                 ]);
             }
 
-            return redirect()->route('osis.broadcast')->with('success', 'Pengumuman OSIS berhasil dibroadcast ke seluruh siswa SMK!');
+            return redirect()->route('organizer.broadcast')->with('success', 'Pengumuman berhasil disiarkan ke seluruh talenta (' . $students->count() . ' penerima)!');
         }
 
-        $recentBroadcasts = Notification::where('type', 'Pengumuman OSIS')->latest()->take(5)->get();
+        // Kelompokkan siaran agar 1 agenda yang dikirim ke banyak talenta hanya muncul sebagai 1 riwayat siaran
+        $allBroadcasts = Notification::whereIn('type', ['Pengumuman Komunitas', 'Pengumuman OSIS'])
+            ->latest()
+            ->get();
+
+        $recentBroadcasts = $allBroadcasts
+            ->groupBy(function ($item) {
+                return $item->title . '||' . $item->desc;
+            })
+            ->map(function ($group) {
+                $first = $group->first();
+                $first->recipient_count = $group->count();
+                return $first;
+            })
+            ->take(5);
+
         return view('osis.broadcast.index', compact('recentBroadcasts'));
     }
 }

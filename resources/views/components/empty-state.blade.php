@@ -1,6 +1,6 @@
 @props([
     'title' => 'Belum ada data',
-    'description' => 'Mulai kolaborasi dengan membuat project pertama kamu.',
+    'description' => 'Mulai kolaborasi dengan membuat proyek pertama Anda.',
     'actionText' => null,
     'actionHref' => null,
     'icon' => 'folder-kanban',

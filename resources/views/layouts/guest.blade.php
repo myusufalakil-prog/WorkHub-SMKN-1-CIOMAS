@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title . ' - WORKHUB SMKN 1 Ciomas' : 'WORKHUB SMKN 1 Ciomas - Connect. Collaborate. Create.' }}</title>
-    <meta name="description" content="WORKHUB: Platform Kolaborasi Antarjurusan Resmi SMKN 1 Ciomas. Wadah sinergi inovasi karya PPLG, BCF, Animasi, Teknik Otomotif, dan Pengelasan.">
+    <title>{{ isset($title) ? $title . ' - SynapseHub' : 'SynapseHub - Terhubung. Berkolaborasi. Berinovasi.' }}</title>
+    <meta name="description" content="SynapseHub: Platform Kolaborasi Proyek & Jaringan Talenta Multi-Disiplin. Hubungkan ide, talenta, dan keahlian untuk menciptakan inovasi nyata.">
 
     <!-- Favicon & PWA Icons -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
@@ -54,7 +54,7 @@
         <div class="flex items-center gap-2 sm:gap-3">
             @auth
                 <x-button :href="route('dashboard')" variant="primary" size="sm">
-                    Dashboard ({{ auth()->user()->name }})
+                    Dasbor ({{ auth()->user()->name }})
                 </x-button>
             @else
                 <a href="{{ route('login') }}" class="text-xs font-bold text-slate-700 hover:text-slate-950 px-3 py-2 rounded-xl border border-slate-300 hover:bg-slate-100 transition-colors">
@@ -76,14 +76,12 @@
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">
                 <x-logo variant="compact" size="sm" />
-                <span class="font-bold text-neutral-900 dark:text-white">WORKHUB</span>
+                <span class="font-bold text-neutral-900 dark:text-white">SynapseHub</span>
                 <span class="text-neutral-400 dark:text-neutral-600">&bull;</span>
-                <span class="font-semibold text-neutral-700 dark:text-neutral-300">SMKN 1 Ciomas</span>
-                <span class="text-neutral-400 dark:text-neutral-600">&bull;</span>
-                <span>Connect. Collaborate. Create.</span>
+                <span class="font-semibold text-neutral-700 dark:text-neutral-300">Terhubung. Berkolaborasi. Berinovasi.</span>
             </div>
             <div>
-                Platform Kolaborasi Lintas 5 Kejuruan &bull; SMKN 1 Ciomas
+                Platform Kolaborasi Talenta & Proyek Inovasi Lintas Disiplin
             </div>
         </div>
     </footer>

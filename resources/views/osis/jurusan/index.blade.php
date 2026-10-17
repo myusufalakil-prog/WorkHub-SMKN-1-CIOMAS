@@ -1,11 +1,11 @@
-<x-app-layout current="osis-jurusan" role="osis" pageTitle="Aktivitas Kolaborasi Jurusan">
+<x-app-layout current="osis-jurusan" role="osis" pageTitle="Pilar Bidang Keahlian">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                Statistik & Keaktifan 5 Jurusan SMK
+                Statistik & Keaktifan {{ $jurusans->count() }} Bidang Keahlian
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Data partisipasi siswa dan kontribusi karya per keahlian kejuruan.
+                Data partisipasi talenta dan kontribusi proyek per pilar bidang keahlian di SynapseHub.
             </p>
         </div>
     </div>
@@ -31,8 +31,8 @@
                 </p>
 
                 <div class="mt-6 pt-4 border-t border-neutral-100 dark:border-[#262626] flex items-center justify-between text-xs">
-                    <span class="text-neutral-500">Siswa Terdaftar:</span>
-                    <span class="font-bold text-neutral-900 dark:text-white">{{ $j->students_count }} Siswa</span>
+                    <span class="text-neutral-500">Talenta Terdaftar:</span>
+                    <span class="font-bold text-neutral-900 dark:text-white">{{ $j->students_count }} Talenta</span>
                 </div>
             </x-card>
         @endforeach

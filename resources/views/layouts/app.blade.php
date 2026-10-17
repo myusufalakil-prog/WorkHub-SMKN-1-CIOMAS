@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title . ' - WORKHUB SMKN 1 Ciomas' : 'WORKHUB SMKN 1 Ciomas - Connect. Collaborate. Create.' }}</title>
-    <meta name="description" content="Platform kolaborasi lintas jurusan resmi siswa SMKN 1 Ciomas. Temukan tim impian, kelola proyek bersama, dan bangun portofolio industri nyata.">
+    <title>{{ isset($title) ? $title . ' - SynapseHub' : 'SynapseHub - Terhubung. Berkolaborasi. Berinovasi.' }}</title>
+    <meta name="description" content="Platform kolaborasi talenta lintas disiplin & inkubasi proyek inovatif. Temukan tim impian, kelola proyek bersama, dan bangun portofolio industri nyata.">
 
     <!-- Favicon & PWA Icons (Mandatory WORKHUB Connection Hub Icon) -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">

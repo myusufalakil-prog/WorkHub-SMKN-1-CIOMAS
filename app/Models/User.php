@@ -17,9 +17,12 @@ class User extends Authenticatable
         'role', // 'siswa', 'osis', 'guru'
         'nisn_nip',
         'kelas',
+        'institution',
         'jurusan_id',
         'jabatan',
+        'headline',
         'bio',
+        'portfolio_website',
         'avatar',
         'phone',
     ];
@@ -49,7 +52,12 @@ class User extends Authenticatable
 
     public function isOsis(): bool
     {
-        return $this->role === 'osis' || $this->role === 'admin';
+        return $this->role === 'osis' || $this->role === 'organizer' || $this->role === 'admin';
+    }
+
+    public function isOrganizer(): bool
+    {
+        return $this->role === 'osis' || $this->role === 'organizer' || $this->role === 'admin';
     }
 
     public function isGuru(): bool

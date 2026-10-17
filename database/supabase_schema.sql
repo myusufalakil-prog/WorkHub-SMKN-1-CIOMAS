@@ -29,9 +29,12 @@ CREATE TABLE IF NOT EXISTS users (
     role VARCHAR(20) DEFAULT 'siswa',
     nisn_nip VARCHAR(30) NULL,
     kelas VARCHAR(30) NULL,
+    institution VARCHAR(150) NULL,
     jurusan_id BIGINT NULL REFERENCES jurusans(id) ON DELETE SET NULL,
     jabatan VARCHAR(100) NULL,
+    headline VARCHAR(150) NULL,
     bio TEXT NULL,
+    portfolio_website VARCHAR(255) NULL,
     avatar VARCHAR(255) NULL,
     phone VARCHAR(25) NULL,
     remember_token VARCHAR(100) NULL,
@@ -282,47 +285,59 @@ ALTER TABLE school_events ENABLE ROW LEVEL SECURITY;
 -- Hash Bcrypt: $2y$12$NqKkUjS3qQj5P9gP8pI2u.3qK0zL1E2L7mB5r4o8YkH3x1v9u6vCe
 -- =============================================================================
 
--- Master Jurusan
+-- Master Domain / Kategori Universal
 INSERT INTO jurusans (id, kode, nama_lengkap, deskripsi, color_accent) VALUES
-(1, 'PPLG', 'Pengembangan Perangkat Lunak dan Gim', 'Rekayasa perangkat lunak, web engineering, mobile app, dan game dev.', '#111111'),
-(2, 'BCF', 'Broadcasting dan Perfilman', 'Produksi video, sinematografi, audio sound design, dan live streaming.', '#222222'),
-(3, 'Animasi', 'Animasi 3D & 2D', '3D asset modeling, rigging karakter, motion graphic, dan visual effects.', '#181818'),
-(4, 'TO', 'Teknik Otomotif', 'Pemeliharaan mesin kendaraan, kelistrikan otomotif, chasis, dan sistem EFI.', '#111111'),
-(5, 'TPFL', 'Teknik Pengelasan dan Fabrikasi Logam', 'Pengelasan SMAW/GMAW/GTAW, perancangan plat logam, dan fabrikasi presisi.', '#181818')
-ON CONFLICT (id) DO NOTHING;
+(1, 'TECH', 'Software Engineering & Web Development', 'Pengembangan aplikasi web, mobile (Android/iOS), backend APIs, dan arsitektur sistem komputasi modern.', '#2563EB'),
+(2, 'MEDIA', 'Creative Media, Film & Broadcasting', 'Produksi video sinematik, editing, motion graphics, audio visual sound design, podcast & studio broadcasting.', '#9333EA'),
+(3, 'DESIGN', 'UI/UX & Digital Product Design', 'Desain interaksi antarmuka pengguna, user research, wireframing, prototyping Figma, dan design system visual.', '#F59E0B'),
+(4, 'ENG', 'Robotics, Mechatronics & IoT Hardware', 'Rekayasa perangkat keras, mikrokontroler (Arduino/ESP32), otomasi industri, dan integrasi robotika modern.', '#E11D48'),
+(5, 'BIZ', 'Digital Business & Product Strategy', 'Manajemen produk, strategi pemasaran digital, riset pasar, sales funnel, dan inkubasi startup digital.', '#0891B2'),
+(6, 'AI-DATA', 'Data Science & Artificial Intelligence', 'Machine learning, computer vision, data analytics, predictive modeling, serta integrasi LLM & AI agent.', '#4F46E5'),
+(7, 'CYBER', 'Cloud Infrastructure & Cyber Security', 'Keamanan jaringan informasi, ethical hacking, DevSecOps, arsitektur cloud server (AWS/GCP), dan sysadmin.', '#0F172A'),
+(8, '3D-GAME', '3D Art, Animation & Game Development', 'Asset modeling 3D Blender/Maya, rigging, animasi karakter, dan game engine Unity/Unreal Engine.', '#7C3AED'),
+(9, 'FIN', 'Fintech, Accounting & Financial Analysis', 'Analisis kelayakan finansial proyek, budgeting, pembukuan digital, payment gateway, dan fintech logic.', '#059669'),
+(10, 'HEALTH', 'Health Informatics & Biotechnology', 'Solusi teknologi medis, sistem rekam medis digital, bioinformatika, dan teknologi kesehatan preventif.', '#0D9488'),
+(11, 'ENV', 'Environmental Science & Green Tech', 'Energi terbarukan, pemantauan kualitas lingkungan berbasis sensor IoT, dan inovasi keberlanjutan bumi.', '#16A34A'),
+(12, 'COMM', 'Digital Communication, Law & Public Policy', 'Hukum siber & privasi data, jurnalisme digital, komunikasi publik, copy engineering, dan advokasi sosial.', '#0284C7')
+ON CONFLICT (id) DO UPDATE SET
+    kode = EXCLUDED.kode,
+    nama_lengkap = EXCLUDED.nama_lengkap,
+    deskripsi = EXCLUDED.deskripsi,
+    color_accent = EXCLUDED.color_accent;
 
--- Master Skills
+-- Master Skills Multidisiplin
 INSERT INTO skills (id, name, category) VALUES
-(1, 'Frontend Web & UI', 'Code'),
-(2, 'Backend & Database', 'Code'),
-(3, 'Game Development', 'Code'),
-(4, 'Sinematografi & Kamera', 'Media'),
-(5, 'Video Editing & Audio', 'Media'),
-(6, '3D Blender & Rigging', 'Design'),
-(7, '2D Motion & Animasi', 'Design'),
-(8, 'Diagnosis Mesin Otomotif', 'Teknik'),
-(9, 'Kelistrikan & EFI Otomotif', 'Teknik'),
-(10, 'Pengelasan SMAW / GMAW', 'Manufaktur'),
-(11, 'Fabrikasi Logam & Desain CAD', 'Manufaktur')
+(1, 'Frontend & Web App', 'Technology'),
+(2, 'Backend & API Architecture', 'Technology'),
+(3, 'Machine Learning & AI', 'Technology'),
+(4, 'Mobile App (Flutter/React Native)', 'Technology'),
+(5, 'Video Editing & Motion Graphics', 'Media'),
+(6, 'Audio Production & Sound Design', 'Media'),
+(7, 'UI/UX & Product Design', 'Design'),
+(8, '3D Blender & Asset Modeling', 'Design'),
+(9, 'IoT & Microcontroller Firmware', 'Engineering'),
+(10, 'Hardware Prototyping', 'Engineering'),
+(11, 'Product Management & Scrum', 'Business'),
+(12, 'Growth & Digital Marketing', 'Business')
 ON CONFLICT (id) DO NOTHING;
 
 -- Akun User Utama (Password: password)
--- Password Hash di bawah valid untuk Laravel bcrypt: 'password'
-INSERT INTO users (id, name, email, password, role, kelas, jurusan_id, jabatan, bio, phone) VALUES
-(1, 'Super Administrator', 'admin@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'admin', 'Staff IT', 1, 'Administrator Sistem', 'Akun administrator dengan hak akses penuh ke portal Siswa dan OSIS.', '081122334455'),
-(2, 'Pengurus OSIS', 'osis@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'osis', 'XI PPLG 2', 1, 'Divisi IT & Acara OSIS', 'Pengurus OSIS SMK. Mengoordinasikan event festival tahunan dan kurasi showcase proyek kolaborasi.', '081298765432'),
-(3, 'Raka Pratama', 'raka@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'siswa', 'XII PPLG 1', 1, 'Fullstack Developer', 'Siswa PPLG antusias berkolaborasi membangun aplikasi nyata dengan teman lintas jurusan Animasi, BCF, TO, dan TPFL.', '081234567890')
+INSERT INTO users (id, name, email, password, role, institution, headline, kelas, jurusan_id, jabatan, bio, phone) VALUES
+(1, 'SynapseHub Administrator', 'admin@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'admin', 'SynapseHub Core Team', 'Platform Administrator & Tech Lead', 'Tech Core', 1, 'Administrator Sistem', 'Akun administrator dengan hak akses penuh ke seluruh portal dan ekosistem kolaborasi SynapseHub.', '081122334455'),
+(2, 'Community Organizer', 'osis@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'osis', 'Open Innovation Community', 'Challenge Curator & Event Coordinator', 'Community Lead', 5, 'Koordinator Event & Kurator Showcase', 'Mengoordinasikan hackathon, challenge kolaborasi terbuka, dan kurasi showcase proyek unggulan.', '081298765432'),
+(3, 'Raka Pratama', 'raka@gmail.com', '$2y$10$oOGsXCmsDDtV3qUrAjDch.GDA5uH1Q7tV4EZ2PKk7NgQA57n9/3Zm', 'siswa', 'Talenta Terbuka / Tech Enthusiast', 'Fullstack Developer & AI Prototyper', 'Developer', 1, 'Fullstack Developer', 'Antusias berkolaborasi membangun produk inovatif nyata bersama desainer, audio-video creator, dan engineer perangkat keras.', '081234567890')
 ON CONFLICT (id) DO NOTHING;
 
--- Hubungkan Skill Siswa Raka
+-- Hubungkan Skill Kreator Raka
 INSERT INTO user_skills (user_id, skill_id, level, is_verified) VALUES
 (3, 1, 'Mahir', true),
-(3, 2, 'Menengah', true)
+(3, 2, 'Menengah', true),
+(3, 7, 'Menengah', true)
 ON CONFLICT DO NOTHING;
 
--- Event Awal OSIS
+-- Event / Challenge Awal SynapseHub
 INSERT INTO school_events (title, date_text, status, "desc", lead, participants_info, category) VALUES
-('Ciomas Tech & Creative Expo 2026', '24 - 26 Oktober 2026', 'Open Registrasi', 'Pameran karya inovasi lintas keahlian siswa SMKN 1 Ciomas.', 'Pengurus OSIS SMKN 1 Ciomas', 'Terbuka untuk Semua Jurusan', 'Festival Tahunan Sekolah')
+('SynapseHub Open Innovation Hackathon 2026', '24 - 26 Oktober 2026', 'Open Registrasi', 'Kompetisi kolaborasi lintas disiplin: Software, Desain Visual, Media, dan Hardware Prototyping.', 'SynapseHub Community Team', 'Terbuka untuk Umum / Talenta Multi-Disiplin', 'Hackathon & Challenge Global')
 ON CONFLICT DO NOTHING;
 
 -- Reset Sequence PostgreSQL agar ID baru tidak bentrok

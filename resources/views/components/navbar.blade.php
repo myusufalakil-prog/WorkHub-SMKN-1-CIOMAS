@@ -26,7 +26,7 @@
             <input 
                 type="text" 
                 name="q"
-                placeholder="Cari proyek, jurusan (PPLG, Animasi...), atau skill..." 
+                placeholder="Cari proyek, bidang keahlian (TECH, MEDIA...), atau keahlian..." 
                 class="w-full pl-9 pr-4 py-1.5 text-xs md:text-sm bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 border border-transparent focus:border-blue-500 rounded-xl focus:outline-none focus:bg-white dark:focus:bg-slate-900 transition-all"
             />
         </form>
@@ -38,7 +38,7 @@
         @auth
             @if(auth()->user()->role === 'osis')
                 <x-button :href="route('osis.events')" variant="primary" size="sm" icon="plus" class="hidden sm:inline-flex">
-                    Event
+                    Agenda
                 </x-button>
             @else
                 <x-button :href="route('projects.create')" variant="primary" size="sm" icon="plus" class="hidden sm:inline-flex">
@@ -72,7 +72,7 @@
                         {{ auth()->user()->name }}
                     </span>
                     <span class="text-[10px] text-neutral-400 mt-0.5">
-                        {{ auth()->user()->kelas ?? ucfirst(auth()->user()->role) }}
+                        {{ auth()->user()->institution ?? (auth()->user()->headline ?? (auth()->user()->kelas ?? 'Kolaborator')) }}
                     </span>
                 </div>
             </a>

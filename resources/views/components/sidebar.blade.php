@@ -5,20 +5,20 @@
 
 @php
     $studentNav = [
-        ['id' => 'beranda', 'label' => 'Beranda Siswa', 'icon' => 'home', 'href' => route('siswa.dashboard')],
+        ['id' => 'beranda', 'label' => 'Beranda Kolaborator', 'icon' => 'home', 'href' => route('siswa.dashboard')],
         ['id' => 'proyek', 'label' => 'Proyek Kolaborasi', 'icon' => 'folder-kanban', 'href' => route('siswa.proyek.index')],
-        ['id' => 'match', 'label' => 'WORKHUB MATCH', 'icon' => 'cpu', 'href' => route('siswa.match')],
-        ['id' => 'workspace', 'label' => 'Workspace Proyek', 'icon' => 'briefcase', 'href' => route('siswa.workspace')],
-        ['id' => 'showcase', 'label' => 'Showcase Karya', 'icon' => 'sparkles', 'href' => route('siswa.showcase')],
+        ['id' => 'match', 'label' => 'Pencocokan Rekan (AI)', 'icon' => 'cpu', 'href' => route('siswa.match')],
+        ['id' => 'workspace', 'label' => 'Ruang Kerja Proyek', 'icon' => 'briefcase', 'href' => route('siswa.workspace')],
+        ['id' => 'showcase', 'label' => 'Galeri Karya Inovasi', 'icon' => 'sparkles', 'href' => route('siswa.showcase')],
     ];
 
     $osisNav = [
-        ['id' => 'osis-dashboard', 'label' => 'Dashboard OSIS', 'icon' => 'home', 'href' => route('osis.dashboard')],
-        ['id' => 'osis-events', 'label' => 'Event & Festival', 'icon' => 'sparkles', 'href' => route('osis.events')],
-        ['id' => 'osis-proyek', 'label' => 'Monitoring Proyek', 'icon' => 'folder-kanban', 'href' => route('osis.proyek')],
-        ['id' => 'osis-kurasi', 'label' => 'Kurasi Showcase', 'icon' => 'award', 'href' => route('osis.kurasi')],
-        ['id' => 'osis-jurusan', 'label' => 'Aktivitas Jurusan', 'icon' => 'layers', 'href' => route('osis.jurusan')],
-        ['id' => 'osis-broadcast', 'label' => 'Broadcast Info', 'icon' => 'bell', 'href' => route('osis.broadcast')],
+        ['id' => 'osis-dashboard', 'label' => 'Dasbor Penyelenggara', 'icon' => 'home', 'href' => route('osis.dashboard')],
+        ['id' => 'osis-events', 'label' => 'Agenda & Tantangan', 'icon' => 'sparkles', 'href' => route('osis.events')],
+        ['id' => 'osis-proyek', 'label' => 'Pemantauan Proyek', 'icon' => 'folder-kanban', 'href' => route('osis.proyek')],
+        ['id' => 'osis-kurasi', 'label' => 'Kurasi Karya Unggulan', 'icon' => 'award', 'href' => route('osis.kurasi')],
+        ['id' => 'osis-jurusan', 'label' => 'Pilar Bidang Keahlian', 'icon' => 'layers', 'href' => route('osis.jurusan')],
+        ['id' => 'osis-broadcast', 'label' => 'Siaran Pengumuman', 'icon' => 'bell', 'href' => route('osis.broadcast')],
     ];
 
     $navItems = match($role) {
@@ -27,21 +27,21 @@
     };
 
     $roleBadgeText = match($role) {
-        'osis' => 'PORTAL OSIS',
-        default => 'PORTAL SISWA',
+        'osis' => 'HUB PENYELENGGARA',
+        default => 'HUB TALENTA',
     };
 
     $auth = auth()->user();
     $currentUser = [
         'name' => $auth?->name ?? match($role) {
-            'osis' => 'Pengurus OSIS',
-            default => 'Siswa Kolaborator',
+            'osis' => 'Penyelenggara Komunitas',
+            default => 'Talenta Kolaborator',
         },
-        'sub' => $auth ? ($auth->kelas ?? ($auth->jabatan ?? ucfirst($auth->role))) : match($role) {
-            'osis' => 'Divisi IT OSIS',
-            default => 'Belum Login',
+        'sub' => $auth ? ($auth->institution ?? ($auth->headline ?? ($auth->kelas ?? ucfirst($auth->role)))) : match($role) {
+            'osis' => 'Koordinator Komunitas',
+            default => 'Tamu Terbuka',
         },
-        'initials' => strtoupper(substr($auth?->name ?? ($role === 'osis' ? 'OS' : 'SK'), 0, 2)),
+        'initials' => strtoupper(substr($auth?->name ?? ($role === 'osis' ? 'OG' : 'SH'), 0, 2)),
     ];
 
     $profileId = $auth?->id ?? 1;
@@ -108,17 +108,17 @@
                     <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-indigo-200/60 dark:border-indigo-800/50 text-[10px] text-center font-bold">
                         <a 
                             href="{{ route('siswa.dashboard') }}" 
-                            title="Buka Portal Siswa"
+                            title="Buka Portal Talenta"
                             class="py-1.5 rounded-lg transition-all {{ $role === 'siswa' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-extrabold shadow-sm' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700 border border-slate-200/70 dark:border-slate-700' }}"
                         >
-                            Siswa
+                            Talenta
                         </a>
                         <a 
                             href="{{ route('osis.dashboard') }}" 
-                            title="Buka Portal OSIS"
+                            title="Buka Hub Penyelenggara"
                             class="py-1.5 rounded-lg transition-all {{ $role === 'osis' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white font-extrabold shadow-sm' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-purple-50 dark:hover:bg-slate-700 border border-slate-200/70 dark:border-slate-700' }}"
                         >
-                            OSIS
+                            Penyelenggara
                         </a>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
         <!-- Navigation list -->
         <div class="px-3 py-4">
             <div class="px-3 mb-2 text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">
-                Menu Khusus {{ ucfirst($role) }}
+                Menu {{ $role === 'osis' ? 'Penyelenggara' : 'Talenta' }}
             </div>
             
             <nav class="space-y-1">
@@ -210,7 +210,7 @@
                     class="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors border border-rose-200/70 dark:border-rose-900/40 cursor-pointer"
                 >
                     <x-icon name="arrow-right" class="w-3.5 h-3.5 rotate-180" />
-                    <span>Keluar Akun (Logout)</span>
+                    <span>Keluar Akun</span>
                 </button>
             </form>
         @else

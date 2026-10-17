@@ -10,7 +10,7 @@
                 Buat Proyek Kolaborasi Baru
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Tulis ide proyekmu dan undang rekan lintas jurusan untuk berkolaborasi.
+                Tulis ide proyekmu dan undang rekan lintas domain untuk berkolaborasi.
             </p>
         </div>
 
@@ -28,28 +28,35 @@
                         type="text" 
                         name="title" 
                         required
-                        placeholder="Contoh: Festival Sekolah 2026 Digital Hub"
+                        placeholder="Contoh: AI-Powered Smart Learning Platform atau Open Creative Studio"
                         class="w-full px-3.5 py-2.5 text-sm bg-neutral-50 dark:bg-[#141414] text-neutral-900 dark:text-white placeholder-neutral-400 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:border-neutral-900 dark:focus:border-neutral-300 focus:bg-white dark:focus:bg-[#111111] transition-all"
                     />
                 </div>
 
-                <!-- Jurusan Kolaborator yang Dibutuhkan -->
+                <!-- Domain Kolaborator yang Dibutuhkan -->
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-2">
-                        Kejuruan Kolaborasi yang Dibutuhkan (SMKN 1 Ciomas) <span class="text-rose-500">*</span>
+                        Domain Kolaborasi yang Dibutuhkan <span class="text-rose-500">*</span>
                     </label>
                     <p class="text-xs text-neutral-500 mb-3">
-                        Pilih minimal 1 atau lebih dari 5 kejuruan resmi SMKN 1 Ciomas untuk membangun sinergi tim.
+                        Pilih minimal 1 atau lebih dari domain keahlian multidisiplin untuk membangun sinergi tim.
                     </p>
                     <div class="flex flex-wrap gap-2">
                         @foreach($jurusans as $j)
                             @php
                                 $badgeColor = match($j->kode) {
-                                    'PPLG' => 'hover:border-blue-500 hover:text-blue-600',
-                                    'BCF' => 'hover:border-purple-500 hover:text-purple-600',
-                                    'Animasi' => 'hover:border-amber-500 hover:text-amber-600',
-                                    'TO' => 'hover:border-rose-500 hover:text-rose-600',
-                                    'TPFL' => 'hover:border-cyan-500 hover:text-cyan-600',
+                                    'TECH' => 'hover:border-blue-500 hover:text-blue-600',
+                                    'AI-DATA' => 'hover:border-indigo-500 hover:text-indigo-600',
+                                    'CYBER' => 'hover:border-slate-500 hover:text-slate-600',
+                                    'DESIGN' => 'hover:border-amber-500 hover:text-amber-600',
+                                    '3D-GAME' => 'hover:border-violet-500 hover:text-violet-600',
+                                    'MEDIA' => 'hover:border-purple-500 hover:text-purple-600',
+                                    'ENG' => 'hover:border-rose-500 hover:text-rose-600',
+                                    'BIZ' => 'hover:border-cyan-500 hover:text-cyan-600',
+                                    'FIN' => 'hover:border-emerald-500 hover:text-emerald-600',
+                                    'HEALTH' => 'hover:border-teal-500 hover:text-teal-600',
+                                    'ENV' => 'hover:border-green-500 hover:text-green-600',
+                                    'COMM' => 'hover:border-sky-500 hover:text-sky-600',
                                     default => 'hover:border-blue-500 hover:text-blue-600',
                                 };
                             @endphp
@@ -93,7 +100,7 @@
 
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-2">
-                            Target Deadline Selesai
+                            Target Tenggat Waktu Selesai
                         </label>
                         <input 
                             type="date" 

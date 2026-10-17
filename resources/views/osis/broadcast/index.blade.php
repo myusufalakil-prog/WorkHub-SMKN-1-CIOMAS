@@ -1,12 +1,12 @@
-<x-app-layout current="osis-broadcast" role="osis" pageTitle="Broadcast Pengumuman OSIS">
+<x-app-layout current="osis-broadcast" role="osis" pageTitle="Siaran Pengumuman Hub">
     <div class="max-w-3xl mx-auto">
         <div class="flex items-center justify-between pb-6 border-b border-neutral-200 dark:border-[#222222]">
             <div>
                 <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                    Broadcast Pengumuman OSIS
+                    Siaran Pengumuman Hub
                 </h1>
                 <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                    Kirim notifikasi informasi event, panggilan kolaborasi, atau tenggat waktu ke seluruh siswa SMK.
+                    Kirim notifikasi agenda kegiatan, panggilan kolaborasi, atau pengumuman penting ke seluruh talenta terdaftar.
                 </p>
             </div>
         </div>
@@ -37,14 +37,14 @@
                             name="desc" 
                             rows="3" 
                             required 
-                            placeholder="Tuliskan rincian pengumuman yang akan muncul pada notifikasi siswa..." 
+                            placeholder="Tuliskan rincian pengumuman yang akan muncul pada notifikasi talenta..." 
                             class="w-full text-xs md:text-sm p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white focus:outline-none"
                         ></textarea>
                     </div>
 
                     <div class="pt-2 flex justify-end">
                         <x-button type="submit" variant="primary" size="sm" icon="send">
-                            Kirim Notifikasi Broadcast
+                            Kirim Siaran Pengumuman
                         </x-button>
                     </div>
                 </form>
@@ -54,20 +54,28 @@
         <!-- Riwayat Broadcast Terakhir -->
         <div class="mt-8 space-y-3">
             <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
-                Pengumuman Terkirim Sebelumnya
+                Riwayat Siaran Pengumuman
             </h3>
 
             @forelse($recentBroadcasts as $b)
-                <div class="p-4 rounded-xl border border-neutral-200 dark:border-[#2A2A2A] bg-white dark:bg-[#181818] shadow-xs flex items-start gap-3">
-                    <x-icon name="bell" class="w-5 h-5 text-neutral-400 shrink-0 mt-0.5" />
-                    <div>
-                        <span class="text-[10px] text-neutral-400 block">{{ $b->created_at->diffForHumans() }}</span>
-                        <h4 class="text-sm font-bold text-neutral-900 dark:text-white">{{ $b->title }}</h4>
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{{ $b->desc }}</p>
+                <div class="p-4 rounded-xl border border-neutral-200 dark:border-[#2A2A2A] bg-white dark:bg-[#181818] shadow-xs flex items-start justify-between gap-3">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                            <x-icon name="bell" class="w-4 h-4" />
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-neutral-400 block">{{ $b->created_at ? $b->created_at->diffForHumans() : 'Baru saja' }}</span>
+                            <h4 class="text-sm font-bold text-neutral-900 dark:text-white">{{ $b->title }}</h4>
+                            <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{{ $b->desc }}</p>
+                        </div>
                     </div>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/80 dark:border-purple-800 shrink-0">
+                        <x-icon name="users" class="w-3 h-3" />
+                        {{ $b->recipient_count ?? 1 }} Talenta Penerima
+                    </span>
                 </div>
             @empty
-                <div class="text-xs text-neutral-400">Belum ada riwayat broadcast.</div>
+                <div class="text-xs text-neutral-400">Belum ada riwayat siaran pengumuman.</div>
             @endforelse
         </div>
     </div>

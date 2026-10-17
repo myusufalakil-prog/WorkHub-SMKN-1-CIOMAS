@@ -38,8 +38,8 @@ Route::get('/dashboard', function () {
     }
 
     return match (auth()->user()->role) {
-        'admin' => redirect()->route('portal')->with('success', 'Selamat datang Administrator! Anda memiliki akses penuh ke portal Siswa dan OSIS.'),
-        'osis' => redirect()->route('osis.dashboard'),
+        'admin' => redirect()->route('portal')->with('success', 'Selamat datang Administrator! Anda memiliki akses penuh ke portal Talenta dan Organizer Hub.'),
+        'osis', 'organizer' => redirect()->route('organizer.dashboard'),
         default => redirect()->route('siswa.dashboard'),
     };
 })->name('dashboard');
@@ -56,10 +56,11 @@ Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->grou
     Route::post('/proyek/{id}/members/{userId}/approve', [SiswaController::class, 'approveMember'])->name('proyek.member.approve');
     Route::post('/proyek/{id}/members/{userId}/reject', [SiswaController::class, 'rejectMember'])->name('proyek.member.reject');
     
-    // Workspace Interaktif
+    // Workspace Interaktif & Realtime Chat
     Route::get('/workspace/{id?}', [SiswaController::class, 'workspace'])->name('workspace');
     Route::post('/workspace/{id}/tugas', [SiswaController::class, 'storeTask'])->name('workspace.task.store');
     Route::post('/workspace/{id}/tugas/{taskId}/status', [SiswaController::class, 'updateTaskStatus'])->name('workspace.task.status');
+    Route::get('/workspace/{id}/chat/messages', [SiswaController::class, 'getMessages'])->name('workspace.chat.messages');
     Route::post('/workspace/{id}/chat', [SiswaController::class, 'sendMessage'])->name('workspace.chat.send');
     Route::post('/workspace/{id}/file', [SiswaController::class, 'storeFile'])->name('workspace.file.store');
 
@@ -77,9 +78,21 @@ Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->grou
 });
 
 // =========================================================================
-// 3. URL KHUSUS OSIS (/osis/...) - Terproteksi Auth & Role OSIS
+// 3. URL ORGANIZER / PENYELENGGARA & KOMUNITAS (/organizer/...) & (/osis/...)
 // =========================================================================
-Route::prefix('osis')->name('osis.')->middleware(['auth', 'role:osis'])->group(function () {
+Route::prefix('organizer')->name('organizer.')->middleware(['auth', 'role:osis,organizer'])->group(function () {
+    Route::get('/dashboard', [OsisController::class, 'dashboard'])->name('dashboard');
+    Route::get('/events', [OsisController::class, 'events'])->name('events');
+    Route::post('/events', [OsisController::class, 'storeEvent'])->name('events.store');
+    Route::get('/proyek', [OsisController::class, 'projects'])->name('proyek');
+    Route::get('/projects', [OsisController::class, 'projects'])->name('projects');
+    Route::get('/kurasi', [OsisController::class, 'kurasi'])->name('kurasi');
+    Route::post('/kurasi/{id}/approve', [OsisController::class, 'approveKurasi'])->name('kurasi.approve');
+    Route::get('/jurusan', [OsisController::class, 'jurusan'])->name('jurusan');
+    Route::match(['get', 'post'], '/broadcast', [OsisController::class, 'broadcast'])->name('broadcast');
+});
+
+Route::prefix('osis')->name('osis.')->middleware(['auth', 'role:osis,organizer'])->group(function () {
     Route::get('/dashboard', [OsisController::class, 'dashboard'])->name('dashboard');
     Route::get('/events', [OsisController::class, 'events'])->name('events');
     Route::post('/events', [OsisController::class, 'storeEvent'])->name('events.store');
@@ -103,6 +116,7 @@ Route::get('/profil/{id?}', function ($id = 1) { return redirect()->route('siswa
 Route::get('/notifikasi', function () { return redirect()->route('siswa.notifikasi'); })->name('notifications.index');
 Route::get('/showcase', function () { return redirect()->route('siswa.showcase'); })->name('showcase.index');
 Route::get('/dashboard/siswa', function () { return redirect()->route('siswa.dashboard'); })->name('dashboard.siswa');
-Route::get('/dashboard/osis', function () { return redirect()->route('osis.dashboard'); })->name('dashboard.osis');
+Route::get('/dashboard/organizer', function () { return redirect()->route('organizer.dashboard'); })->name('dashboard.organizer');
+Route::get('/dashboard/osis', function () { return redirect()->route('organizer.dashboard'); })->name('dashboard.osis');
 Route::get('/dashboard/guru', function () { return redirect()->route('siswa.dashboard'); })->name('dashboard.guru');
 Route::get('/guru/dashboard', function () { return redirect()->route('siswa.dashboard'); })->name('guru.dashboard');

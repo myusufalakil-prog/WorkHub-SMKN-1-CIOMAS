@@ -1,4 +1,4 @@
-<x-app-layout current="beranda" role="siswa" pageTitle="Beranda Siswa">
+<x-app-layout current="beranda" role="siswa" pageTitle="Dasbor Kolaborator">
     <!-- Vibrant Welcome Hero Banner -->
     <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 p-6 md:p-8 text-white shadow-xl shadow-blue-500/10 mb-6 border border-white/10">
         <!-- Ambient decorative blurs -->
@@ -9,13 +9,13 @@
             <div>
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-bold text-white mb-3 border border-white/20 shadow-xs">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>{{ auth()->user()->kelas ?? ($student->kelas ?? 'Siswa') }} &bull; {{ auth()->user()->jurusan->nama_lengkap ?? ($student->jurusan->nama_lengkap ?? 'SMKN 1 Ciomas') }}</span>
+                    <span>{{ auth()->user()->institution ?? (auth()->user()->kelas ?? ($student->institution ?? 'Kolaborator')) }} &bull; {{ auth()->user()->jurusan->nama_lengkap ?? ($student->jurusan->nama_lengkap ?? 'Domain Multidisiplin') }}</span>
                 </div>
                 <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">
-                    Halo, {{ auth()->user()->name ?? ($student->name ?? 'Siswa SMKN 1 Ciomas') }}
+                    Halo, {{ auth()->user()->name ?? ($student->name ?? 'Kolaborator') }}
                 </h1>
                 <p class="text-xs md:text-sm text-blue-100 mt-2 max-w-xl leading-relaxed">
-                    Siap berkolaborasi hari ini? Kamu memiliki <strong class="text-white underline decoration-white/40">{{ $projects->count() }} proyek aktif</strong> lintas 5 kejuruan SMKN 1 Ciomas.
+                    Siap berkolaborasi hari ini? Kamu memiliki <strong class="text-white underline decoration-white/40">{{ $projects->count() }} proyek aktif</strong> dalam ekosistem kolaborasi SynapseHub.
                 </p>
             </div>
 
@@ -73,7 +73,7 @@
             <div class="flex items-baseline justify-between mt-3">
                 <span class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white">{{ $candidates->count() + 1 }}</span>
                 <span class="text-xs font-semibold text-purple-600 dark:text-purple-400">
-                    5 Jurusan
+                    {{ \App\Models\Jurusan::count() }} Domain Keahlian
                 </span>
             </div>
         </div>
@@ -102,7 +102,7 @@
                         <x-icon name="bell" class="w-3.5 h-3.5" />
                     </span>
                     <h3 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-purple-900 dark:text-purple-300">
-                        Papan Informasi & Broadcast OSIS
+                        Papan Informasi & Pengumuman Hub
                     </h3>
                 </div>
                 <a href="{{ route('siswa.notifikasi') }}" class="text-[11px] font-bold text-purple-700 dark:text-purple-400 hover:underline">
@@ -167,7 +167,7 @@
                             Buat Proyek Baru
                         </x-button>
                         <x-button :href="route('siswa.proyek.index')" variant="secondary" size="sm" icon="folder-kanban">
-                            Jelajahi Proyek Sekolah
+                            Jelajahi Proyek Kolaborasi
                         </x-button>
                     </div>
                 </div>
@@ -180,10 +180,10 @@
                     <div>
                         <h3 class="text-sm font-bold text-neutral-900 dark:text-white tracking-tight flex items-center gap-1.5">
                             <x-icon name="sparkles" class="w-4 h-4 text-amber-500" />
-                            Peluang Kolaborasi Lintas Jurusan di Sekolah
+                            Peluang Kolaborasi Lintas Domain
                         </h3>
                         <p class="text-[11px] text-neutral-500">
-                            Proyek karya siswa lain yang sedang membuka perekrutan anggota baru.
+                            Proyek kolaborator lain yang sedang membuka perekrutan anggota baru.
                         </p>
                     </div>
                     <a href="{{ route('siswa.proyek.index') }}" class="text-xs font-semibold text-neutral-700 dark:text-neutral-300 hover:underline">
@@ -199,7 +199,7 @@
                                         {{ $ep->jurusan_label }}
                                     </span>
                                     <span class="text-[10px] text-neutral-500">
-                                        Lead: {{ $ep->lead->name ?? 'Siswa' }}
+                                        Lead: {{ $ep->lead->name ?? 'Talenta' }}
                                     </span>
                                 </div>
                                 <h4 class="text-sm font-bold text-neutral-900 dark:text-white line-clamp-1">{{ $ep->title }}</h4>
@@ -242,14 +242,14 @@
                 @forelse($candidates->take(2) as $c)
                     <x-match-card 
                         :name="$c->name"
-                        :classMajor="($c->kelas ?? 'Siswa') . ' ' . ($c->jurusan->kode ?? '')"
+                        :classMajor="($c->institution ?? ($c->headline ?? 'Talenta')) . ' • ' . ($c->jurusan->kode ?? 'TECH')"
                         :score="95"
                         :skills="$c->skills->pluck('name')->all()"
                         :href="route('siswa.profil', $c->id)"
                     />
                 @empty
                     <div class="col-span-full bg-white dark:bg-[#181818] border border-dashed border-neutral-300 dark:border-neutral-700 rounded-xl p-6 text-center text-xs text-neutral-400">
-                        Belum ada siswa lain yang terdaftar. Ajak teman sekelasmu bergabung di WORKHUB!
+                        Belum ada talenta lain yang terdaftar. Ajak rekan kolaborasimu bergabung di SynapseHub!
                     </div>
                 @endforelse
             </div>
@@ -296,7 +296,7 @@
 
             <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-[#262626]">
                 <x-button :href="route('siswa.workspace')" variant="outline" size="sm" class="w-full justify-center text-xs">
-                    Buka Workspace Proyek
+                    Buka Ruang Kerja Proyek
                 </x-button>
             </div>
         </div>

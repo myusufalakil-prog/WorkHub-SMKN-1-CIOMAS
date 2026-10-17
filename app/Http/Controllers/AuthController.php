@@ -28,12 +28,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'string', 'email', 'ends_with:@gmail.com'],
+            'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
         ], [
-            'email.required' => 'Alamat email Gmail wajib diisi.',
+            'email.required' => 'Alamat email wajib diisi.',
             'email.email' => 'Format alamat email tidak valid.',
-            'email.ends_with' => 'Email login wajib menggunakan domain @gmail.com.',
             'password.required' => 'Kata sandi wajib diisi.',
         ]);
 
@@ -52,7 +51,7 @@ class AuthController extends Controller
         return back()
             ->withInput($request->only('email'))
             ->withErrors([
-                'email' => 'Email Gmail atau kata sandi yang Anda masukkan tidak cocok.',
+                'email' => 'Email atau kata sandi yang Anda masukkan tidak cocok.',
             ]);
     }
 
@@ -82,23 +81,23 @@ class AuthController extends Controller
                 'email',
                 'max:255',
                 'unique:users,email',
-                'ends_with:@gmail.com',
             ],
-            'kelas' => 'required|string|max:30',
+            'institution' => 'nullable|string|max:150',
+            'kelas' => 'nullable|string|max:100',
             'jurusan_id' => 'required|exists:jurusans,id',
             'password' => 'required|string|min:6|confirmed',
         ], [
             'name.required' => 'Nama lengkap wajib diisi.',
-            'email.required' => 'Email Gmail aktif wajib diisi.',
+            'email.required' => 'Email aktif wajib diisi.',
             'email.email' => 'Format alamat email tidak valid.',
-            'email.ends_with' => 'Pendaftaran akun wajib menggunakan email Gmail (@gmail.com).',
-            'email.unique' => 'Email Gmail ini sudah terdaftar. Silakan gunakan email lain atau masuk.',
-            'kelas.required' => 'Kelas wajib diisi (contoh: XI PPLG 1).',
-            'jurusan_id.required' => 'Silakan pilih jurusan kompetensi Anda.',
+            'email.unique' => 'Email ini sudah terdaftar. Silakan gunakan email lain atau masuk.',
+            'jurusan_id.required' => 'Silakan pilih domain keahlian utama Anda.',
             'password.required' => 'Kata sandi wajib diisi.',
             'password.min' => 'Kata sandi minimal terdiri dari 6 karakter.',
             'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
         ]);
+
+        $institution = trim((string) $request->input('institution')) ?: (trim((string) $request->input('kelas')) ?: 'Independen / Komunitas');
 
         $user = User::create([
             'name' => trim($request->name),
@@ -106,16 +105,18 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'role' => 'siswa',
             'nisn_nip' => null,
-            'kelas' => trim($request->kelas),
+            'kelas' => $institution,
+            'institution' => $institution,
             'jurusan_id' => $request->jurusan_id,
-            'jabatan' => 'Siswa Kolaborator',
-            'bio' => 'Siswa aktif berkolaborasi dalam proyek antarjurusan di SMK.',
+            'jabatan' => 'Kolaborator & Kreator',
+            'headline' => 'Talenta & Kolaborator Proyek',
+            'bio' => 'Talenta aktif yang siap berkolaborasi dalam proyek inovasi multidisiplin di SynapseHub.',
         ]);
 
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('siswa.dashboard')->with('success', 'Akun berhasil dibuat! Selamat datang di ruang kolaborasi WORKHUB.');
+        return redirect()->route('siswa.dashboard')->with('success', 'Akun berhasil dibuat! Selamat datang di jaringan kolaborasi SynapseHub.');
     }
 
     /**

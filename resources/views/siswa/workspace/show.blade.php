@@ -1,14 +1,14 @@
-<x-app-layout current="workspace" role="siswa" pageTitle="Workspace Proyek">
+<x-app-layout current="workspace" role="siswa" pageTitle="Ruang Kerja Proyek">
     @if(!$project)
         <div class="max-w-xl mx-auto py-16 px-4 text-center">
             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-400">
                 <x-icon name="briefcase" class="w-8 h-8" />
             </div>
             <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-2">
-                Belum Ada Proyek Aktif di Workspace
+                Belum Ada Proyek Aktif di Ruang Kerja
             </h2>
             <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 max-w-md mx-auto mb-6">
-                Workspace ini adalah ruang kolaborasi untuk pengerjaan tugas tim, file aset, dan chat realtime. Silakan inisiasi proyek baru atau gabung ke proyek yang tersedia.
+                Ruang kerja ini adalah wadah kolaborasi untuk pengerjaan tugas tim, berkas aset, dan obrolan langsung. Silakan inisiasi proyek baru atau gabung ke proyek yang tersedia.
             </p>
             <div class="flex items-center justify-center gap-3">
                 <x-button :href="route('siswa.proyek.create')" variant="primary" size="md" icon="plus">
@@ -149,7 +149,7 @@
                                 class="w-full inline-flex items-center justify-center gap-1.5 py-1.5 text-[11px] font-bold text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                             >
                                 <x-icon name="folder-kanban" class="w-3.5 h-3.5" />
-                                <span>Jelajahi Semua Proyek Sekolah</span>
+                                <span>Jelajahi Semua Proyek Kolaborasi</span>
                                 <x-icon name="arrow-right" class="w-3 h-3" />
                             </a>
                         </div>
@@ -183,7 +183,7 @@
                         <x-badge variant="success" size="xs" :dot="true">{{ $project->status }}</x-badge>
                         @if($project->is_showcase)
                             <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-200 dark:border-amber-800 flex items-center gap-1">
-                                <x-icon name="award" class="w-3.5 h-3.5" /> Showcase Resmi
+                                <x-icon name="award" class="w-3.5 h-3.5" /> Galeri Resmi
                             </span>
                         @endif
                     </div>
@@ -237,7 +237,7 @@
 
             <div class="bg-white dark:bg-[#161616] border border-neutral-200/80 dark:border-[#262626] rounded-2xl p-4 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Deadline</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-neutral-400 dark:text-neutral-500">Tenggat Waktu</span>
                     <div class="w-6 h-6 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
                         <x-icon name="calendar" class="w-3.5 h-3.5" />
                     </div>
@@ -284,9 +284,9 @@
                     ['id' => 'ringkasan', 'label' => 'Ringkasan', 'icon' => 'home'],
                     ['id' => 'tugas', 'label' => 'Tugas', 'icon' => 'briefcase', 'count' => $tasks->count()],
                     ['id' => 'anggota', 'label' => 'Anggota', 'icon' => 'users', 'count' => $activeMembers->count(), 'pending' => ($isLead ? $pendingMembers->count() : 0)],
-                    ['id' => 'file', 'label' => 'File', 'icon' => 'paperclip', 'count' => $files->count()],
+                    ['id' => 'file', 'label' => 'Berkas & Dokumen', 'icon' => 'paperclip', 'count' => $files->count()],
                     ['id' => 'aktivitas', 'label' => 'Aktivitas', 'icon' => 'activity'],
-                    ['id' => 'chat', 'label' => 'Chat Tim', 'icon' => 'message-square', 'count' => $messages->count()],
+                    ['id' => 'chat', 'label' => 'Diskusi Tim', 'icon' => 'message-square', 'count' => $messages->count()],
                 ];
             @endphp
 
@@ -323,11 +323,11 @@
                             Tentang Proyek Kolaborasi
                         </h3>
                         <p class="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                            Proyek <strong>{{ $project->title }}</strong> menyatukan keahlian siswa lintas jurusan SMK dalam alur kerja berbasis <em>Project-Based Learning</em> yang terstruktur.
+                            Proyek <strong>{{ $project->title }}</strong> menyatukan keahlian kolaborator lintas domain dalam alur kerja berbasis <em>Project-Based Learning</em> yang terstruktur.
                         </p>
                         
                         <div class="mt-4 pt-4 border-t border-neutral-100 dark:border-[#262626] flex flex-wrap gap-2">
-                            <span class="text-xs font-semibold text-neutral-500 self-center mr-1">Jurusan Terlibat:</span>
+                            <span class="text-xs font-semibold text-neutral-500 self-center mr-1">Domain Terlibat:</span>
                             @foreach($project->jurusans as $jur)
                                 <x-badge variant="neutral" size="sm">{{ $jur->kode }} - {{ $jur->nama_lengkap }}</x-badge>
                             @endforeach
@@ -364,10 +364,10 @@
                                     </div>
                                     @if($task->assignee_id)
                                         <a href="{{ route('siswa.profil', $task->assignee_id) }}" class="text-xs text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:underline shrink-0">
-                                            {{ $task->assignee->name ?? 'Tim Siswa' }}
+                                            {{ $task->assignee->name ?? 'Tim Kolaborasi' }}
                                         </a>
                                     @else
-                                        <span class="text-xs text-neutral-500 shrink-0">{{ $task->assignee->name ?? 'Tim Siswa' }}</span>
+                                        <span class="text-xs text-neutral-500 shrink-0">{{ $task->assignee->name ?? 'Tim Kolaborasi' }}</span>
                                     @endif
                                 </div>
                             @empty
@@ -380,7 +380,7 @@
                 <div class="space-y-6">
                     <x-card padding="p-5">
                         <h4 class="text-xs uppercase font-bold tracking-wider text-neutral-400 mb-3">
-                            Project Lead
+                            Ketua Tim Proyek
                         </h4>
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-lg bg-neutral-900 text-white font-bold flex items-center justify-center text-xs">
@@ -388,7 +388,7 @@
                             </div>
                             <div>
                                 <h5 class="text-sm font-bold text-neutral-900 dark:text-white">{{ $project->lead->name ?? 'Ketua Tim' }}</h5>
-                                <span class="text-xs text-neutral-400">{{ $project->lead->kelas ?? 'Siswa' }} &bull; {{ $project->lead->jurusan->kode ?? 'SMK' }}</span>
+                                <span class="text-xs text-neutral-400">{{ $project->lead->institution ?? ($project->lead->headline ?? 'Talenta') }} &bull; {{ $project->lead->jurusan->kode ?? 'TECH' }}</span>
                             </div>
                         </div>
                     </x-card>
@@ -400,7 +400,7 @@
                         <div class="space-y-3 text-xs">
                             <div class="flex items-center justify-between py-1 border-b border-neutral-100 dark:border-neutral-800">
                                 <span class="text-neutral-500">Target Tim:</span>
-                                <span class="font-bold text-neutral-800 dark:text-neutral-200">{{ $project->target_members }} Siswa</span>
+                                <span class="font-bold text-neutral-800 dark:text-neutral-200">{{ $project->target_members }} Talenta</span>
                             </div>
                             <div class="flex items-center justify-between py-1 border-b border-neutral-100 dark:border-neutral-800">
                                 <span class="text-neutral-500">Tenggat Waktu:</span>
@@ -552,7 +552,7 @@
                                                     {{ $pm->name }}
                                                 </a>
                                                 <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
-                                                    {{ $pm->jurusan?->kode ?? 'SMK' }} &bull; {{ $pm->kelas ?? 'Siswa' }}
+                                                    {{ $pm->jurusan?->kode ?? 'TECH' }} &bull; {{ $pm->institution ?? ($pm->headline ?? 'Talenta') }}
                                                 </span>
                                             </div>
                                             <p class="text-xs text-neutral-500 mt-0.5 truncate">
@@ -590,7 +590,7 @@
                             Anggota Kolaborasi Tim Aktif ({{ $activeMembers->count() }})
                         </h3>
                         <p class="text-xs text-neutral-500">
-                            Kolaborasi lintas jurusan resmi yang berpartisipasi dalam proyek ini.
+                            Kolaborasi lintas domain resmi yang berpartisipasi dalam proyek ini.
                         </p>
                     </div>
 
@@ -612,7 +612,7 @@
                                         <x-icon name="arrow-up-right" class="w-3 h-3 text-neutral-400 opacity-60" />
                                     </a>
                                     <span class="text-xs text-neutral-500 block">
-                                        {{ $m->kelas ?? 'Siswa' }} &bull; {{ $m->jurusan->kode ?? 'SMK' }}
+                                        {{ $m->institution ?? ($m->headline ?? 'Talenta') }} &bull; {{ $m->jurusan->kode ?? 'TECH' }}
                                     </span>
                                     <span class="text-[11px] text-neutral-400 font-medium">
                                         {{ $m->pivot->role_in_project ?? 'Anggota' }}
@@ -729,34 +729,38 @@
             </x-card>
 
         @elseif($activeTab === 'chat')
-            <!-- Chat Tab Interaktif -->
+            <!-- Chat Tab Interaktif & Realtime -->
             <div class="max-w-4xl mx-auto">
                 <div class="flex flex-col h-[560px] bg-white dark:bg-[#181818] border border-neutral-200 dark:border-[#2A2A2A] rounded-xl overflow-hidden shadow-xs">
                     <!-- Chat Header -->
                     <div class="px-5 py-3.5 border-b border-neutral-200 dark:border-[#2A2A2A] flex items-center justify-between bg-neutral-50/50 dark:bg-[#151515]">
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 font-bold text-xs flex items-center justify-center">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
                                 <x-icon name="message-square" class="w-4 h-4" />
                             </div>
                             <div>
                                 <h4 class="text-sm font-bold text-neutral-900 dark:text-white leading-tight">
                                     Ruang Diskusi: {{ $project->title }}
                                 </h4>
-                                <span class="text-[11px] text-neutral-500 dark:text-neutral-400 flex items-center gap-1.5">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                                    {{ $activeMembers->count() }} Anggota Tim Aktif
+                                <span class="text-[11px] text-neutral-500 dark:text-neutral-400 flex items-center gap-1.5 mt-0.5">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span>{{ $activeMembers->count() }} Anggota Tim &bull; Sinkronisasi Realtime</span>
                                 </span>
                             </div>
                         </div>
+
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live
+                        </span>
                     </div>
 
                     <!-- Messages Container -->
-                    <div class="flex-1 p-4 md:p-5 overflow-y-auto space-y-4 text-xs md:text-sm">
+                    <div id="workspaceChatBox" class="flex-1 p-4 md:p-5 overflow-y-auto space-y-4 text-xs md:text-sm scroll-smooth">
                         @forelse($messages as $msg)
                             @php 
-                                $isMe = ($msg->user_id === 1); // Raka Pratama active student
+                                $isMe = ($msg->user_id === (auth()->id() ?? 1));
                             @endphp
-                            <div class="flex gap-3 {{ $isMe ? 'flex-row-reverse' : '' }}">
+                            <div data-message-id="{{ $msg->id }}" class="flex gap-3 {{ $isMe ? 'flex-row-reverse' : '' }}">
                                 <div class="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0">
                                     {{ strtoupper(substr($msg->user->name ?? 'User', 0, 2)) }}
                                 </div>
@@ -767,42 +771,162 @@
                                             {{ $msg->user->name ?? 'Anggota' }}
                                         </span>
                                         <span class="text-[10px] text-neutral-400">
-                                            {{ $msg->user->jurusan->kode ?? 'SMK' }} &bull; {{ $msg->created_at ? $msg->created_at->format('H:i') : 'Hari ini' }}
+                                            {{ $msg->user->jurusan->kode ?? 'TECH' }} &bull; {{ $msg->created_at ? $msg->created_at->format('H:i') : 'Hari ini' }}
                                         </span>
                                     </div>
 
                                     <div class="p-3.5 rounded-xl {{ $isMe ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-tr-none shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-none border border-slate-200/70 dark:border-slate-700/70' }} leading-relaxed">
-                                        <p>{{ $msg->message }}</p>
+                                        <p class="whitespace-pre-wrap break-words">{{ $msg->message }}</p>
                                     </div>
                                 </div>
                             </div>
                         @empty
-                            <div class="py-12 text-center text-xs text-neutral-400">
+                            <div id="chatEmptyState" class="py-12 text-center text-xs text-neutral-400">
                                 Belum ada riwayat pesan. Kirim pesan pertama ke tim kolaborasi Anda di bawah!
                             </div>
                         @endforelse
-                    </div>                    @if($isActiveUser)
+                    </div>
+
+                    @if($isActiveUser)
                         <!-- Input Box Chat Form -->
                         <div class="p-3.5 border-t border-neutral-200 dark:border-[#2A2A2A] bg-white dark:bg-[#181818]">
-                            <form action="{{ route('siswa.workspace.chat.send', $project->id) }}" method="POST" class="flex items-center gap-2">
+                            <form id="workspaceChatForm" action="{{ route('siswa.workspace.chat.send', $project->id) }}" method="POST" class="flex items-center gap-2">
                                 @csrf
                                 <input 
                                     type="text" 
+                                    id="workspaceChatInput"
                                     name="message"
                                     required
-                                    placeholder="Tulis pesan atau update tugas ke tim..." 
+                                    autocomplete="off"
+                                    placeholder="Tulis pesan atau update ke tim..." 
                                     class="flex-1 py-2.5 px-3.5 text-xs md:text-sm bg-neutral-100 dark:bg-[#141414] text-neutral-900 dark:text-white placeholder-neutral-400 rounded-lg border border-transparent focus:border-neutral-300 dark:focus:border-neutral-700 focus:outline-none focus:bg-white dark:focus:bg-[#111111] transition-all"
                                 />
 
                                 <button 
                                     type="submit" 
+                                    id="workspaceChatSubmitBtn"
                                     class="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all shadow-md hover:shadow-blue-500/25 cursor-pointer shrink-0"
                                 >
                                     <x-icon name="send" class="w-3.5 h-3.5" />
-                                    Kirim
+                                    <span>Kirim</span>
                                 </button>
                             </form>
                         </div>
+
+                        <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const chatContainer = document.getElementById('workspaceChatBox');
+                            const chatForm = document.getElementById('workspaceChatForm');
+                            const chatInput = document.getElementById('workspaceChatInput');
+                            if (!chatContainer || !chatForm) return;
+
+                            const scrollToBottom = () => {
+                                chatContainer.scrollTop = chatContainer.scrollHeight;
+                            };
+                            scrollToBottom();
+
+                            let lastMessageId = 0;
+                            chatContainer.querySelectorAll('[data-message-id]').forEach(el => {
+                                const id = parseInt(el.getAttribute('data-message-id'), 10);
+                                if (id > lastMessageId) lastMessageId = id;
+                            });
+
+                            const appendMessage = (msg) => {
+                                const emptyPlaceholder = document.getElementById('chatEmptyState');
+                                if (emptyPlaceholder) emptyPlaceholder.remove();
+
+                                if (chatContainer.querySelector(`[data-message-id="${msg.id}"]`)) return;
+
+                                if (msg.id > lastMessageId) {
+                                    lastMessageId = msg.id;
+                                }
+
+                                const msgDiv = document.createElement('div');
+                                msgDiv.setAttribute('data-message-id', msg.id);
+                                msgDiv.className = `flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-200 ${msg.is_me ? 'flex-row-reverse' : ''}`;
+                                msgDiv.innerHTML = `
+                                    <div class="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0">
+                                        ${msg.user_avatar}
+                                    </div>
+                                    <div class="max-w-[78%] space-y-1">
+                                        <div class="flex items-center gap-2 ${msg.is_me ? 'justify-end' : ''}">
+                                            <span class="font-bold text-xs text-neutral-900 dark:text-white">
+                                                ${msg.user_name}
+                                            </span>
+                                            <span class="text-[10px] text-neutral-400">
+                                                ${msg.jurusan} &bull; ${msg.created_at}
+                                            </span>
+                                        </div>
+                                        <div class="p-3.5 rounded-xl ${msg.is_me ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-tr-none shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-none border border-slate-200/70 dark:border-slate-700/70'} leading-relaxed">
+                                            <p class="whitespace-pre-wrap break-words">${msg.message}</p>
+                                        </div>
+                                    </div>
+                                `;
+                                chatContainer.appendChild(msgDiv);
+                                scrollToBottom();
+                            };
+
+                            // Realtime Poller (interval 2.5s)
+                            const pollMessages = async () => {
+                                try {
+                                    const url = `{{ route('siswa.workspace.chat.messages', $project->id) }}?after_id=${lastMessageId}`;
+                                    const res = await fetch(url, {
+                                        headers: { 'Accept': 'application/json' }
+                                    });
+                                    if (res.ok) {
+                                        const data = await res.json();
+                                        if (data.messages && data.messages.length > 0) {
+                                            data.messages.forEach(m => appendMessage(m));
+                                        }
+                                    }
+                                } catch (err) {
+                                    // Silent catch for background poll
+                                }
+                            };
+
+                            setInterval(pollMessages, 2500);
+
+                            // Instant AJAX submit
+                            chatForm.addEventListener('submit', async function (e) {
+                                e.preventDefault();
+                                const text = chatInput.value.trim();
+                                if (!text) return;
+
+                                const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') 
+                                    || chatForm.querySelector('input[name="_token"]')?.value;
+
+                                chatInput.disabled = true;
+
+                                try {
+                                    const res = await fetch(chatForm.action, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Accept': 'application/json',
+                                            'X-CSRF-TOKEN': csrfToken,
+                                            'X-Requested-With': 'XMLHttpRequest'
+                                        },
+                                        body: JSON.stringify({ message: text })
+                                    });
+
+                                    if (res.ok) {
+                                        const data = await res.json();
+                                        if (data.success && data.message) {
+                                            appendMessage(data.message);
+                                        }
+                                        chatInput.value = '';
+                                    } else {
+                                        chatForm.submit();
+                                    }
+                                } catch (err) {
+                                    chatForm.submit();
+                                } finally {
+                                    chatInput.disabled = false;
+                                    chatInput.focus();
+                                }
+                            });
+                        });
+                        </script>
                     @else
                         <div class="p-3.5 border-t border-neutral-200 dark:border-[#2A2A2A] bg-neutral-50 dark:bg-[#141414] text-center text-xs text-neutral-500 font-medium flex items-center justify-center gap-1.5">
                             <x-icon name="lock" class="w-3.5 h-3.5 text-amber-500 shrink-0" />
@@ -825,7 +949,7 @@
                         Tambah Tugas Proyek Baru
                     </h3>
                     <p class="text-xs text-neutral-500">
-                        Tetapkan butir pengerjaan untuk anggota tim lintas jurusan.
+                        Tetapkan butir pengerjaan untuk anggota tim lintas domain.
                     </p>
                 </div>
                 <button onclick="document.getElementById('modalTambahTugas').close()" class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-lg font-bold">
@@ -843,7 +967,7 @@
                         type="text" 
                         name="title" 
                         required 
-                        placeholder="Contoh: Slicing UI Dashboard ke Blade & Tailwind" 
+                        placeholder="Contoh: Pembuatan Antarmuka Dasbor ke Blade" 
                         class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-900"
                     />
                 </div>
@@ -870,10 +994,10 @@
                             class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white"
                         >
                             @if($project->lead)
-                                <option value="{{ $project->lead->id }}">{{ $project->lead->name }} (Ketua - {{ $project->lead->jurusan->kode ?? 'SMK' }})</option>
+                                <option value="{{ $project->lead->id }}">{{ $project->lead->name }} (Ketua - {{ $project->lead->jurusan->kode ?? 'TECH' }})</option>
                             @endif
                             @foreach($activeMembers->where('id', '!=', $project->lead_id) as $m)
-                                <option value="{{ $m->id }}">{{ $m->name }} ({{ $m->jurusan->kode ?? 'SMK' }})</option>
+                                <option value="{{ $m->id }}">{{ $m->name }} ({{ $m->jurusan->kode ?? 'TECH' }})</option>
                             @endforeach
                         </select>
                     </div>

@@ -33,8 +33,9 @@ class WorkhubController extends Controller
     {
         $student = User::where('role', 'siswa')->first();
         $osis = User::where('role', 'osis')->first();
+        $jurusans = Jurusan::all();
 
-        return view('portal', compact('student', 'osis'));
+        return view('portal', compact('student', 'osis', 'jurusans'));
     }
 
     /**

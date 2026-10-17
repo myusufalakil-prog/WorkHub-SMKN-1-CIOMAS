@@ -1,14 +1,14 @@
-<x-app-layout current="match" role="siswa" pageTitle="WORKHUB MATCH">
+<x-app-layout current="match" role="siswa" pageTitle="Pencocokan Rekan (AI)">
     <div class="pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider mb-2 shadow-xs">
             <x-icon name="cpu" class="w-3.5 h-3.5" />
-            AI Recommendation Engine
+            Mesin Rekomendasi AI
         </div>
         <h1 class="text-3xl font-extrabold tracking-tight text-neutral-950 dark:text-white">
-            WORKHUB MATCH
+            Pencocokan Rekan Kolaborasi
         </h1>
         <p class="text-sm md:text-base text-neutral-600 dark:text-neutral-400 mt-1 max-w-2xl">
-            "Temukan orang yang paling cocok untuk project kamu."
+            "Temukan rekan terbaik yang paling sesuai dengan kebutuhan proyek kolaborasi Anda."
         </p>
     </div>
 
@@ -18,10 +18,10 @@
             <span class="text-neutral-400 shrink-0 font-semibold">Filter Keahlian:</span>
             @php
                 $filters = [
-                    'Semua' => 'Semua Siswa',
-                    'Frontend' => 'Frontend / Web',
+                    'Semua' => 'Semua Talenta',
+                    'Frontend' => 'Frontend & Web',
                     '3D' => '3D & Animasi',
-                    'Video' => 'Video Production',
+                    'Video' => 'Produksi Video & Audio',
                     'Server' => 'Server & IoT',
                 ];
             @endphp
@@ -45,7 +45,7 @@
         @forelse($candidates as $c)
             <x-match-card 
                 :name="$c->name"
-                :classMajor="($c->kelas ?? 'Siswa') . ' ' . ($c->jurusan->kode ?? '')"
+                :classMajor="($c->institution ?? ($c->headline ?? 'Talenta')) . ' • ' . ($c->jurusan->kode ?? 'TECH')"
                 :score="rand(88, 96)"
                 :skills="$c->skills->pluck('name')->all()"
                 :href="route('siswa.profil', $c->id)"
@@ -53,14 +53,14 @@
         @empty
             <div class="col-span-1 md:col-span-2 p-8 text-center rounded-xl border border-dashed border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#181818]">
                 <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-                    Tidak ada siswa yang cocok dengan filter "{{ $kategori }}"
+                    Tidak ada talenta yang cocok dengan filter "{{ $kategori }}"
                 </p>
                 <p class="text-xs text-neutral-500 mt-1">
-                    Coba pilih filter lain atau lihat semua siswa yang terdaftar.
+                    Coba pilih filter lain atau lihat semua talenta yang terdaftar.
                 </p>
                 <div class="mt-4">
                     <x-button :href="route('siswa.match', ['kategori' => 'Semua'])" variant="secondary" size="sm">
-                        Tampilkan Semua Siswa
+                        Tampilkan Semua Talenta
                     </x-button>
                 </div>
             </div>
@@ -75,10 +75,10 @@
             </div>
             <div>
                 <h4 class="text-sm font-bold text-neutral-900 dark:text-white">
-                    Bagaimana WORKHUB MATCH bekerja?
+                    Bagaimana Synapse Match bekerja?
                 </h4>
                 <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 leading-relaxed">
-                    Skor kecocokan dihitung secara dinamis dari kombinasi kompetensi kejuruan SMKN 1 Ciomas, keahlian teknis portofolio siswa, serta rekam jejak aktivitas di workspace.
+                    Skor kecocokan dihitung secara dinamis dari kombinasi bidang keahlian, keterampilan teknis portofolio talenta, serta rekam jejak aktivitas kolaborasi di ruang kerja.
                 </p>
             </div>
         </div>

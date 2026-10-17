@@ -1,11 +1,11 @@
-<x-app-layout current="osis-events" role="osis" pageTitle="Event & Festival Sekolah">
+<x-app-layout current="osis-events" role="osis" pageTitle="Agenda & Tantangan Hub">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                Event & Festival Kolaborasi Sekolah
+                Agenda & Tantangan Kolaborasi Hub
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Agenda kegiatan pameran inovasi siswa dan kompetisi teknologi lintas jurusan SMK.
+                Agenda kegiatan pameran inovasi, tantangan kolaborasi, dan demo day talenta lintas domain.
             </p>
         </div>
 
@@ -14,7 +14,7 @@
             class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-colors shadow-xs"
         >
             <x-icon name="plus" class="w-3.5 h-3.5" />
-            Tambah Agenda Event
+            Tambah Agenda Kegiatan
         </button>
     </div>
 
@@ -45,9 +45,9 @@
                         </p>
 
                         <div class="flex items-center gap-4 text-xs text-neutral-500 pt-2">
-                            <span>Penanggung Jawab: <strong>{{ $ev->lead ?? 'Pengurus OSIS' }}</strong></span>
+                            <span>Penanggung Jawab: <strong>{{ $ev->lead ?? 'Tim Penyelenggara' }}</strong></span>
                             <span>&bull;</span>
-                            <span>{{ $ev->participants_info ?? 'Terbuka Semua Siswa' }}</span>
+                            <span>{{ $ev->participants_info ?? 'Terbuka untuk Semua Talenta' }}</span>
                         </div>
                     </div>
 
@@ -63,21 +63,21 @@
             </x-card>
         @empty
             <div class="py-12 text-center text-sm text-neutral-500">
-                Belum ada agenda event dibuat. Klik "Tambah Agenda Event" di atas untuk membuat kegiatan baru.
+                Belum ada agenda kegiatan dibuat. Klik "Tambah Agenda Kegiatan" di atas untuk membuat kegiatan baru.
             </div>
         @endforelse
     </div>
 
-    <!-- Modal Tambah Agenda Event OSIS -->
+    <!-- Modal Tambah Agenda Kegiatan OSIS -->
     <dialog id="modalTambahEvent" class="fixed inset-0 m-auto p-0 rounded-2xl bg-white dark:bg-[#181818] border border-neutral-200 dark:border-[#2A2A2A] shadow-2xl backdrop:bg-black/60 max-w-md w-[92vw] sm:w-full overflow-hidden">
         <div class="p-6">
             <div class="flex items-center justify-between pb-4 border-b border-neutral-100 dark:border-[#262626]">
                 <div>
                     <h3 class="text-base font-bold text-neutral-900 dark:text-white">
-                        Inisiasi Event / Festival Sekolah
+                        Inisiasi Agenda & Tantangan Inovasi
                     </h3>
                     <p class="text-xs text-neutral-500">
-                        Publikasikan agenda kegiatan dan broadcast notifikasi ke siswa.
+                        Publikasikan agenda kegiatan dan siarkan pengumuman ke seluruh jaringan talenta.
                     </p>
                 </div>
                 <button onclick="document.getElementById('modalTambahEvent').close()" class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-lg font-bold">
@@ -89,13 +89,13 @@
                 @csrf
                 <div>
                     <label class="text-xs font-bold uppercase text-neutral-600 dark:text-neutral-300 block mb-1">
-                        Nama Event / Festival <span class="text-red-500">*</span>
+                        Nama Agenda / Festival <span class="text-red-500">*</span>
                     </label>
                     <input 
                         type="text" 
                         name="title" 
                         required 
-                        placeholder="Contoh: WORKHUB Tech Expo & Expo Game 2026" 
+                        placeholder="Contoh: SynapseHub Global Innovation Festival 2026" 
                         class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white focus:outline-none"
                     />
                 </div>
@@ -122,7 +122,7 @@
                             name="status" 
                             class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white"
                         >
-                            <option value="Open Registrasi">Open Registrasi</option>
+                            <option value="Pendaftaran Terbuka">Pendaftaran Terbuka</option>
                             <option value="Persiapan Teknis">Persiapan Teknis</option>
                             <option value="Tahap Kurasi">Tahap Kurasi</option>
                         </select>
@@ -132,15 +132,15 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="text-xs font-bold uppercase text-neutral-600 dark:text-neutral-300 block mb-1">
-                            Kategori Event
+                            Kategori Agenda
                         </label>
                         <select 
                             name="category" 
                             class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white"
                         >
-                            <option value="Festival Sekolah">Festival Sekolah</option>
+                            <option value="Festival Inovasi">Festival Inovasi</option>
                             <option value="Kompetisi Inovasi">Kompetisi Inovasi</option>
-                            <option value="Pameran Karya PBL">Pameran Karya PBL</option>
+                            <option value="Pameran Karya Terbuka">Pameran Karya Terbuka</option>
                         </select>
                     </div>
 
@@ -151,7 +151,7 @@
                         <input 
                             type="text" 
                             name="lead" 
-                            value="Divisi IPTEK OSIS" 
+                            value="Tim Penyelenggara Komunitas" 
                             class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white"
                         />
                     </div>
@@ -181,7 +181,7 @@
                         type="submit" 
                         class="px-4 py-2 text-xs font-bold rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-black hover:bg-neutral-800 transition-colors"
                     >
-                        Publikasikan Event
+                        Publikasikan Agenda
                     </button>
                 </div>
             </form>

@@ -1,4 +1,4 @@
-<x-guest-layout title="Daftar Akun Siswa - SMKN 1 Ciomas">
+<x-guest-layout title="Daftar Akun Talenta & Kolaborator - SynapseHub">
     <div class="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <!-- Ambient Background Glows -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-blue-600/15 via-purple-600/15 to-amber-500/15 blur-[120px] rounded-full pointer-events-none -z-10"></div>
@@ -9,13 +9,13 @@
             <!-- Header Card -->
             <div class="text-center">
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold text-lg shadow-md mb-4 shadow-blue-500/20">
-                    WH
+                    SH
                 </div>
                 <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950 dark:text-white">
-                    Pendaftaran Siswa SMKN 1 Ciomas
+                    Pendaftaran Talenta & Kolaborator
                 </h1>
                 <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1.5 max-w-md mx-auto">
-                    Buat akun siswa untuk mulai berkolaborasi dalam proyek nyata lintas 5 kejuruan SMKN 1 Ciomas.
+                    Buat akun untuk mulai berkolaborasi dalam proyek inovasi nyata multidisiplin di SynapseHub.
                 </p>
             </div>
 
@@ -27,7 +27,7 @@
                     <!-- Nama Lengkap -->
                     <div>
                         <label for="name" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5">
-                            Nama Lengkap Siswa <span class="text-rose-500">*</span>
+                            Nama Lengkap <span class="text-rose-500">*</span>
                         </label>
                         <input 
                             type="text" 
@@ -44,29 +44,28 @@
                         @enderror
                     </div>
 
-                    <!-- 2 Grid: Kelas & Jurusan -->
+                    <!-- 2 Grid: Institusi/Asal & Domain Keahlian -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label for="kelas" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5">
-                                Kelas Siswa <span class="text-rose-500">*</span>
+                            <label for="institution" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5">
+                                Asal Institusi / Kampus / Sekolah / Komunitas
                             </label>
                             <input 
                                 type="text" 
-                                id="kelas" 
-                                name="kelas" 
-                                value="{{ old('kelas') }}" 
-                                required 
-                                placeholder="Contoh: XI PPLG 1"
-                                class="w-full px-3.5 py-2.5 text-sm bg-neutral-50 dark:bg-[#1C1C1C] text-neutral-900 dark:text-white placeholder-neutral-400 border {{ $errors->has('kelas') ? 'border-rose-500' : 'border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-blue-400' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                                id="institution" 
+                                name="institution" 
+                                value="{{ old('institution', old('kelas')) }}" 
+                                placeholder="Contoh: Universitas / SMKN / Independen"
+                                class="w-full px-3.5 py-2.5 text-sm bg-neutral-50 dark:bg-[#1C1C1C] text-neutral-900 dark:text-white placeholder-neutral-400 border {{ $errors->has('institution') ? 'border-rose-500' : 'border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-blue-400' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                             />
-                            @error('kelas')
+                            @error('institution')
                                 <p class="text-xs text-rose-600 dark:text-rose-400 mt-1 font-medium">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
                             <label for="jurusan_id" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5">
-                                Program Keahlian / Jurusan <span class="text-rose-500">*</span>
+                                Domain Keahlian Utama <span class="text-rose-500">*</span>
                             </label>
                             <select 
                                 id="jurusan_id" 
@@ -74,7 +73,7 @@
                                 required
                                 class="w-full px-3.5 py-2.5 text-sm bg-neutral-50 dark:bg-[#1C1C1C] text-neutral-900 dark:text-white border {{ $errors->has('jurusan_id') ? 'border-rose-500' : 'border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-blue-400' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                             >
-                                <option value="">-- Pilih Jurusan --</option>
+                                <option value="">-- Pilih Domain Keahlian --</option>
                                 @foreach($jurusans as $j)
                                     <option value="{{ $j->id }}" {{ old('jurusan_id') == $j->id ? 'selected' : '' }}>
                                         {{ $j->kode }} - {{ $j->nama_lengkap }}
@@ -90,7 +89,7 @@
                     <!-- Email -->
                     <div>
                         <label for="email" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5">
-                            Alamat Email Gmail (@gmail.com) <span class="text-rose-500">*</span>
+                            Alamat Email <span class="text-rose-500">*</span>
                         </label>
                         <input 
                             type="email" 
@@ -98,11 +97,11 @@
                             name="email" 
                             value="{{ old('email') }}" 
                             required 
-                            placeholder="nama.siswa@gmail.com"
+                            placeholder="nama@domain.com atau nama@kampus.ac.id"
                             class="w-full px-3.5 py-2.5 text-sm bg-neutral-50 dark:bg-[#1C1C1C] text-neutral-900 dark:text-white placeholder-neutral-400 border {{ $errors->has('email') ? 'border-rose-500' : 'border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-blue-400' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                         />
                         <p class="text-[11px] text-neutral-400 dark:text-neutral-500 mt-1">
-                            Akun pendaftaran wajib menggunakan domain resmi <strong>@gmail.com</strong>
+                            Gunakan email aktif Anda (Gmail, domain kampus/organisasi, atau email institusi).
                         </p>
                         @error('email')
                             <p class="text-xs text-rose-600 dark:text-rose-400 mt-1 font-medium">{{ $message }}</p>

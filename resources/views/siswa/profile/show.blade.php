@@ -1,4 +1,4 @@
-<x-app-layout current="profil" role="siswa" pageTitle="Profil Siswa Kolaborator">
+<x-app-layout current="profil" role="siswa" pageTitle="Profil Talenta Kolaborator">
     <div class="max-w-5xl mx-auto space-y-6">
         <!-- Profile Header Card -->
         <x-card padding="p-6 md:p-8">
@@ -20,7 +20,7 @@
                         </div>
 
                         <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mt-0.5">
-                            {{ $student->kelas ?? 'Siswa' }} &bull; {{ $student->jurusan->nama_lengkap ?? 'SMK' }}
+                            {{ $student->institution ?? ($student->headline ?? 'Talenta') }} &bull; {{ $student->jurusan->nama_lengkap ?? 'Domain Multidisiplin' }}
                         </p>
 
                         <p class="text-xs text-neutral-400 mt-0.5">
@@ -36,7 +36,7 @@
                         class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-lg border border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors shadow-xs"
                     >
                         <x-icon name="edit" class="w-3.5 h-3.5" />
-                        Edit Biodata
+                        Ubah Profil
                     </button>
                     <button 
                         type="button"
@@ -52,10 +52,10 @@
             <!-- Bio -->
             <div class="mt-6">
                 <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-400 block mb-1">
-                    Tentang / Bio Siswa
+                    Tentang Kolaborator
                 </span>
                 <p class="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-3xl">
-                    {{ $student->bio ?? 'Siswa aktif berkolaborasi dalam proyek lintas jurusan di SMK.' }}
+                    {{ $student->bio ?? 'Kolaborator aktif dalam proyek multidisiplin di SynapseHub.' }}
                 </p>
             </div>
 
@@ -63,7 +63,7 @@
             <div class="mt-6 pt-5 border-t border-neutral-100 dark:border-[#262626]">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                     <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-400 block">
-                        Skills & Kompetensi Keahlian
+                        Keahlian & Kompetensi
                     </span>
 
                     <!-- Form Tambah Skill Cepat -->
@@ -118,7 +118,7 @@
                                 <a href="{{ route('siswa.workspace', $pl->id) }}" class="text-sm font-bold text-neutral-900 dark:text-white hover:underline">
                                     {{ $pl->title }}
                                 </a>
-                                <x-badge variant="neutral" size="xs">Lead</x-badge>
+                                <x-badge variant="neutral" size="xs">Ketua Tim</x-badge>
                             </div>
                             <span class="text-xs text-neutral-500 mt-0.5 block">Status: {{ $pl->status }} &bull; {{ $pl->jurusan_label }}</span>
                         </div>
@@ -130,9 +130,9 @@
                                 <a href="{{ route('siswa.workspace', $pj->id) }}" class="text-sm font-bold text-neutral-900 dark:text-white hover:underline">
                                     {{ $pj->title }}
                                 </a>
-                                <x-badge variant="outline" size="xs">Member</x-badge>
+                                <x-badge variant="outline" size="xs">Anggota</x-badge>
                             </div>
-                            <span class="text-xs text-neutral-500 mt-0.5 block">Role: {{ $pj->pivot->role_in_project ?? 'Anggota' }}</span>
+                            <span class="text-xs text-neutral-500 mt-0.5 block">Peran: {{ $pj->pivot->role_in_project ?? 'Anggota' }}</span>
                         </div>
                     @endforeach
                 </div>
@@ -171,10 +171,10 @@
                 <div>
                     <h3 class="text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2">
                         <x-icon name="sparkles" class="w-4 h-4 text-neutral-500" />
-                        Portofolio Karya Siswa
+                        Portofolio Karya Talenta
                     </h3>
                     <p class="text-xs text-neutral-500">
-                        Hasil karya nyata yang diajukan untuk divalidasi guru pembimbing.
+                        Hasil karya nyata yang dipamerkan di platform SynapseHub.
                     </p>
                 </div>
 
@@ -211,7 +211,7 @@
                                 </span>
                             @else
                                 <span class="text-amber-600 dark:text-amber-400 font-medium">
-                                    Menunggu Guru
+                                    Proses Kurasi
                                 </span>
                             @endif
                         </div>
@@ -233,10 +233,10 @@
             <div class="flex items-center justify-between pb-4 border-b border-neutral-100 dark:border-[#262626]">
                 <div>
                     <h3 class="text-base font-bold text-neutral-900 dark:text-white">
-                        Edit Biodata Profil Siswa
+                        Ubah Biodata Profil Talenta
                     </h3>
                     <p class="text-xs text-neutral-500">
-                        Perbarui informasi kelas, minat, dan bio kolaborasi Anda.
+                        Perbarui institusi / kampus, peran minat, dan bio kolaborasi Anda.
                     </p>
                 </div>
                 <button onclick="document.getElementById('modalEditProfil').close()" class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-lg font-bold">
@@ -249,19 +249,19 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="text-xs font-bold uppercase text-neutral-600 dark:text-neutral-300 block mb-1">
-                            Kelas
+                            Institusi / Asal
                         </label>
                         <input 
                             type="text" 
                             name="kelas" 
-                            value="{{ $student->kelas ?? 'XI PPLG 1' }}" 
+                            value="{{ $student->institution ?? ($student->kelas ?? 'Komunitas Inovator') }}" 
                             class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white"
                         />
                     </div>
 
                     <div>
                         <label class="text-xs font-bold uppercase text-neutral-600 dark:text-neutral-300 block mb-1">
-                            Email Akun Gmail
+                            Alamat Email
                         </label>
                         <input 
                             type="email" 
@@ -326,7 +326,7 @@
                         Tambah Karya Portofolio
                     </h3>
                     <p class="text-xs text-neutral-500">
-                        Ajukan karya digital Anda agar divalidasi guru pembimbing.
+                        Ajukan karya digital Anda agar divalidasi kurator dan tampil di galeri inovasi.
                     </p>
                 </div>
                 <button onclick="document.getElementById('modalTambahPorto').close()" class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-lg font-bold">
@@ -344,7 +344,7 @@
                         type="text" 
                         name="title" 
                         required 
-                        placeholder="Contoh: Skenik Virtual Tour 3D & Web Hub" 
+                        placeholder="Contoh: Platform Kolaborasi Berbasis AI" 
                         class="w-full text-xs p-2.5 rounded-lg bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white focus:outline-none"
                     />
                 </div>

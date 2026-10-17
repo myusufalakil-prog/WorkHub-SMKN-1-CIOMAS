@@ -30,10 +30,10 @@
                 </span>
             @endif
 
-            @if($status === 'Open Recruitment')
+            @if($status === 'Open Recruitment' || $status === 'Rekrutmen Terbuka')
                 <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Recruiting
+                    Buka Rekrutmen
                 </span>
             @elseif($status === 'Selesai')
                 <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">
@@ -94,7 +94,7 @@
         <!-- Progress bar -->
         <div class="space-y-1.5 mb-4">
             <div class="flex justify-between text-xs font-semibold">
-                <span class="text-neutral-500 dark:text-neutral-400">Penyelesaian PBL</span>
+                <span class="text-neutral-500 dark:text-neutral-400">Kemajuan Proyek</span>
                 <span class="text-neutral-900 dark:text-white">{{ $progress }}%</span>
             </div>
             <div class="w-full h-2 bg-neutral-100 dark:bg-[#202020] rounded-full overflow-hidden p-0.5 border border-neutral-200/60 dark:border-neutral-800">
@@ -110,7 +110,7 @@
             href="{{ $href }}" 
             class="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all shadow-sm hover:shadow-md cursor-pointer"
         >
-            <span>Lihat Workspace Proyek</span>
+            <span>Buka Ruang Kerja Proyek</span>
             <x-icon name="arrow-right" class="w-3.5 h-3.5" />
         </a>
     </div>

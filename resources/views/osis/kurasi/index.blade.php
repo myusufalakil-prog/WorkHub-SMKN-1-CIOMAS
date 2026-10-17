@@ -1,20 +1,20 @@
-<x-app-layout current="osis-kurasi" role="osis" pageTitle="Kurasi Showcase Festival">
+<x-app-layout current="osis-kurasi" role="osis" pageTitle="Kurasi Galeri Inovasi">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                Kurasi Showcase Festival Sekolah
+                Kurasi Galeri Inovasi Festival
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Pilih dan setujui karya kolaborasi siswa terbaik untuk ditampilkan di panggung pameran resmi.
+                Pilih dan setujui karya kolaborasi talenta terbaik untuk ditampilkan di galeri pameran resmi.
             </p>
         </div>
     </div>
 
-    <!-- Antrean Pengajuan yang Belum Masuk Showcase -->
+    <!-- Antrean Pengajuan yang Belum Masuk Galeri -->
     <div class="my-8 space-y-4">
         <h2 class="text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2">
             <x-icon name="clock" class="w-5 h-5 text-amber-500" />
-            Antrean Pengajuan Proyek Masuk Showcase ({{ $pendingProjects->count() }})
+            Antrean Pengajuan Proyek Masuk Galeri ({{ $pendingProjects->count() }})
         </h2>
 
         @forelse($pendingProjects as $p)
@@ -25,7 +25,7 @@
                             <span class="text-xs font-semibold px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
                                 {{ $p->jurusan_label }}
                             </span>
-                            <span class="text-xs text-neutral-400">Lead: {{ $p->lead->name ?? 'Siswa' }}</span>
+                            <span class="text-xs text-neutral-400">Ketua Tim: {{ $p->lead->name ?? 'Talenta' }}</span>
                         </div>
                         <h3 class="text-base font-bold text-neutral-900 dark:text-white">
                             {{ $p->title }}
@@ -43,7 +43,7 @@
                         <form action="{{ route('osis.kurasi.approve', $p->id) }}" method="POST">
                             @csrf
                             <x-button type="submit" variant="primary" size="sm" icon="check">
-                                Setujui Masuk Showcase
+                                Setujui Masuk Galeri
                             </x-button>
                         </form>
                     </div>
@@ -56,11 +56,11 @@
         @endforelse
     </div>
 
-    <!-- Proyek yang Sudah Tervalidasi di Showcase -->
+    <!-- Proyek yang Sudah Tervalidasi di Galeri -->
     <div class="my-10 space-y-4">
         <h2 class="text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2">
             <x-icon name="sparkles" class="w-5 h-5 text-emerald-500" />
-            Proyek Resmi Terpilih di Showcase ({{ $approvedProjects->count() }})
+            Proyek Resmi Terpilih di Galeri Inovasi ({{ $approvedProjects->count() }})
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -71,7 +71,7 @@
                             <span class="text-xs font-semibold px-2 py-0.5 rounded bg-neutral-900 text-white dark:bg-white dark:text-black">
                                 {{ $ap->jurusan_label }}
                             </span>
-                            <x-badge variant="success" size="xs">Showcase Live</x-badge>
+                            <x-badge variant="success" size="xs">Tayang di Galeri</x-badge>
                         </div>
                         <h4 class="text-base font-bold text-neutral-900 dark:text-white mt-2">
                             {{ $ap->title }}
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-[#242424] flex items-center justify-between text-xs text-neutral-500">
-                        <span>Lead: {{ $ap->lead->name }}</span>
+                        <span>Ketua Tim: {{ $ap->lead->name }}</span>
                         <x-button :href="route('siswa.workspace', $ap->id)" variant="outline" size="sm">
                             Buka Karya
                         </x-button>

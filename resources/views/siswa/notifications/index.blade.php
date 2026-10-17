@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between pb-6 border-b border-neutral-200 dark:border-[#222222]">
             <div>
                 <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                    Notifikasi Siswa
+                    Pusat Notifikasi Talenta
                 </h1>
                 <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                     Pembaruan aktivitas proyek, undangan tim, dan penugasan kerja.

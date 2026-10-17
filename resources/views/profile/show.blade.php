@@ -1,4 +1,4 @@
-<x-app-layout current="profil" pageTitle="Profil Siswa Kolaborator">
+<x-app-layout current="profil" pageTitle="Profil Talenta Kolaborator">
     <div class="max-w-5xl mx-auto space-y-6">
         <!-- Profile Header Card -->
         <x-card padding="p-6 md:p-8">
@@ -20,11 +20,11 @@
                         </div>
 
                         <p class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mt-0.5">
-                            {{ $student->kelas ?? 'Siswa' }} &bull; {{ $student->jurusan->nama_lengkap ?? 'SMK' }}
+                            {{ $student->institution ?? ($student->headline ?? 'Talenta') }} &bull; {{ $student->jurusan->nama_lengkap ?? 'Domain Multidisiplin' }}
                         </p>
 
                         <p class="text-xs text-neutral-400 mt-0.5">
-                            {{ $student->email ?? 'siswa@gmail.com' }} &bull; {{ $student->jabatan ?? 'Siswa Kolaborator' }}
+                            {{ $student->email ?? 'user@synapsehub.id' }} &bull; {{ $student->jabatan ?? 'Talenta Kolaborator' }}
                         </p>
                     </div>
                 </div>
@@ -45,14 +45,14 @@
                     Tentang / Bio
                 </span>
                 <p class="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-3xl">
-                    {{ $student->bio ?? 'Siswa aktif berkolaborasi dalam proyek lintas jurusan di SMK.' }}
+                    {{ $student->bio ?? 'Kolaborator aktif dalam proyek lintas domain di SynapseHub.' }}
                 </p>
             </div>
 
             <!-- Skills List (Pill badges as requested) -->
             <div class="mt-6 pt-5 border-t border-neutral-100 dark:border-[#262626]">
                 <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-400 block mb-2.5">
-                    Skills & Kompetensi
+                    Keahlian & Kompetensi
                 </span>
                 <div class="flex flex-wrap gap-2">
                     @forelse($student->skills as $skill)
@@ -85,7 +85,7 @@
                         <div class="py-3">
                             <div class="flex items-center justify-between">
                                 <h4 class="text-sm font-bold text-neutral-900 dark:text-white">{{ $pl->title }}</h4>
-                                <x-badge variant="neutral" size="xs">Lead</x-badge>
+                                <x-badge variant="neutral" size="xs">Ketua Tim</x-badge>
                             </div>
                             <span class="text-xs text-neutral-500 mt-0.5 block">Status: {{ $pl->status }} &bull; {{ $pl->jurusan_label }}</span>
                         </div>
@@ -95,9 +95,9 @@
                         <div class="py-3">
                             <div class="flex items-center justify-between">
                                 <h4 class="text-sm font-bold text-neutral-900 dark:text-white">{{ $pj->title }}</h4>
-                                <x-badge variant="outline" size="xs">Member</x-badge>
+                                <x-badge variant="outline" size="xs">Anggota</x-badge>
                             </div>
-                            <span class="text-xs text-neutral-500 mt-0.5 block">Role: {{ $pj->pivot->role_in_project ?? 'Anggota' }}</span>
+                            <span class="text-xs text-neutral-500 mt-0.5 block">Peran: {{ $pj->pivot->role_in_project ?? 'Anggota' }}</span>
                         </div>
                     @endforeach
                 </div>
@@ -139,7 +139,7 @@
                         Portofolio Unggulan
                     </h3>
                     <p class="text-xs text-neutral-500">
-                        Hasil karya nyata yang telah divalidasi pembimbing.
+                        Hasil karya nyata yang telah divalidasi kurator.
                     </p>
                 </div>
             </div>
@@ -161,7 +161,7 @@
                         </div>
 
                         <div class="mt-4 pt-3 border-t border-neutral-200/60 dark:border-neutral-800 flex items-center justify-between text-xs">
-                            <span class="font-medium text-neutral-500">Validasi Guru</span>
+                            <span class="font-medium text-neutral-500">Validasi Kurator</span>
                             <x-icon name="check" class="w-3.5 h-3.5 text-emerald-600" />
                         </div>
                     </div>

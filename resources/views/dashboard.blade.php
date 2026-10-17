@@ -1,17 +1,17 @@
-<x-app-layout current="beranda" role="siswa" pageTitle="Beranda Siswa">
+<x-app-layout current="beranda" role="siswa" pageTitle="Dasbor Talenta">
     <!-- Welcome Header with Action -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div>
             <div class="flex items-center gap-2">
                 <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                    Halo, {{ auth()->user()->name ?? ($student->name ?? 'Siswa WORKHUB') }}
+                    Halo, {{ auth()->user()->name ?? ($student->name ?? 'Talenta SynapseHub') }}
                 </h1>
                 <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">
-                    {{ auth()->user()->kelas ?? ($student->kelas ?? 'Kelas Siswa') }} &bull; {{ auth()->user()->jurusan->kode ?? ($student->jurusan->kode ?? 'SMK') }}
+                    {{ auth()->user()->institution ?? (auth()->user()->headline ?? 'Talenta') }} &bull; {{ auth()->user()->jurusan->nama_lengkap ?? 'Domain Multidisiplin' }}
                 </span>
             </div>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Ada <span class="font-semibold text-neutral-900 dark:text-white">{{ $projects->count() }} proyek aktif</span> di sekolah dan beberapa tugas menunggu penyelesaianmu.
+                Ada <span class="font-semibold text-neutral-900 dark:text-white">{{ $projects->count() }} proyek aktif</span> di platform dan beberapa tugas menunggu penyelesaianmu.
             </p>
         </div>
 
@@ -49,7 +49,7 @@
             <div class="flex items-baseline justify-between mt-2">
                 <span class="text-2xl md:text-3xl font-extrabold text-neutral-900 dark:text-white">{{ $candidates->count() + 1 }}</span>
                 <span class="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-                    5 Jurusan
+                    12 Bidang Keahlian
                 </span>
             </div>
         </div>
@@ -70,10 +70,10 @@
         <div class="flex items-center justify-between mb-4">
             <div>
                 <h2 class="text-lg font-bold text-neutral-900 dark:text-white tracking-tight">
-                    Proyek Kolaborasi Siswa
+                    Proyek Kolaborasi Aktif
                 </h2>
                 <p class="text-xs text-neutral-500 dark:text-neutral-400">
-                    Sinergi karya teknologi, multimedia, dan desain antarjurusan SMK.
+                    Sinergi karya teknologi, media, desain, dan bisnis lintas domain keahlian.
                 </p>
             </div>
             <x-button :href="route('projects.index')" variant="ghost" size="sm" iconRight="arrow-right">
@@ -107,11 +107,11 @@
                     <div class="flex items-center gap-1.5">
                         <x-icon name="cpu" class="w-4 h-4 text-neutral-800 dark:text-neutral-200" />
                         <h2 class="text-lg font-bold text-neutral-900 dark:text-white tracking-tight">
-                            WORKHUB MATCH
+                            Pencocokan Rekan (AI)
                         </h2>
                     </div>
                     <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
-                        Temukan orang yang paling cocok untuk project kamu.
+                        Temukan partner yang paling sesuai untuk proyek Anda.
                     </p>
                 </div>
                 <x-button :href="route('match.index')" variant="outline" size="sm">
@@ -123,7 +123,7 @@
                 @foreach($candidates->take(2) as $c)
                     <x-match-card 
                         :name="$c->name"
-                        :classMajor="($c->kelas ?? 'Siswa') . ' ' . ($c->jurusan->kode ?? '')"
+                        :classMajor="($c->institution ?? ($c->headline ?? 'Talenta')) . ' • ' . ($c->jurusan->kode ?? 'TECH')"
                         :score="rand(88, 96)"
                         :skills="$c->skills->pluck('name')->all()"
                         :href="route('profile.show', $c->id)"
@@ -174,7 +174,7 @@
 
             <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-[#262626]">
                 <x-button :href="route('workspace.show', 1)" variant="outline" size="sm" class="w-full justify-center text-xs">
-                    Buka Workspace Proyek
+                    Buka Ruang Kerja Proyek
                 </x-button>
             </div>
         </div>

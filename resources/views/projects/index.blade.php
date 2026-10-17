@@ -6,7 +6,7 @@
                 Proyek Kolaborasi
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Eksplorasi proyek lintas jurusan, temukan rekan satu tim, atau buat ide kolaborasi barumu.
+                Eksplorasi proyek lintas domain, temukan rekan satu tim, atau bangun kolaborasi barumu.
             </p>
         </div>
 
@@ -15,16 +15,16 @@
         </x-button>
     </div>
 
-    <!-- Filter Bar (Clean pill buttons for Jurusan) -->
+    <!-- Filter Bar (Clean pill buttons for Domain) -->
     <div class="my-6 space-y-4">
-        <!-- Jurusan Tabs -->
+        <!-- Domain Tabs -->
         <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-            <span class="text-neutral-400 font-semibold mr-1 shrink-0">Jurusan:</span>
+            <span class="text-neutral-400 font-semibold mr-1 shrink-0">Bidang Keahlian:</span>
             <a 
                 href="{{ route('projects.index', ['jurusan' => 'Semua', 'status' => $currentStatus, 'q' => $search]) }}"
                 class="px-3 py-1.5 rounded-full font-medium transition-all shrink-0 {{ $currentJurusan === 'Semua' ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 font-bold shadow-xs' : 'bg-white dark:bg-[#181818] text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-[#2A2A2A] hover:border-neutral-400' }}"
             >
-                Semua
+                Semua Bidang
             </a>
             @foreach($jurusans as $j)
                 <a 
@@ -41,7 +41,7 @@
             <!-- Status Filter -->
             <div class="flex items-center gap-1.5 text-xs w-full sm:w-auto overflow-x-auto">
                 <span class="text-neutral-400 font-semibold mr-1 shrink-0">Status:</span>
-                @foreach(['Semua', 'Open Recruitment', 'Sedang Berjalan', 'Selesai'] as $st)
+                @foreach(['Semua', 'Rekrutmen Terbuka', 'Sedang Berjalan', 'Selesai'] as $st)
                     <a 
                         href="{{ route('projects.index', ['status' => $st, 'jurusan' => $currentJurusan, 'q' => $search]) }}"
                         class="px-2.5 py-1 rounded-md text-xs font-medium transition-colors shrink-0 {{ $currentStatus === $st ? 'bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white font-bold' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white' }}"

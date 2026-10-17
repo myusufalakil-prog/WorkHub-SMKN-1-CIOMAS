@@ -3,10 +3,10 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#222222]">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
-                Proyek Kolaborasi SMKN 1 Ciomas
+                Proyek Kolaborasi SynapseHub
             </h1>
             <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                Eksplorasi karya lintas 5 kejuruan SMKN 1 Ciomas, ajukan diri bergabung dengan tim, atau inisiasi proyek baru.
+                Eksplorasi proyek inovasi multidisiplin, ajukan diri bergabung dengan tim, atau inisiasi proyek baru.
             </p>
         </div>
 
@@ -15,16 +15,16 @@
         </x-button>
     </div>
 
-    <!-- Filter Bar (Themed pill buttons for Jurusan) -->
+    <!-- Filter Bar (Themed pill buttons for Domain Keahlian) -->
     <div class="my-6 space-y-4">
-        <!-- Jurusan Tabs -->
+        <!-- Domain Tabs -->
         <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-            <span class="text-neutral-400 font-bold mr-1 shrink-0">Jurusan:</span>
+            <span class="text-neutral-400 font-bold mr-1 shrink-0">Bidang Keahlian:</span>
             <a 
                 href="{{ route('siswa.proyek.index', ['jurusan' => 'Semua', 'status' => $statusFilter, 'q' => $search]) }}"
                 class="px-3.5 py-1.5 rounded-full font-bold transition-all shrink-0 {{ $jurusanFilter === 'Semua' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xs' : 'bg-white dark:bg-[#181818] text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-[#2A2A2A] hover:border-blue-400' }}"
             >
-                Semua Jurusan
+                Semua Bidang
             </a>
             @foreach($jurusans as $j)
                 @php
@@ -44,7 +44,7 @@
             <!-- Status Filter -->
             <div class="flex items-center gap-1.5 text-xs w-full sm:w-auto overflow-x-auto">
                 <span class="text-neutral-400 font-bold mr-1 shrink-0">Status:</span>
-                @foreach(['Semua', 'Open Recruitment', 'Sedang Berjalan', 'Selesai'] as $st)
+                @foreach(['Semua', 'Rekrutmen Terbuka', 'Sedang Berjalan', 'Selesai'] as $st)
                     <a 
                         href="{{ route('siswa.proyek.index', ['status' => $st, 'jurusan' => $jurusanFilter, 'q' => $search]) }}"
                         class="px-3 py-1 rounded-full text-xs font-semibold transition-all shrink-0 {{ $statusFilter === $st ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-800' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white' }}"
@@ -89,7 +89,7 @@
                             @if($p->status === 'Open Recruitment')
                                 <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                    Recruiting
+                                    Buka Rekrutmen
                                 </span>
                             @elseif($p->status === 'Selesai')
                                 <span class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">
@@ -115,7 +115,7 @@
                         <!-- Progress Bar with Gradient -->
                         <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-[#222222]">
                             <div class="flex justify-between text-xs font-semibold mb-1.5">
-                                <span class="text-neutral-400">Progress PBL</span>
+                                <span class="text-neutral-400">Kemajuan Proyek</span>
                                 <span class="text-neutral-800 dark:text-neutral-200">{{ $p->progress }}%</span>
                             </div>
                             <div class="w-full h-2 bg-neutral-100 dark:bg-[#202020] rounded-full overflow-hidden p-0.5 border border-neutral-200/60 dark:border-neutral-800">
@@ -125,7 +125,7 @@
 
                         <div class="mt-3 flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400">
                             <span>Anggota Tim: <strong class="text-neutral-800 dark:text-neutral-200">{{ $activeCount }} / {{ $p->target_members }}</strong></span>
-                            <span>Ketua: <strong class="text-neutral-800 dark:text-neutral-200">{{ $p->lead->name ?? 'Siswa' }}</strong></span>
+                            <span>Ketua: <strong class="text-neutral-800 dark:text-neutral-200">{{ $p->lead->name ?? 'Talenta' }}</strong></span>
                         </div>
                     </div>
 
@@ -136,11 +136,11 @@
                                 class="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all shadow-md shadow-blue-500/20"
                             >
                                 <x-icon name="briefcase" class="w-3.5 h-3.5" />
-                                <span>Kelola Workspace (Ketua)</span>
+                                <span>Kelola Ruang Kerja (Ketua)</span>
                             </a>
                         @elseif($isActiveMember)
                             <x-button :href="route('siswa.workspace', $p->id)" variant="secondary" size="sm" class="w-full justify-center" icon="briefcase">
-                                Buka Workspace (Anggota)
+                                Buka Ruang Kerja (Anggota)
                             </x-button>
                         @elseif($isPendingMember)
                             <div class="w-full py-2 px-3 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-center">
@@ -208,11 +208,18 @@
                         name="role_in_project" 
                         class="w-full text-xs p-3 rounded-xl bg-neutral-50 dark:bg-[#141414] border border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                     >
-                        <option value="Software & Game Developer (PPLG)">Software & Game Developer (PPLG)</option>
-                        <option value="3D & Character Animator (Animasi)">3D & Character Animator (Animasi)</option>
-                        <option value="Sinematografi & Video Editor (BCF)">Sinematografi & Video Editor (BCF)</option>
-                        <option value="Teknisi & Mekanik Otomotif (TO)">Teknisi & Mekanik Otomotif (TO)</option>
-                        <option value="Fabrikasi & Pengelasan Logam (TPFL)">Fabrikasi & Pengelasan Logam (TPFL)</option>
+                        <option value="Rekayasa Perangkat Lunak & AI (TECH)">Rekayasa Perangkat Lunak & AI (TECH)</option>
+                        <option value="Media Kreatif & Konten Video (MEDIA)">Media Kreatif & Konten Video (MEDIA)</option>
+                        <option value="Desain Visual & UI/UX (DESIGN)">Desain Visual & UI/UX (DESIGN)</option>
+                        <option value="Rekayasa Perangkat Keras & IoT (ENG)">Rekayasa Perangkat Keras & IoT (ENG)</option>
+                        <option value="Strategi Produk & Bisnis (BIZ)">Strategi Produk & Bisnis (BIZ)</option>
+                        <option value="Analisis Data & Sains (DATA)">Analisis Data & Sains (DATA)</option>
+                        <option value="Keamanan Siber & Jaringan (CYBER)">Keamanan Siber & Jaringan (CYBER)</option>
+                        <option value="Tenaga Kesehatan & Medis (HEALTH)">Tenaga Kesehatan & Medis (HEALTH)</option>
+                        <option value="Pendidikan & Pelatihan (EDU)">Pendidikan & Pelatihan (EDU)</option>
+                        <option value="Lingkungan & Keberlanjutan (ENV)">Lingkungan & Keberlanjutan (ENV)</option>
+                        <option value="Riset Ilmiah & Laboratorium (SCI)">Riset Ilmiah & Laboratorium (SCI)</option>
+                        <option value="Hukum & Kepatuhan Etika (LEGAL)">Hukum & Kepatuhan Etika (LEGAL)</option>
                         <option value="Anggota Kolaborasi Tim">Anggota Kolaborasi Tim</option>
                     </select>
                 </div>

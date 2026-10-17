@@ -1,4 +1,4 @@
-<x-guest-layout title="Pilih Portal Peran - SMKN 1 Ciomas">
+<x-guest-layout title="Pilih Portal Peran - SynapseHub">
     <div class="relative overflow-hidden py-12 md:py-20">
         <!-- Ambient Background Glows -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-blue-600/15 via-purple-600/15 to-amber-500/15 blur-[120px] rounded-full pointer-events-none -z-10"></div>
@@ -10,14 +10,14 @@
             <div class="text-center max-w-3xl mx-auto mb-12">
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/5 dark:bg-white/10 border border-neutral-200/80 dark:border-white/10 text-xs font-semibold text-neutral-800 dark:text-neutral-200 mb-5 shadow-xs backdrop-blur-md">
                     <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                    <span>Gerbang Akses Multi-Role WORKHUB &bull; SMKN 1 Ciomas</span>
+                    <span>Gerbang Akses Multi-Role &bull; SynapseHub</span>
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-950 dark:text-white leading-tight">
                     Pilih Lingkungan Kerja Anda
                 </h1>
                 <p class="text-sm md:text-base text-neutral-600 dark:text-neutral-400 mt-3.5 leading-relaxed">
-                    Setiap peran memiliki alur kerja, hak akses, dan halaman dashboard mandiri untuk mendukung kolaborasi antar 5 kejuruan SMKN 1 Ciomas secara profesional.
+                    Setiap peran memiliki alur kerja, hak akses, dan halaman dasbor mandiri untuk mendukung kolaborasi multidisiplin secara profesional.
                 </p>
             </div>
 
@@ -34,14 +34,14 @@
                                     <span class="px-2 py-0.5 text-[10px] uppercase font-black bg-white/20 text-white rounded-full backdrop-blur-sm">Akses Bebas Semua Portal</span>
                                 </div>
                                 <p class="text-xs text-neutral-400 mt-1">
-                                    Anda login sebagai <strong>{{ auth()->user()->name }}</strong> (<span class="font-mono text-neutral-300">{{ auth()->user()->email }}</span>). Anda memiliki hak akses penuh untuk masuk ke Dashboard Siswa maupun OSIS kapan pun.
+                                    Anda masuk sebagai <strong>{{ auth()->user()->name }}</strong> (<span class="font-mono text-neutral-300">{{ auth()->user()->email }}</span>). Anda memiliki hak akses penuh untuk masuk ke Dasbor Talenta maupun Hub Penyelenggara kapan pun.
                                 </p>
                             </div>
                         </div>
                         <form action="{{ route('logout') }}" method="POST" class="shrink-0 w-full sm:w-auto">
                             @csrf
                             <button type="submit" class="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-neutral-200 hover:text-white transition-colors cursor-pointer">
-                                Keluar Akun (Logout)
+                                Keluar Akun
                             </button>
                         </form>
                     </div>
@@ -54,10 +54,10 @@
                         </div>
                         <div>
                             <h2 class="text-xs sm:text-sm font-bold text-neutral-900 dark:text-white">
-                                Belum masuk ke akun WORKHUB?
+                                Belum masuk ke akun SynapseHub?
                             </h2>
                             <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
-                                Silakan masuk menggunakan email Gmail atau daftarkan akun siswa baru untuk mulai berkolaborasi.
+                                Silakan masuk dengan email Anda atau daftarkan akun talenta baru untuk mulai berkolaborasi.
                             </p>
                         </div>
                     </div>
@@ -66,13 +66,13 @@
                             href="{{ route('login') }}" 
                             class="flex-1 sm:flex-none px-4 py-2 text-center rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all shadow-xs cursor-pointer"
                         >
-                            Masuk (Login)
+                            Masuk Akun
                         </a>
                         <a 
                             href="{{ route('register') }}" 
-                            class="flex-1 sm:flex-none px-4 py-2 text-center rounded-xl text-xs font-bold border border-blue-600/70 text-blue-700 bg-white hover:bg-blue-50 transition-colors shadow-xs"
+                            class="flex-1 sm:flex-none px-4 py-2 text-center rounded-xl text-xs font-bold border border-blue-600/70 text-blue-700 bg-white hover:bg-blue-50 dark:bg-transparent dark:text-blue-400 dark:border-blue-500/60 dark:hover:bg-blue-950/40 transition-colors shadow-xs"
                         >
-                            Daftar (Register)
+                            Daftar Akun
                         </a>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                     <div class="absolute -top-3 left-6">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 shadow-xs">
                             <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-                            Portal Siswa
+                            Portal Talenta
                         </span>
                     </div>
 
@@ -97,30 +97,30 @@
                         </div>
 
                         <h2 class="text-xl font-bold text-neutral-950 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                            Portal Siswa
+                            Portal Talenta & Kolaborasi
                         </h2>
                         <p class="text-xs font-semibold text-blue-600 dark:text-blue-400 mt-1">
-                            PPLG &bull; BCF &bull; Animasi &bull; TO &bull; TPFL
+                            12 Pilar Domain: TECH &bull; MEDIA &bull; DESIGN &bull; AI &bull; CYBER &bull; HEALTH &bull; & Lainnya
                         </p>
 
                         <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-3 leading-relaxed">
-                            Bangun portofolio karya industri, inisiasi proyek kolaborasi bersama, kerjakan tugas di workspace tim, dan temukan kolaborator lewat AI Match.
+                            Bangun portofolio karya industri, inisiasi proyek kolaborasi bersama, kerjakan tugas di ruang kerja tim, dan temukan kolaborator lewat Pencocokan Cerdas.
                         </p>
 
-                        <!-- Fitur Utama Siswa -->
+                        <!-- Fitur Utama Talenta -->
                         <div class="mt-6 pt-5 border-t border-neutral-100 dark:border-[#222222] space-y-2.5 text-xs">
                             <span class="text-[10px] uppercase font-bold tracking-wider text-neutral-400 block mb-2">Fitur Utama:</span>
                             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                                 <x-icon name="check" class="w-3.5 h-3.5 text-blue-500 shrink-0 stroke-[2.5]" />
-                                <span>Beranda & Tracking Proyek Siswa</span>
+                                <span>Beranda & Pemantauan Proyek Kolaboratif</span>
                             </div>
                             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                                 <x-icon name="check" class="w-3.5 h-3.5 text-blue-500 shrink-0 stroke-[2.5]" />
-                                <span>Workspace Tim (Tugas, File, Chat Realtime)</span>
+                                <span>Ruang Kerja Tim (Tugas, Berkas, Obrolan)</span>
                             </div>
                             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                                 <x-icon name="check" class="w-3.5 h-3.5 text-blue-500 shrink-0 stroke-[2.5]" />
-                                <span>WORKHUB MATCH (AI Pencarian Partner)</span>
+                                <span>Pencocokan Cerdas (Pencarian Rekan Kolaborasi)</span>
                             </div>
                             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                                 <x-icon name="check" class="w-3.5 h-3.5 text-blue-500 shrink-0 stroke-[2.5]" />
@@ -136,50 +136,57 @@
                                     href="{{ route('siswa.dashboard') }}"
                                     class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-md hover:shadow-blue-500/25 cursor-pointer"
                                 >
-                                    <span>Buka Dashboard Siswa</span>
+                                    <span>Buka Dasbor Talenta</span>
                                     <x-icon name="arrow-right" class="w-4 h-4" />
                                 </a>
                                 <span class="text-[10px] text-center text-blue-600 dark:text-blue-400 block mt-2 font-medium">
                                     @if(auth()->user()->role === 'admin')
                                         Akses Penuh (Mode Admin)
                                     @else
-                                        Login sebagai: {{ auth()->user()->name }}
+                                        Masuk sebagai: {{ auth()->user()->name }}
                                     @endif
+                                </span>
+                            @elseif(auth()->user()->role === 'osis')
+                                <div class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-center bg-neutral-100 dark:bg-neutral-800/80 text-neutral-400 dark:text-neutral-500 border border-neutral-200 dark:border-neutral-700 select-none">
+                                    Khusus Akun Talenta (Sesi Aktif: Penyelenggara)
+                                </div>
+                                <span class="text-[10px] text-center text-neutral-400 block mt-2">
+                                    Gunakan Dasbor Penyelenggara di sebelah kanan
                                 </span>
                             @else
                                 <a 
                                     href="{{ route('siswa.dashboard') }}"
                                     class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
                                 >
-                                    Masuk Portal Siswa
+                                    Masuk Portal Talenta
                                 </a>
                             @endif
                         @else
                             <div class="space-y-2">
                                 <a 
-                                    href="{{ route('login') }}"
+                                    href="{{ route('login') }}" 
                                     class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all shadow-sm"
                                 >
-                                    Masuk Akun Siswa
+                                    Masuk Akun Talenta
                                     <x-icon name="arrow-right" class="w-3.5 h-3.5" />
                                 </a>
                                 <a 
-                                    href="{{ route('register') }}"
-                                    class="w-full inline-flex items-center justify-center gap-2 py-2 px-4 rounded-xl text-xs font-bold border border-blue-600/60 text-blue-700 bg-white hover:bg-blue-50 transition-all"
+                                    href="{{ route('register') }}" 
+                                    class="w-full inline-flex items-center justify-center gap-2 py-2 px-4 rounded-xl text-xs font-bold border border-blue-600/60 text-blue-700 bg-white hover:bg-blue-50 dark:bg-transparent dark:text-blue-400 dark:border-blue-500/60 dark:hover:bg-blue-950/40 transition-all"
                                 >
-                                    Daftar Siswa Baru
+                                    Daftar Talenta Baru
                                 </a>
                             </div>
                         @endauth
                     </div>
                 </div>
 
-                <!-- 2. PORTAL OSIS -->
+                <!-- 2. PORTAL ORGANIZER & KOMUNITAS -->
                 <div class="relative rounded-2xl border border-neutral-200/80 dark:border-[#2A2A2A] bg-white/90 dark:bg-[#161616]/90 backdrop-blur-md p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-purple-500/80 hover:shadow-xl hover:-translate-y-1 group">
                     <div class="absolute -top-3 left-6">
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 shadow-xs">
                             <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
-                            Pengurus OSIS
+                            Komunitas & Penyelenggara
                         </span>
                     </div>
 
@@ -191,34 +198,34 @@
                         </div>
 
                         <h2 class="text-xl font-bold text-neutral-950 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                            Portal Pengurus OSIS
+                            Portal Penyelenggara & Komunitas
                         </h2>
                         <p class="text-xs font-semibold text-purple-600 dark:text-purple-400 mt-1">
-                            Koordinator Event & Showcase Festival
+                            Koordinator Agenda, Tantangan & Pameran Karya
                         </p>
 
                         <p class="text-xs text-neutral-600 dark:text-neutral-400 mt-3 leading-relaxed">
-                            Inisiasi agenda kegiatan sekolah, kurasi proyek karya siswa untuk pameran festival resmi, dan broadcast informasi penting ke seluruh jurusan.
+                            Inisiasi agenda kegiatan komunitas, tantangan inovasi, kurasi proyek karya talenta untuk galeri inovasi resmi, dan siaran informasi penting ke seluruh jaringan bidang keahlian.
                         </p>
 
-                        <!-- Fitur Utama OSIS -->
+                        <!-- Fitur Utama Penyelenggara -->
                         <div class="mt-6 pt-5 border-t border-neutral-100 dark:border-[#222222] space-y-2.5 text-xs">
                             <span class="text-[10px] uppercase font-bold tracking-wider text-neutral-400 block mb-2">Fitur Utama:</span>
                             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                                 <x-icon name="check" class="w-3.5 h-3.5 text-purple-500 shrink-0 stroke-[2.5]" />
-                                <span>Dashboard Monitoring Kolaborasi Sekolah</span>
+                                <span>Dasbor Pemantauan Kolaborasi Komunitas</span>
                             </div>
                             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                                 <x-icon name="check" class="w-3.5 h-3.5 text-purple-500 shrink-0 stroke-[2.5]" />
-                                <span>Manajemen Event & Festival Tahunan</span>
+                                <span>Manajemen Tantangan, Hackathon & Agenda Kegiatan</span>
                             </div>
                             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                                 <x-icon name="check" class="w-3.5 h-3.5 text-purple-500 shrink-0 stroke-[2.5]" />
-                                <span>Meja Kurasi Karya untuk Galeri Showcase</span>
+                                <span>Meja Kurasi Karya untuk Galeri Inovasi</span>
                             </div>
                             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                                 <x-icon name="check" class="w-3.5 h-3.5 text-purple-500 shrink-0 stroke-[2.5]" />
-                                <span>Broadcast Pengumuman Terpusat</span>
+                                <span>Siaran Pengumuman Terpusat</span>
                             </div>
                         </div>
                     </div>
@@ -230,73 +237,83 @@
                                     href="{{ route('osis.dashboard') }}"
                                     class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition-all shadow-md hover:shadow-purple-500/25 cursor-pointer"
                                 >
-                                    <span>Buka Dashboard OSIS</span>
+                                    <span>Buka Dasbor Penyelenggara</span>
                                     <x-icon name="arrow-right" class="w-4 h-4" />
                                 </a>
                                 <span class="text-[10px] text-center text-purple-600 dark:text-purple-400 block mt-2 font-medium">
                                     @if(auth()->user()->role === 'admin')
                                         Akses Penuh (Mode Admin)
                                     @else
-                                        Login sebagai: {{ auth()->user()->name }}
+                                        Masuk sebagai: {{ auth()->user()->name }}
                                     @endif
+                                </span>
+                            @elseif(auth()->user()->role === 'siswa')
+                                <div class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-center bg-neutral-100 dark:bg-neutral-800/80 text-neutral-400 dark:text-neutral-500 border border-neutral-200 dark:border-neutral-700 select-none">
+                                    Khusus Tim Penyelenggara (Sesi Aktif: Talenta)
+                                </div>
+                                <span class="text-[10px] text-center text-neutral-400 block mt-2">
+                                    Gunakan Dasbor Talenta di sebelah kiri
                                 </span>
                             @else
                                 <a 
                                     href="{{ route('osis.dashboard') }}"
                                     class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs font-bold border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
                                 >
-                                    Masuk Portal OSIS
+                                    Masuk Portal Penyelenggara
                                 </a>
                             @endif
                         @else
                             <a 
-                                href="{{ route('login') }}"
+                                href="{{ route('login') }}" 
                                 class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white transition-all shadow-sm"
                             >
-                                Masuk Portal OSIS
+                                Masuk Portal Penyelenggara
                                 <x-icon name="arrow-right" class="w-3.5 h-3.5" />
                             </a>
                             <span class="text-[10px] text-center text-neutral-400 block mt-2">
-                                Gunakan akun pengurus OSIS
+                                Gunakan akun tim Penyelenggara / Komunitas
                             </span>
                         @endauth
                     </div>
                 </div>
             </div>
 
-            <!-- 5 Kejuruan Strip -->
+            <!-- 12 Domain Multidisiplin Strip -->
+            @php
+                $defaultDomains = [
+                    ['kode' => 'TECH', 'nama' => 'Software & AI', 'icon' => 'code'],
+                    ['kode' => 'MEDIA', 'nama' => 'Media & Film', 'icon' => 'video'],
+                    ['kode' => 'DESIGN', 'nama' => 'UI/UX & Product', 'icon' => 'sparkles'],
+                    ['kode' => 'ENG', 'nama' => 'IoT & Hardware', 'icon' => 'wrench'],
+                    ['kode' => 'BIZ', 'nama' => 'Digital Business', 'icon' => 'zap'],
+                    ['kode' => 'AI-DATA', 'nama' => 'Data Science & ML', 'icon' => 'cpu'],
+                    ['kode' => 'CYBER', 'nama' => 'Cyber Security', 'icon' => 'shield'],
+                    ['kode' => '3D-GAME', 'nama' => '3D & Game Engine', 'icon' => 'box'],
+                    ['kode' => 'FIN', 'nama' => 'Fintech Analytics', 'icon' => 'award'],
+                    ['kode' => 'HEALTH', 'nama' => 'Health Informatics', 'icon' => 'activity'],
+                    ['kode' => 'ENV', 'nama' => 'Green Technology', 'icon' => 'globe'],
+                    ['kode' => 'COMM', 'nama' => 'Digital Comm', 'icon' => 'message-square'],
+                ];
+            @endphp
             <div class="mt-16 pt-10 border-t border-neutral-200/80 dark:border-[#222222] text-center">
                 <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 block mb-4">
-                    Mendukung 5 Kompetensi Keahlian SMKN 1 Ciomas
+                    Mendukung 12 Pilar Bidang Keahlian Multidisiplin SynapseHub
                 </span>
-                <div class="flex flex-wrap items-center justify-center gap-2.5">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800">
-                        <x-icon name="code" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                        <span>PPLG (Perangkat Lunak & Gim)</span>
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border border-purple-200/80 dark:border-purple-800">
-                        <x-icon name="video" class="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-                        <span>BCF (Broadcasting & Film)</span>
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800">
-                        <x-icon name="sparkles" class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-                        <span>Animasi (3D & 2D)</span>
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200/80 dark:border-rose-800">
-                        <x-icon name="wrench" class="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
-                        <span>TO (Teknik Otomotif)</span>
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-50 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-300 border border-cyan-200/80 dark:border-cyan-800">
-                        <x-icon name="zap" class="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-                        <span>TPFL (Pengelasan & Logam)</span>
-                    </span>
+                <div class="flex flex-wrap items-center justify-center gap-2 max-w-5xl mx-auto">
+                    @foreach($defaultDomains as $d)
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-neutral-100/90 dark:bg-neutral-800/70 text-neutral-800 dark:text-neutral-200 border border-neutral-200/80 dark:border-neutral-700/80 hover:border-blue-500/50 hover:bg-white dark:hover:bg-neutral-800 transition-colors shadow-2xs">
+                            <x-icon :name="$d['icon']" class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                            <span>{{ $d['kode'] }}</span>
+                            <span class="text-[10px] text-neutral-500 dark:text-neutral-400 font-medium hidden sm:inline">({{ $d['nama'] }})</span>
+                        </span>
+                    @endforeach
                 </div>
             </div>
 
             <!-- Footer Link -->
             <div class="mt-10 text-center">
                 <a href="{{ route('home') }}" class="inline-flex items-center gap-2 text-xs font-semibold text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors">
-                    &larr; Kembali ke Beranda Utama WORKHUB
+                    &larr; Kembali ke Beranda Utama SynapseHub
                 </a>
             </div>
         </div>

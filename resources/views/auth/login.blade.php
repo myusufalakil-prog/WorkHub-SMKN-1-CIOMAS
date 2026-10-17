@@ -1,4 +1,4 @@
-<x-guest-layout title="Masuk ke Akun - SMKN 1 Ciomas">
+<x-guest-layout title="Masuk ke Akun - SynapseHub">
     <div class="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <!-- Ambient Background Glows -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-blue-600/15 via-purple-600/15 to-amber-500/15 blur-[120px] rounded-full pointer-events-none -z-10"></div>
@@ -9,13 +9,13 @@
             <!-- Header Card -->
             <div class="text-center">
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold text-lg shadow-md mb-4 shadow-blue-500/20">
-                    WH
+                    SH
                 </div>
                 <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950 dark:text-white">
-                    Masuk ke WORKHUB
+                    Masuk ke SynapseHub
                 </h1>
                 <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1.5">
-                    Platform Kolaborasi Siswa & Guru SMKN 1 Ciomas.
+                    Platform Kolaborasi Talenta & Proyek Inovasi.
                 </p>
             </div>
 
@@ -39,10 +39,10 @@
                 <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
                     @csrf
 
-                    <!-- Email Gmail -->
+                    <!-- Email -->
                     <div>
                         <label for="email" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5">
-                            Alamat Email Gmail (@gmail.com)
+                            Alamat Email
                         </label>
                         <div class="relative">
                             <input 
@@ -52,7 +52,7 @@
                                 value="{{ old('email') }}" 
                                 required 
                                 autofocus
-                                placeholder="nama.anda@gmail.com"
+                                placeholder="nama@domain.com atau nama@kampus.ac.id"
                                 class="w-full px-3.5 py-2.5 text-sm bg-neutral-50 dark:bg-[#1C1C1C] text-neutral-900 dark:text-white placeholder-neutral-400 border {{ $errors->has('email') ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-blue-400' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
                             />
                         </div>
@@ -117,9 +117,9 @@
                 <!-- Divider & Register Link -->
                 <div class="mt-6 pt-5 border-t border-neutral-100 dark:border-[#222222] text-center">
                     <p class="text-xs text-neutral-500 dark:text-neutral-400">
-                        Belum memiliki akun siswa? 
+                        Belum memiliki akun? 
                         <a href="{{ route('register') }}" class="font-bold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-all">
-                            Daftar Akun Siswa Baru
+                            Daftar Akun Talenta Baru
                         </a>
                     </p>
                 </div>
