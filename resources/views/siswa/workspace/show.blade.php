@@ -814,118 +814,168 @@
                         </div>
 
                         <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            const chatContainer = document.getElementById('workspaceChatBox');
-                            const chatForm = document.getElementById('workspaceChatForm');
-                            const chatInput = document.getElementById('workspaceChatInput');
-                            if (!chatContainer || !chatForm) return;
+                        (function () {
+                            const initWorkspaceChat = () => {
+                                const chatContainer = document.getElementById('workspaceChatBox');
+                                const chatForm = document.getElementById('workspaceChatForm');
+                                const chatInput = document.getElementById('workspaceChatInput');
+                                const chatSubmitBtn = document.getElementById('workspaceChatSubmitBtn');
+                                if (!chatContainer || !chatForm || !chatInput) return;
 
-                            const scrollToBottom = () => {
-                                chatContainer.scrollTop = chatContainer.scrollHeight;
-                            };
-                            scrollToBottom();
-
-                            let lastMessageId = 0;
-                            chatContainer.querySelectorAll('[data-message-id]').forEach(el => {
-                                const id = parseInt(el.getAttribute('data-message-id'), 10);
-                                if (id > lastMessageId) lastMessageId = id;
-                            });
-
-                            const appendMessage = (msg) => {
-                                const emptyPlaceholder = document.getElementById('chatEmptyState');
-                                if (emptyPlaceholder) emptyPlaceholder.remove();
-
-                                if (chatContainer.querySelector(`[data-message-id="${msg.id}"]`)) return;
-
-                                if (msg.id > lastMessageId) {
-                                    lastMessageId = msg.id;
-                                }
-
-                                const msgDiv = document.createElement('div');
-                                msgDiv.setAttribute('data-message-id', msg.id);
-                                msgDiv.className = `flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-200 ${msg.is_me ? 'flex-row-reverse' : ''}`;
-                                msgDiv.innerHTML = `
-                                    <div class="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0">
-                                        ${msg.user_avatar}
-                                    </div>
-                                    <div class="max-w-[78%] space-y-1">
-                                        <div class="flex items-center gap-2 ${msg.is_me ? 'justify-end' : ''}">
-                                            <span class="font-bold text-xs text-neutral-900 dark:text-white">
-                                                ${msg.user_name}
-                                            </span>
-                                            <span class="text-[10px] text-neutral-400">
-                                                ${msg.jurusan} &bull; ${msg.created_at}
-                                            </span>
-                                        </div>
-                                        <div class="p-3.5 rounded-xl ${msg.is_me ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-tr-none shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-none border border-slate-200/70 dark:border-slate-700/70'} leading-relaxed">
-                                            <p class="whitespace-pre-wrap break-words">${msg.message}</p>
-                                        </div>
-                                    </div>
-                                `;
-                                chatContainer.appendChild(msgDiv);
+                                const scrollToBottom = () => {
+                                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                                };
                                 scrollToBottom();
+
+                                let lastMessageId = 0;
+                                chatContainer.querySelectorAll('[data-message-id]').forEach(el => {
+                                    const id = parseInt(el.getAttribute('data-message-id'), 10);
+                                    if (id > lastMessageId) lastMessageId = id;
+                                });
+
+                                const appendMessage = (msg) => {
+                                    const emptyPlaceholder = document.getElementById('chatEmptyState');
+                                    if (emptyPlaceholder) emptyPlaceholder.remove();
+
+                                    const msgIdNum = parseInt(msg.id, 10);
+                                    // Cegah render ganda jika pesan sudah ada di DOM
+                                    if (chatContainer.querySelector(`[data-message-id="${msgIdNum}"]`)) {
+                                        return;
+                                    }
+
+                                    if (msgIdNum > lastMessageId) {
+                                        lastMessageId = msgIdNum;
+                                    }
+
+                                    const msgDiv = document.createElement('div');
+                                    msgDiv.setAttribute('data-message-id', msgIdNum);
+                                    msgDiv.className = `flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-200 ${msg.is_me ? 'flex-row-reverse' : ''}`;
+                                    msgDiv.innerHTML = `
+                                        <div class="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0">
+                                            ${msg.user_avatar || 'U'}
+                                        </div>
+                                        <div class="max-w-[78%] space-y-1">
+                                            <div class="flex items-center gap-2 ${msg.is_me ? 'justify-end' : ''}">
+                                                <span class="font-bold text-xs text-neutral-900 dark:text-white">
+                                                    ${msg.user_name}
+                                                </span>
+                                                <span class="text-[10px] text-neutral-400">
+                                                    ${msg.jurusan || 'TECH'} &bull; ${msg.created_at}
+                                                </span>
+                                            </div>
+                                            <div class="p-3.5 rounded-xl ${msg.is_me ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-tr-none shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-none border border-slate-200/70 dark:border-slate-700/70'} leading-relaxed">
+                                                <p class="whitespace-pre-wrap break-words">${msg.message}</p>
+                                            </div>
+                                        </div>
+                                    `;
+                                    chatContainer.appendChild(msgDiv);
+                                    scrollToBottom();
+                                };
+
+                                let isPolling = false;
+                                // Sinkronisasi Realtime cepat (polling tiap 1.2 detik tanpa tumpang tindih)
+                                const pollMessages = async () => {
+                                    if (isPolling) return;
+                                    isPolling = true;
+
+                                    try {
+                                        const url = `{{ route('siswa.workspace.chat.messages', $project->id) }}?after_id=${lastMessageId}`;
+                                        const res = await fetch(url, {
+                                            headers: { 
+                                                'Accept': 'application/json',
+                                                'X-Requested-With': 'XMLHttpRequest'
+                                            }
+                                        });
+
+                                        if (res.ok) {
+                                            const data = await res.json();
+                                            if (data.messages && data.messages.length > 0) {
+                                                data.messages.forEach(m => appendMessage(m));
+                                            }
+                                        }
+                                    } catch (err) {
+                                        // Silently recover on transient background fetch error
+                                    } finally {
+                                        isPolling = false;
+                                    }
+                                };
+
+                                // Polling awal saat buka tab, lalu berulang tiap 1200ms
+                                pollMessages();
+                                const pollInterval = setInterval(pollMessages, 1200);
+
+                                // Segera sinkronisasi ulang ketika tab browser kembali aktif
+                                document.addEventListener('visibilitychange', () => {
+                                    if (!document.hidden) {
+                                        pollMessages();
+                                    }
+                                });
+
+                                let isSubmitting = false;
+
+                                // Pengiriman Pesan Instan dengan Guard Anti-Dobel
+                                chatForm.addEventListener('submit', async function (e) {
+                                    e.preventDefault();
+                                    
+                                    if (isSubmitting) return; // Kunci anti double-click
+
+                                    const text = chatInput.value.trim();
+                                    if (!text) return;
+
+                                    isSubmitting = true;
+                                    chatInput.disabled = true;
+                                    if (chatSubmitBtn) {
+                                        chatSubmitBtn.disabled = true;
+                                        chatSubmitBtn.classList.add('opacity-60', 'cursor-not-allowed');
+                                    }
+
+                                    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') 
+                                        || chatForm.querySelector('input[name="_token"]')?.value;
+
+                                    try {
+                                        const res = await fetch(chatForm.action, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Accept': 'application/json',
+                                                'X-CSRF-TOKEN': csrfToken,
+                                                'X-Requested-With': 'XMLHttpRequest'
+                                            },
+                                            body: JSON.stringify({ message: text })
+                                        });
+
+                                        if (res.ok) {
+                                            const data = await res.json();
+                                            chatInput.value = '';
+                                            if (data.success && data.message) {
+                                                appendMessage(data.message);
+                                            }
+                                            // Panggil poll langsung untuk memastikan urutan konsisten
+                                            setTimeout(pollMessages, 200);
+                                        } else {
+                                            const errData = await res.json().catch(() => null);
+                                            alert(errData?.error || 'Gagal mengirim pesan. Silakan coba kembali.');
+                                        }
+                                    } catch (err) {
+                                        console.error('Chat error:', err);
+                                    } finally {
+                                        chatInput.disabled = false;
+                                        if (chatSubmitBtn) {
+                                            chatSubmitBtn.disabled = false;
+                                            chatSubmitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+                                        }
+                                        isSubmitting = false;
+                                        chatInput.focus();
+                                    }
+                                });
                             };
 
-                            // Realtime Poller (interval 2.5s)
-                            const pollMessages = async () => {
-                                try {
-                                    const url = `{{ route('siswa.workspace.chat.messages', $project->id) }}?after_id=${lastMessageId}`;
-                                    const res = await fetch(url, {
-                                        headers: { 'Accept': 'application/json' }
-                                    });
-                                    if (res.ok) {
-                                        const data = await res.json();
-                                        if (data.messages && data.messages.length > 0) {
-                                            data.messages.forEach(m => appendMessage(m));
-                                        }
-                                    }
-                                } catch (err) {
-                                    // Silent catch for background poll
-                                }
-                            };
-
-                            setInterval(pollMessages, 2500);
-
-                            // Instant AJAX submit
-                            chatForm.addEventListener('submit', async function (e) {
-                                e.preventDefault();
-                                const text = chatInput.value.trim();
-                                if (!text) return;
-
-                                const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') 
-                                    || chatForm.querySelector('input[name="_token"]')?.value;
-
-                                chatInput.disabled = true;
-
-                                try {
-                                    const res = await fetch(chatForm.action, {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                            'Accept': 'application/json',
-                                            'X-CSRF-TOKEN': csrfToken,
-                                            'X-Requested-With': 'XMLHttpRequest'
-                                        },
-                                        body: JSON.stringify({ message: text })
-                                    });
-
-                                    if (res.ok) {
-                                        const data = await res.json();
-                                        if (data.success && data.message) {
-                                            appendMessage(data.message);
-                                        }
-                                        chatInput.value = '';
-                                    } else {
-                                        chatForm.submit();
-                                    }
-                                } catch (err) {
-                                    chatForm.submit();
-                                } finally {
-                                    chatInput.disabled = false;
-                                    chatInput.focus();
-                                }
-                            });
-                        });
+                            if (document.readyState === 'loading') {
+                                document.addEventListener('DOMContentLoaded', initWorkspaceChat);
+                            } else {
+                                initWorkspaceChat();
+                            }
+                        })();
                         </script>
                     @else
                         <div class="p-3.5 border-t border-neutral-200 dark:border-[#2A2A2A] bg-neutral-50 dark:bg-[#141414] text-center text-xs text-neutral-500 font-medium flex items-center justify-center gap-1.5">

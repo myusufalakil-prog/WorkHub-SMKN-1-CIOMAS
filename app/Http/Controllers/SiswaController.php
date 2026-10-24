@@ -503,10 +503,40 @@ class SiswaController extends Controller
             return back()->with('error', 'Hanya anggota resmi atau ketua tim yang dapat mengirim pesan dalam diskusi tim.');
         }
 
+        $cleanMessage = trim($request->message);
+
+        // Server-side guard: cegah pesan dobel akibat double click / enter cepat dalam rentang 3 detik
+        $recentDuplicate = ProjectMessage::where('project_id', $project->id)
+            ->where('user_id', $user->id)
+            ->where('message', $cleanMessage)
+            ->where('created_at', '>=', now()->subSeconds(3))
+            ->latest()
+            ->first();
+
+        if ($recentDuplicate) {
+            if ($request->expectsJson() || $request->ajax()) {
+                $recentDuplicate->load('user.jurusan');
+                return response()->json([
+                    'success' => true,
+                    'message' => [
+                        'id' => $recentDuplicate->id,
+                        'user_id' => $recentDuplicate->user_id,
+                        'user_name' => $recentDuplicate->user->name ?? 'Anggota',
+                        'user_avatar' => strtoupper(substr($recentDuplicate->user->name ?? 'U', 0, 2)),
+                        'jurusan' => $recentDuplicate->user->jurusan?->kode ?? 'TECH',
+                        'message' => $recentDuplicate->message,
+                        'created_at' => $recentDuplicate->created_at ? $recentDuplicate->created_at->format('H:i') : 'Baru saja',
+                        'is_me' => true,
+                    ],
+                ]);
+            }
+            return redirect()->route('siswa.workspace', ['id' => $project->id, 'tab' => 'chat']);
+        }
+
         $msg = ProjectMessage::create([
             'project_id' => $project->id,
             'user_id' => $user->id,
-            'message' => $request->message,
+            'message' => $cleanMessage,
             'attachment' => $request->attachment ?? null,
         ]);
 
