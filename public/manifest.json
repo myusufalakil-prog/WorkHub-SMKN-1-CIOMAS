@@ -1,11 +1,11 @@
 {
-  "name": "WORKHUB - Platform Kolaborasi Siswa SMK",
+  "name": "WORKHUB - Platform Kolaborasi Proyek & Talenta",
   "short_name": "WORKHUB",
-  "description": "Connect. Collaborate. Create. Platform kolaborasi antarjurusan untuk siswa SMK.",
+  "description": "Connect. Collaborate. Create. Platform kolaborasi inovasi dan jaringan talenta multidisiplin.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#111111",
-  "theme_color": "#111111",
+  "background_color": "#2563EB",
+  "theme_color": "#2563EB",
   "icons": [
     {
       "src": "/favicon.svg",

@@ -21,7 +21,7 @@
 
     <!-- Center: Search input -->
     <div class="flex-1 max-w-md mx-4">
-        <form action="{{ route('projects.index') }}" method="GET" class="relative">
+        <form action="{{ route('siswa.proyek.index') }}" method="GET" class="relative">
             <x-icon name="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input 
                 type="text" 
@@ -41,7 +41,7 @@
                     Agenda
                 </x-button>
             @else
-                <x-button :href="route('projects.create')" variant="primary" size="sm" icon="plus" class="hidden sm:inline-flex">
+                <x-button :href="route('siswa.proyek.create')" variant="primary" size="sm" icon="plus" class="hidden sm:inline-flex">
                     Proyek
                 </x-button>
             @endif

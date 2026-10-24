@@ -5,10 +5,10 @@
 @php
     $tabs = [
         ['id' => 'beranda', 'label' => 'Beranda', 'icon' => 'home', 'href' => route('dashboard')],
-        ['id' => 'proyek', 'label' => 'Proyek', 'icon' => 'folder-kanban', 'href' => route('projects.index')],
-        ['id' => 'create', 'label' => 'Buat', 'icon' => 'plus', 'href' => route('projects.create'), 'isAction' => true],
-        ['id' => 'notifikasi', 'label' => 'Notifikasi', 'icon' => 'bell', 'href' => route('notifications.index')],
-        ['id' => 'profil', 'label' => 'Profil', 'icon' => 'user', 'href' => route('profile.show', auth()->id() ?? 1)],
+        ['id' => 'proyek', 'label' => 'Proyek', 'icon' => 'folder-kanban', 'href' => route('siswa.proyek.index')],
+        ['id' => 'create', 'label' => 'Buat', 'icon' => 'plus', 'href' => route('siswa.proyek.create'), 'isAction' => true],
+        ['id' => 'notifikasi', 'label' => 'Notifikasi', 'icon' => 'bell', 'href' => route('siswa.notifikasi')],
+        ['id' => 'profil', 'label' => 'Profil', 'icon' => 'user', 'href' => route('siswa.profil', auth()->id() ?? 1)],
     ];
 @endphp
 

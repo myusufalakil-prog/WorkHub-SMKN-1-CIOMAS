@@ -73,7 +73,7 @@
                         <p class="text-xs uppercase font-extrabold tracking-widest text-neutral-400 dark:text-neutral-500">
                             {{ $jurusans->count() }} Pilar Domain & Disiplin Keahlian di WORKHUB
                         </p>
-                        <a href="{{ route('projects.index') }}" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">
+                        <a href="{{ route('siswa.proyek.index') }}" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">
                             Eksplorasi Semua &rarr;
                         </a>
                     </div>
@@ -81,7 +81,7 @@
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
                         @foreach($jurusans as $j)
                             <a 
-                                href="{{ route('projects.index', ['jurusan' => $j->kode]) }}"
+                                href="{{ route('siswa.proyek.index', ['jurusan' => $j->kode]) }}"
                                 class="p-3.5 rounded-xl bg-white/90 dark:bg-[#161616]/90 border border-neutral-200/80 dark:border-neutral-800/80 shadow-xs hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-md transition-all text-left group block"
                             >
                                 <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">

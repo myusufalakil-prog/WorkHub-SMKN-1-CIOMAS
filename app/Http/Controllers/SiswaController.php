@@ -155,7 +155,7 @@ class SiswaController extends Controller
                     if ($clean !== '') {
                         $stringCodes[] = $clean;
                     }
-                }
+                } 
             }
 
             $query = Jurusan::query();
