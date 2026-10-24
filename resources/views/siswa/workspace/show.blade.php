@@ -758,21 +758,47 @@
                     <div id="workspaceChatBox" class="flex-1 p-4 md:p-5 overflow-y-auto space-y-4 text-xs md:text-sm scroll-smooth">
                         @forelse($messages as $msg)
                             @php 
-                                $isMe = ($msg->user_id === (auth()->id() ?? 1));
+                                $currentUserId = auth()->id() ?? 1;
+                                $isMe = ($msg->user_id === $currentUserId);
+                                $canDelete = ($msg->user_id === $currentUserId) || ($project->lead_id === $currentUserId) || (auth()->user()?->isAdmin());
                             @endphp
-                            <div data-message-id="{{ $msg->id }}" class="flex gap-3 {{ $isMe ? 'flex-row-reverse' : '' }}">
+                            <div data-message-id="{{ $msg->id }}" class="group flex gap-3 {{ $isMe ? 'flex-row-reverse' : '' }} items-start transition-all">
                                 <div class="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0">
                                     {{ strtoupper(substr($msg->user->name ?? 'User', 0, 2)) }}
                                 </div>
 
                                 <div class="max-w-[78%] space-y-1">
                                     <div class="flex items-center gap-2 {{ $isMe ? 'justify-end' : '' }}">
+                                        @if($isMe && $canDelete)
+                                            <button 
+                                                type="button" 
+                                                onclick="deleteWorkspaceMessage(this, {{ $msg->id }})" 
+                                                title="Hapus pesan" 
+                                                class="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 text-neutral-400 hover:text-rose-500 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer"
+                                            >
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        @endif
                                         <span class="font-bold text-xs text-neutral-900 dark:text-white">
                                             {{ $msg->user->name ?? 'Anggota' }}
                                         </span>
                                         <span class="text-[10px] text-neutral-400">
                                             {{ $msg->user->jurusan->kode ?? 'TECH' }} &bull; {{ $msg->created_at ? $msg->created_at->format('H:i') : 'Hari ini' }}
                                         </span>
+                                        @if(!$isMe && $canDelete)
+                                            <button 
+                                                type="button" 
+                                                onclick="deleteWorkspaceMessage(this, {{ $msg->id }})" 
+                                                title="Hapus pesan" 
+                                                class="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 text-neutral-400 hover:text-rose-500 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer"
+                                            >
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        @endif
                                     </div>
 
                                     <div class="p-3.5 rounded-xl {{ $isMe ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-tr-none shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-none border border-slate-200/70 dark:border-slate-700/70' }} leading-relaxed">
@@ -798,7 +824,7 @@
                                     name="message"
                                     required
                                     autocomplete="off"
-                                    placeholder="Tulis pesan atau update ke tim..." 
+                                    placeholder="Tulis pesan lalu tekan Enter untuk mengirim..." 
                                     class="flex-1 py-2.5 px-3.5 text-xs md:text-sm bg-neutral-100 dark:bg-[#141414] text-neutral-900 dark:text-white placeholder-neutral-400 rounded-lg border border-transparent focus:border-neutral-300 dark:focus:border-neutral-700 focus:outline-none focus:bg-white dark:focus:bg-[#111111] transition-all"
                                 />
 
@@ -847,21 +873,36 @@
                                         lastMessageId = msgIdNum;
                                     }
 
+                                    const deleteBtnHtml = msg.can_delete ? `
+                                        <button 
+                                            type="button" 
+                                            onclick="deleteWorkspaceMessage(this, ${msgIdNum})" 
+                                            title="Hapus pesan" 
+                                            class="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 text-neutral-400 hover:text-rose-500 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer"
+                                        >
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    ` : '';
+
                                     const msgDiv = document.createElement('div');
                                     msgDiv.setAttribute('data-message-id', msgIdNum);
-                                    msgDiv.className = `flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-200 ${msg.is_me ? 'flex-row-reverse' : ''}`;
+                                    msgDiv.className = `group flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-200 transition-all ${msg.is_me ? 'flex-row-reverse' : ''} items-start`;
                                     msgDiv.innerHTML = `
                                         <div class="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0">
                                             ${msg.user_avatar || 'U'}
                                         </div>
                                         <div class="max-w-[78%] space-y-1">
                                             <div class="flex items-center gap-2 ${msg.is_me ? 'justify-end' : ''}">
+                                                ${msg.is_me ? deleteBtnHtml : ''}
                                                 <span class="font-bold text-xs text-neutral-900 dark:text-white">
                                                     ${msg.user_name}
                                                 </span>
                                                 <span class="text-[10px] text-neutral-400">
                                                     ${msg.jurusan || 'TECH'} &bull; ${msg.created_at}
                                                 </span>
+                                                ${!msg.is_me ? deleteBtnHtml : ''}
                                             </div>
                                             <div class="p-3.5 rounded-xl ${msg.is_me ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-tr-none shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-none border border-slate-200/70 dark:border-slate-700/70'} leading-relaxed">
                                                 <p class="whitespace-pre-wrap break-words">${msg.message}</p>
@@ -892,6 +933,16 @@
                                             if (data.messages && data.messages.length > 0) {
                                                 data.messages.forEach(m => appendMessage(m));
                                             }
+                                            // Sinkronisasi pesan yang dihapus (realtime delete sync)
+                                            if (data.active_ids && Array.isArray(data.active_ids)) {
+                                                const activeSet = new Set(data.active_ids.map(Number));
+                                                chatContainer.querySelectorAll('[data-message-id]').forEach(el => {
+                                                    const elId = parseInt(el.getAttribute('data-message-id'), 10);
+                                                    if (!activeSet.has(elId)) {
+                                                        el.remove();
+                                                    }
+                                                });
+                                            }
                                         }
                                     } catch (err) {
                                         // Silently recover on transient background fetch error
@@ -912,6 +963,16 @@
                                 });
 
                                 let isSubmitting = false;
+
+                                // Kirim otomatis saat tombol Enter ditekan (tanpa tombol Shift)
+                                chatInput.addEventListener('keydown', function (e) {
+                                    if (e.key === 'Enter' && !e.shiftKey) {
+                                        e.preventDefault();
+                                        if (chatInput.value.trim().length > 0 && !isSubmitting) {
+                                            chatForm.requestSubmit();
+                                        }
+                                    }
+                                });
 
                                 // Pengiriman Pesan Instan dengan Guard Anti-Dobel
                                 chatForm.addEventListener('submit', async function (e) {
@@ -968,6 +1029,53 @@
                                         chatInput.focus();
                                     }
                                 });
+
+                                // Handler Hapus Pesan Global
+                                window.deleteWorkspaceMessage = async function (btnElement, messageId) {
+                                    if (!confirm('Apakah Anda yakin ingin menghapus pesan ini?')) return;
+
+                                    const messageBubble = btnElement.closest('[data-message-id]');
+                                    if (messageBubble) {
+                                        messageBubble.classList.add('opacity-40', 'pointer-events-none');
+                                    }
+
+                                    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') 
+                                        || chatForm.querySelector('input[name="_token"]')?.value;
+
+                                    try {
+                                        const deleteUrl = `{{ url('/siswa/workspace/' . $project->id . '/chat') }}/${messageId}`;
+                                        const res = await fetch(deleteUrl, {
+                                            method: 'DELETE',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Accept': 'application/json',
+                                                'X-CSRF-TOKEN': csrfToken,
+                                                'X-Requested-With': 'XMLHttpRequest'
+                                            }
+                                        });
+
+                                        if (res.ok) {
+                                            if (messageBubble) {
+                                                messageBubble.style.transition = 'all 0.25s ease-out';
+                                                messageBubble.style.opacity = '0';
+                                                messageBubble.style.transform = 'scale(0.95)';
+                                                setTimeout(() => messageBubble.remove(), 250);
+                                            }
+                                        } else {
+                                            const data = await res.json().catch(() => null);
+                                            alert(data?.error || 'Gagal menghapus pesan.');
+                                            if (messageBubble) {
+                                                messageBubble.classList.remove('opacity-40', 'pointer-events-none');
+                                            }
+                                        }
+                                    } catch (err) {
+                                        console.error('Delete chat error:', err);
+                                        alert('Terjadi kesalahan koneksi saat menghapus pesan.');
+                                        if (messageBubble) {
+                                            messageBubble.classList.remove('opacity-40', 'pointer-events-none');
+                                        }
+                                    }
+                                };
                             };
 
                             if (document.readyState === 'loading') {

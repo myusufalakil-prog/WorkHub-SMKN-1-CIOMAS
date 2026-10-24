@@ -466,7 +466,7 @@ class SiswaController extends Controller
             ->with(['user.jurusan'])
             ->oldest()
             ->get()
-            ->map(function ($msg) use ($user) {
+            ->map(function ($msg) use ($user, $project) {
                 return [
                     'id' => $msg->id,
                     'user_id' => $msg->user_id,
@@ -476,12 +476,16 @@ class SiswaController extends Controller
                     'message' => $msg->message,
                     'created_at' => $msg->created_at ? $msg->created_at->format('H:i') : 'Baru saja',
                     'is_me' => ($msg->user_id === ($user->id ?? 0)),
+                    'can_delete' => ($msg->user_id === ($user->id ?? 0)) || ($project->lead_id === ($user->id ?? 0)) || ($user->isAdmin()),
                 ];
             });
+
+        $activeIds = ProjectMessage::where('project_id', $project->id)->pluck('id');
 
         return response()->json([
             'success' => true,
             'messages' => $messages,
+            'active_ids' => $activeIds,
         ]);
     }
 
@@ -527,6 +531,7 @@ class SiswaController extends Controller
                         'message' => $recentDuplicate->message,
                         'created_at' => $recentDuplicate->created_at ? $recentDuplicate->created_at->format('H:i') : 'Baru saja',
                         'is_me' => true,
+                        'can_delete' => true,
                     ],
                 ]);
             }
@@ -551,14 +556,48 @@ class SiswaController extends Controller
                     'user_avatar' => strtoupper(substr($msg->user->name ?? 'U', 0, 2)),
                     'jurusan' => $msg->user->jurusan?->kode ?? 'TECH',
                     'message' => $msg->message,
-                    'created_at' => $msg->created_at->format('H:i'),
+                    'created_at' => $msg->created_at ? $msg->created_at->format('H:i') : 'Baru saja',
                     'is_me' => true,
+                    'can_delete' => true,
                 ],
             ]);
         }
 
         return redirect()->route('siswa.workspace', ['id' => $project->id, 'tab' => 'chat'])
             ->with('success', 'Pesan berhasil dikirim ke ruang kolaborasi tim!');
+    }
+
+    public function deleteMessage(Request $request, $id, $messageId)
+    {
+        $project = Project::findOrFail($id);
+        $user = $this->getActiveStudent();
+
+        $message = ProjectMessage::where('project_id', $project->id)->findOrFail($messageId);
+
+        // Hanya pemilik pesan, lead proyek, atau admin yang dapat menghapus pesan
+        $isOwner = ($message->user_id === $user->id);
+        $isLead = ($project->lead_id === $user->id);
+        $isAdmin = $user->isAdmin();
+
+        if (!$isOwner && !$isLead && !$isAdmin) {
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json(['error' => 'Anda tidak memiliki izin untuk menghapus pesan ini.'], 403);
+            }
+            return back()->with('error', 'Anda tidak memiliki hak untuk menghapus pesan ini.');
+        }
+
+        $deletedId = $message->id;
+        $message->delete();
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message_id' => $deletedId,
+            ]);
+        }
+
+        return redirect()->route('siswa.workspace', ['id' => $project->id, 'tab' => 'chat'])
+            ->with('success', 'Pesan berhasil dihapus.');
     }
 
     public function storeFile(Request $request, $id)

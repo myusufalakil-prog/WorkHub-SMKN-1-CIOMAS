@@ -62,6 +62,8 @@ Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->grou
     Route::post('/workspace/{id}/tugas/{taskId}/status', [SiswaController::class, 'updateTaskStatus'])->name('workspace.task.status');
     Route::get('/workspace/{id}/chat/messages', [SiswaController::class, 'getMessages'])->name('workspace.chat.messages');
     Route::post('/workspace/{id}/chat', [SiswaController::class, 'sendMessage'])->name('workspace.chat.send');
+    Route::delete('/workspace/{id}/chat/{messageId}', [SiswaController::class, 'deleteMessage'])->name('workspace.chat.delete');
+    Route::post('/workspace/{id}/chat/{messageId}/delete', [SiswaController::class, 'deleteMessage'])->name('workspace.chat.delete.post');
     Route::post('/workspace/{id}/file', [SiswaController::class, 'storeFile'])->name('workspace.file.store');
 
     Route::get('/match', [SiswaController::class, 'match'])->name('match');
