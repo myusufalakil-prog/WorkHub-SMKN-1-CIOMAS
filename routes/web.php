@@ -58,6 +58,7 @@ Route::prefix('siswa')->name('siswa.')->middleware(['auth', 'role:siswa'])->grou
     
     // Workspace Interaktif & Realtime Chat
     Route::get('/workspace/{id?}', [SiswaController::class, 'workspace'])->name('workspace');
+    Route::get('/workspace/{id}/laporan', [SiswaController::class, 'workspaceReport'])->name('workspace.report');
     Route::post('/workspace/{id}/tugas', [SiswaController::class, 'storeTask'])->name('workspace.task.store');
     Route::post('/workspace/{id}/tugas/{taskId}/status', [SiswaController::class, 'updateTaskStatus'])->name('workspace.task.status');
     Route::get('/workspace/{id}/chat/messages', [SiswaController::class, 'getMessages'])->name('workspace.chat.messages');
@@ -113,6 +114,7 @@ Route::get('/proyek', function () { return redirect()->route('siswa.proyek.index
 Route::get('/proyek/buat', function () { return redirect()->route('siswa.proyek.create'); })->name('projects.create');
 Route::post('/proyek', [SiswaController::class, 'storeProject'])->name('projects.store');
 Route::get('/workspace/{id?}', function ($id = 1) { return redirect()->route('siswa.workspace', $id); })->name('workspace.show');
+Route::get('/workspace/{id}/laporan', function ($id = 1) { return redirect()->route('siswa.workspace.report', $id); });
 Route::get('/match', function () { return redirect()->route('siswa.match'); })->name('match.index');
 Route::get('/profil/{id?}', function ($id = 1) { return redirect()->route('siswa.profil', $id); })->name('profile.show');
 Route::get('/notifikasi', function () { return redirect()->route('siswa.notifikasi'); })->name('notifications.index');

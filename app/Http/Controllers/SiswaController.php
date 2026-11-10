@@ -362,6 +362,29 @@ class SiswaController extends Controller
         return view('siswa.workspace.show', compact('project', 'activeTab', 'allStudents', 'myProjects'));
     }
 
+    public function workspaceReport(Request $request, $id)
+    {
+        $currentUser = $this->getActiveStudent();
+
+        $project = Project::with([
+            'jurusans', 
+            'lead.jurusan', 
+            'guru.jurusan', 
+            'activeMembers.jurusan', 
+            'tasks.assignee.jurusan', 
+            'files.uploader', 
+            'activities' => function($q) {
+                $q->with('user.jurusan')->latest();
+            }
+        ])->findOrFail($id);
+
+        $totalTasks = $project->tasks->count();
+        $doneTasks = $project->tasks->where('status', 'done')->count();
+        $tasksProgress = $totalTasks > 0 ? round(($doneTasks / $totalTasks) * 100) : 0;
+
+        return view('siswa.workspace.report', compact('project', 'currentUser', 'totalTasks', 'doneTasks', 'tasksProgress'));
+    }
+
     public function storeTask(Request $request, $id)
     {
         $request->validate([

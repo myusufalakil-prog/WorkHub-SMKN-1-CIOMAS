@@ -196,6 +196,16 @@
                 </div>
 
                 <div class="flex items-center gap-2 shrink-0">
+                    <a 
+                        href="{{ route('siswa.workspace.report', $project->id) }}" 
+                        target="_blank"
+                        class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors shadow-xs"
+                        title="Buka & Cetak Laporan Proyek Resmi"
+                    >
+                        <x-icon name="printer" class="w-3.5 h-3.5 text-neutral-500" />
+                        <span>Cetak Laporan</span>
+                    </a>
+
                     <x-button :href="route('siswa.match')" variant="secondary" size="sm" icon="cpu">
                         AI Match
                     </x-button>
@@ -705,9 +715,31 @@
         @elseif($activeTab === 'aktivitas')
             <!-- Aktivitas Tab -->
             <x-card padding="p-6">
-                <h3 class="text-lg font-bold text-neutral-900 dark:text-white mb-6">
-                    Log Aktivitas Proyek
-                </h3>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-neutral-100 dark:border-neutral-800">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-lg font-bold text-neutral-900 dark:text-white">
+                                Log Aktivitas Proyek
+                            </h3>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 font-semibold">
+                                {{ $activities->count() }} Aktivitas
+                            </span>
+                        </div>
+                        <p class="text-xs text-neutral-500 mt-0.5">
+                            Rekam jejak kontribusi pengerjaan tugas, pembaruan tim, dan aktivitas kolaborasi secara kronologis.
+                        </p>
+                    </div>
+
+                    <a 
+                        href="{{ route('siswa.workspace.report', $project->id) }}" 
+                        target="_blank"
+                        class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-100 transition-colors shadow-xs shrink-0 cursor-pointer"
+                        title="Buka & Cetak Laporan Resmi Proyek"
+                    >
+                        <x-icon name="printer" class="w-3.5 h-3.5" />
+                        <span>Cetak Laporan</span>
+                    </a>
+                </div>
 
                 <div class="space-y-6 relative pl-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-neutral-200 dark:before:bg-neutral-800">
                     @forelse($activities as $act)
